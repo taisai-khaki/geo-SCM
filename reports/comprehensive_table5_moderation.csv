@@ -1,0 +1,7 @@
+model,dv,term,coef,se,pvalue,coef_fmt,n_obs,n_countries
+DV1_GVC_Linkage_Change_COI_moderation,DV1_GVC_Linkage_Change,z_eci:pe:z_coi,-0.9165681988656194,0.2648317916233846,0.0005382832735479383,-0.917*** (0.265),679,76
+DV1_GVC_Linkage_Change_GPR_moderation,DV1_GVC_Linkage_Change,z_eci:pe:z_gpr,1.1649219301122573,0.22353066562039448,1.8735659439278743e-07,1.165*** (0.224),679,76
+DV2_Export_Recovery_COI_moderation,DV2_Export_Recovery,z_eci:pe:z_coi,0.13317115636156782,0.10286968211079249,0.19547145234154106,0.133 (0.103),1729,180
+DV2_Export_Recovery_GPR_moderation,DV2_Export_Recovery,z_eci:pe:z_gpr,-0.050915825373070274,0.12513777041619206,0.6840974797177861,-0.051 (0.125),1729,180
+DV3_Partner_Diversification_COI_moderation,DV3_Partner_Diversification,z_eci:pe:z_coi,-0.007843643230618204,0.013374561357452996,0.5575665357900733,-0.008 (0.013),1729,180
+DV3_Partner_Diversification_GPR_moderation,DV3_Partner_Diversification,z_eci:pe:z_gpr,-0.005892151820839485,0.012113828066904052,0.626684418638414,-0.006 (0.012),1729,180

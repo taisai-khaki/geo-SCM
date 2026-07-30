@@ -1,0 +1,73 @@
+mode,stratifier,dv,groups,support05,share_support05,support10,share_support10,status_05,status_10
+controlled_yearfe,coi_q4,H1_DV1_Stability,2,0,0.0,0,0.0,Not supported,Not supported
+controlled_yearfe,coi_q4,H2_DV2_ExportRecovery,4,0,0.0,0,0.0,Not supported,Not supported
+controlled_yearfe,coi_q4,H3_DV3_Diversification,4,0,0.0,0,0.0,Not supported,Not supported
+controlled_yearfe,eci_t3,H1_DV1_Stability,3,0,0.0,0,0.0,Not supported,Not supported
+controlled_yearfe,eci_t3,H2_DV2_ExportRecovery,3,0,0.0,0,0.0,Not supported,Not supported
+controlled_yearfe,eci_t3,H3_DV3_Diversification,3,1,0.3333333333333333,1,0.3333333333333333,Supported in >=1 subgroup,Supported in >=1 subgroup
+controlled_yearfe,exposed_group,H1_DV1_Stability,1,0,0.0,0,0.0,Not supported,Not supported
+controlled_yearfe,exposed_group,H2_DV2_ExportRecovery,1,0,0.0,0,0.0,Not supported,Not supported
+controlled_yearfe,exposed_group,H3_DV3_Diversification,1,0,0.0,0,0.0,Not supported,Not supported
+controlled_yearfe,gpr_time_q4,H1_DV1_Stability,2,0,0.0,0,0.0,Not supported,Not supported
+controlled_yearfe,gpr_time_q4,H2_DV2_ExportRecovery,2,0,0.0,0,0.0,Not supported,Not supported
+controlled_yearfe,gpr_time_q4,H3_DV3_Diversification,2,0,0.0,0,0.0,Not supported,Not supported
+controlled_yearfe,income_q4,H1_DV1_Stability,3,0,0.0,1,0.3333333333333333,Not supported,Supported in >=1 subgroup
+controlled_yearfe,income_q4,H2_DV2_ExportRecovery,4,0,0.0,0,0.0,Not supported,Not supported
+controlled_yearfe,income_q4,H3_DV3_Diversification,4,2,0.5,2,0.5,Supported in >=1 subgroup,Supported in >=1 subgroup
+controlled_yearfe,intensity_q4,H1_DV1_Stability,2,0,0.0,0,0.0,Not supported,Not supported
+controlled_yearfe,intensity_q4,H2_DV2_ExportRecovery,2,0,0.0,0,0.0,Not supported,Not supported
+controlled_yearfe,intensity_q4,H3_DV3_Diversification,2,0,0.0,0,0.0,Not supported,Not supported
+controlled_yearfe,open_q4,H1_DV1_Stability,4,0,0.0,0,0.0,Not supported,Not supported
+controlled_yearfe,open_q4,H2_DV2_ExportRecovery,4,0,0.0,0,0.0,Not supported,Not supported
+controlled_yearfe,open_q4,H3_DV3_Diversification,4,1,0.25,1,0.25,Supported in >=1 subgroup,Supported in >=1 subgroup
+controlled_yearfe,post_group,H1_DV1_Stability,1,0,0.0,0,0.0,Not supported,Not supported
+controlled_yearfe,post_group,H2_DV2_ExportRecovery,1,0,0.0,0,0.0,Not supported,Not supported
+controlled_yearfe,post_group,H3_DV3_Diversification,1,0,0.0,0,0.0,Not supported,Not supported
+controlled_yearfe,rents_q4,H1_DV1_Stability,4,1,0.25,1,0.25,Supported in >=1 subgroup,Supported in >=1 subgroup
+controlled_yearfe,rents_q4,H2_DV2_ExportRecovery,4,0,0.0,0,0.0,Not supported,Not supported
+controlled_yearfe,rents_q4,H3_DV3_Diversification,4,0,0.0,0,0.0,Not supported,Not supported
+controlled_yearfe,size_q4,H1_DV1_Stability,2,0,0.0,0,0.0,Not supported,Not supported
+controlled_yearfe,size_q4,H2_DV2_ExportRecovery,4,0,0.0,0,0.0,Not supported,Not supported
+controlled_yearfe,size_q4,H3_DV3_Diversification,4,1,0.25,1,0.25,Supported in >=1 subgroup,Supported in >=1 subgroup
+controlled_yearfe,tariff_q4,H1_DV1_Stability,3,1,0.3333333333333333,1,0.3333333333333333,Supported in >=1 subgroup,Supported in >=1 subgroup
+controlled_yearfe,tariff_q4,H2_DV2_ExportRecovery,4,0,0.0,0,0.0,Not supported,Not supported
+controlled_yearfe,tariff_q4,H3_DV3_Diversification,4,0,0.0,0,0.0,Not supported,Not supported
+controlled_yearfe,wgi_q4,H1_DV1_Stability,3,1,0.3333333333333333,1,0.3333333333333333,Supported in >=1 subgroup,Supported in >=1 subgroup
+controlled_yearfe,wgi_q4,H2_DV2_ExportRecovery,4,1,0.25,1,0.25,Supported in >=1 subgroup,Supported in >=1 subgroup
+controlled_yearfe,wgi_q4,H3_DV3_Diversification,4,1,0.25,1,0.25,Supported in >=1 subgroup,Supported in >=1 subgroup
+raw,coi_q4,H1_DV1_Stability,2,0,0.0,0,0.0,Not supported,Not supported
+raw,coi_q4,H2_DV2_ExportRecovery,4,0,0.0,0,0.0,Not supported,Not supported
+raw,coi_q4,H3_DV3_Diversification,4,0,0.0,0,0.0,Not supported,Not supported
+raw,eci_t3,H1_DV1_Stability,3,1,0.3333333333333333,2,0.6666666666666666,Supported in >=1 subgroup,Supported in >=1 subgroup
+raw,eci_t3,H2_DV2_ExportRecovery,3,0,0.0,0,0.0,Not supported,Not supported
+raw,eci_t3,H3_DV3_Diversification,3,0,0.0,1,0.3333333333333333,Not supported,Supported in >=1 subgroup
+raw,exposed_group,H1_DV1_Stability,1,0,0.0,0,0.0,Not supported,Not supported
+raw,exposed_group,H2_DV2_ExportRecovery,1,0,0.0,0,0.0,Not supported,Not supported
+raw,exposed_group,H3_DV3_Diversification,1,0,0.0,0,0.0,Not supported,Not supported
+raw,gpr_time_q4,H1_DV1_Stability,3,1,0.3333333333333333,1,0.3333333333333333,Supported in >=1 subgroup,Supported in >=1 subgroup
+raw,gpr_time_q4,H2_DV2_ExportRecovery,3,0,0.0,0,0.0,Not supported,Not supported
+raw,gpr_time_q4,H3_DV3_Diversification,3,0,0.0,0,0.0,Not supported,Not supported
+raw,income_q4,H1_DV1_Stability,4,1,0.25,2,0.5,Supported in >=1 subgroup,Supported in >=1 subgroup
+raw,income_q4,H2_DV2_ExportRecovery,4,1,0.25,1,0.25,Supported in >=1 subgroup,Supported in >=1 subgroup
+raw,income_q4,H3_DV3_Diversification,4,1,0.25,2,0.5,Supported in >=1 subgroup,Supported in >=1 subgroup
+raw,intensity_q4,H1_DV1_Stability,2,0,0.0,1,0.5,Not supported,Supported in >=1 subgroup
+raw,intensity_q4,H2_DV2_ExportRecovery,2,0,0.0,0,0.0,Not supported,Not supported
+raw,intensity_q4,H3_DV3_Diversification,2,0,0.0,0,0.0,Not supported,Not supported
+raw,open_q4,H1_DV1_Stability,4,1,0.25,1,0.25,Supported in >=1 subgroup,Supported in >=1 subgroup
+raw,open_q4,H2_DV2_ExportRecovery,4,0,0.0,0,0.0,Not supported,Not supported
+raw,open_q4,H3_DV3_Diversification,4,1,0.25,1,0.25,Supported in >=1 subgroup,Supported in >=1 subgroup
+raw,post_group,H1_DV1_Stability,1,0,0.0,0,0.0,Not supported,Not supported
+raw,post_group,H2_DV2_ExportRecovery,1,0,0.0,0,0.0,Not supported,Not supported
+raw,post_group,H3_DV3_Diversification,1,0,0.0,0,0.0,Not supported,Not supported
+raw,rents_q4,H1_DV1_Stability,4,0,0.0,0,0.0,Not supported,Not supported
+raw,rents_q4,H2_DV2_ExportRecovery,4,0,0.0,0,0.0,Not supported,Not supported
+raw,rents_q4,H3_DV3_Diversification,4,0,0.0,0,0.0,Not supported,Not supported
+raw,size_q4,H1_DV1_Stability,2,1,0.5,1,0.5,Supported in >=1 subgroup,Supported in >=1 subgroup
+raw,size_q4,H2_DV2_ExportRecovery,4,0,0.0,0,0.0,Not supported,Not supported
+raw,size_q4,H3_DV3_Diversification,4,1,0.25,1,0.25,Supported in >=1 subgroup,Supported in >=1 subgroup
+raw,tariff_q4,H1_DV1_Stability,3,0,0.0,1,0.3333333333333333,Not supported,Supported in >=1 subgroup
+raw,tariff_q4,H2_DV2_ExportRecovery,4,0,0.0,0,0.0,Not supported,Not supported
+raw,tariff_q4,H3_DV3_Diversification,4,0,0.0,0,0.0,Not supported,Not supported
+raw,wgi_q4,H1_DV1_Stability,4,1,0.25,2,0.5,Supported in >=1 subgroup,Supported in >=1 subgroup
+raw,wgi_q4,H2_DV2_ExportRecovery,4,1,0.25,1,0.25,Supported in >=1 subgroup,Supported in >=1 subgroup
+raw,wgi_q4,H3_DV3_Diversification,4,1,0.25,1,0.25,Supported in >=1 subgroup,Supported in >=1 subgroup

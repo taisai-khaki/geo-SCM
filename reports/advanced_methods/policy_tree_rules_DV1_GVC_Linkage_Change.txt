@@ -1,0 +1,22 @@
+|--- year <= 2016.50
+|   |--- wdi_natural_resource_rents_pct_gdp <= 2.64
+|   |   |--- year <= 2015.50
+|   |   |   |--- value: [0.25]
+|   |   |--- year >  2015.50
+|   |   |   |--- value: [0.55]
+|   |--- wdi_natural_resource_rents_pct_gdp >  2.64
+|   |   |--- gpr_for_model_annual <= 0.13
+|   |   |   |--- value: [1.07]
+|   |   |--- gpr_for_model_annual >  0.13
+|   |   |   |--- value: [0.48]
+|--- year >  2016.50
+|   |--- wgi_institutional_quality_composite <= -0.30
+|   |   |--- eci <= -0.11
+|   |   |   |--- value: [-0.52]
+|   |   |--- eci >  -0.11
+|   |   |   |--- value: [-0.16]
+|   |--- wgi_institutional_quality_composite >  -0.30
+|   |   |--- wdi_trade_openness_pct_gdp <= 80.45
+|   |   |   |--- value: [-0.07]
+|   |   |--- wdi_trade_openness_pct_gdp >  80.45
+|   |   |   |--- value: [0.21]

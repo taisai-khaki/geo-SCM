@@ -1,0 +1,111 @@
+\section{RESEARCH DESIGN AND METHODOLOGY}\label{sec3}
+
+\subsection{The Natural Experiment: US--China Tariff Escalation (2018--2019)}
+
+Our identification strategy exploits the United States' staggered tariff escalation on Chinese imports between July 2018 and September 2019 as an external trade shock. The USTR implemented four major rounds: List 1 (\$34 billion; effective July 6, 2018), List 2 (\$16 billion; August 23, 2018), List 3 (\$200 billion; 10\% from September 24, 2018 and 25\% from May 2019), and List 4A (\$112 billion; 7.5\% from September 1, 2019). These policy actions created abrupt changes in trade costs and sourcing incentives across product categories.
+
+The core empirical idea is that countries with stronger pre-shock exposure to the US--China trade nexus faced a larger indirect shock when bilateral tariffs escalated. We therefore use a difference-in-differences design with heterogeneous treatment intensity based on pre-shock exposure, and we test whether national productive complexity conditions countries' resilience responses.
+
+Our main paper-period treatment timing follows the conceptual onset window used in the manuscript design: $\textit{Post}_{t}=1$ for 2019--2022, and 0 otherwise. We additionally run identification diagnostics and alternative timing checks (including placebo pseudo-shocks and event-time pre-trend tests) as robustness layers.
+
+\subsection{Sample Construction and Data Sources}
+
+The project uses a two-layer data structure.
+
+First, we construct a broad country-year databank used for variable engineering and coverage checks. This databank contains 231 countries and 2,995 country-year observations from 2012 to 2024. Atlas-based trade and complexity variables are available beyond 2022, while TiVA-based GVC variables end in 2022.
+
+Second, confirmatory estimation uses the 2012--2022 panel and model-specific complete-case samples after merging all controls and fixed effects covariates. As a result, estimation samples are unbalanced and differ by dependent variable:
+\begin{itemize}
+\item H1 (GVC linkage stability): 679 observations, 76 countries, years 2013--2021.
+\item H2 (export recovery): 1,729 observations, 180 countries, years 2012--2021.
+\item H3 (partner diversification): 1,729 observations, 180 countries, years 2012--2021.
+\end{itemize}
+
+Data sources are as follows:
+\begin{itemize}
+\item \textbf{Productive complexity and trade structure:} Harvard Growth Lab Atlas of Economic Complexity country-year and bilateral files (ECI, COI, export values, bilateral partner flows).
+\item \textbf{GVC measures:} OECD Trade in Value Added (TiVA, 2023 release), used to construct forward-linkage metrics.
+\item \textbf{Macroeconomic and policy controls:} World Development Indicators (WDI), including GDP per capita, trade openness, natural resource rents, and applied weighted-mean tariffs.
+\item \textbf{Institutional controls:} Worldwide Governance Indicators (WGI), aggregated as a six-dimension governance composite.
+\item \textbf{Geopolitical risk:} Caldara--Iacoviello monthly GPR series aggregated to annual values. We use country-specific annual GPR where available and otherwise use the global annual index as fallback for model completeness.
+\end{itemize}
+
+\subsection{Variable Operationalization}
+
+\subsubsection{Dependent Variables}
+
+\textbf{DV1: GVC linkage stability.} We begin with annual change in forward linkage, $\Delta \text{FEXGR\_DVA}_{it}$, from TiVA. For confirmatory estimation, we use a stability transformation:
+\[
+\text{GVC\_Stability}_{it} = -\left| \Delta \text{FEXGR\_DVA}_{it} \right|,
+\]
+so values closer to zero represent smaller disruption (higher stability).
+
+\textbf{DV2: Export Recovery Index (ERI).} For each country-year, ERI is total exports divided by the country-specific pre-shock baseline average over 2015--2017:
+\[
+\text{ERI}_{it} = \frac{\text{Exports}_{it}}{\overline{\text{Exports}}_{i,2015\text{--}2017}}.
+\]
+
+\textbf{DV3: Trade partner diversification.} We compute destination concentration using the export-share HHI and define diversification as:
+\[
+\text{Diversification}_{it} = 1-\text{HHI}_{it}.
+\]
+Higher values indicate broader partner dispersion.
+
+\subsubsection{Independent and Moderating Variables}
+
+\textbf{Economic Complexity Index (ECI).} The focal explanatory variable is country-year ECI from Atlas. In regressions, ECI is standardized ($z$-score).
+
+\textbf{Tariff shock exposure design.} We compute each country's pre-shock US--China trade intensity as the mean (2015--2017) of:
+\[
+\frac{\text{Trade with US and China}}{\text{Total trade}}.
+\]
+Countries in the top tercile are coded $\textit{Exposed}_i=1$ (otherwise 0). The treatment interaction is:
+\[
+\textit{PE}_{it}=\textit{Post}_{t}\times \textit{Exposed}_{i}.
+\]
+The key slope term for H1--H3 is $z\_ECI_{it}\times \textit{PE}_{it}$.
+
+\textbf{H4 moderator (COI).} Product-space density is measured with standardized COI; the test term is $z\_ECI_{it}\times \textit{PE}_{it}\times z\_COI_{it}$.
+
+\textbf{H5 moderator (GPR).} Geopolitical risk is measured with standardized annual GPR; the test term is $z\_ECI_{it}\times \textit{PE}_{it}\times z\_GPR_{it}$.
+
+\subsubsection{Control Variables}
+
+Baseline confirmatory specifications include standardized controls for:
+\begin{itemize}
+\item log GDP per capita,
+\item trade openness (\% GDP),
+\item WGI governance composite,
+\item natural resource rents (\% GDP),
+\item pre-shock US--China trade intensity.
+\end{itemize}
+
+Applied weighted-mean tariffs are available in the databank and in dedicated stricter-control builds, but are excluded from the main confirmatory specification to preserve cross-country coverage.
+
+\subsection{Empirical Specification and Inference}
+
+For each resilience outcome $Y_{it}$, we estimate:
+\[
+Y_{it}=\beta_1 zECI_{it}+\beta_2 PE_{it}+\beta_3 (zECI_{it}\times PE_{it})+\Gamma'X_{it}+\alpha_i+\lambda_t+\varepsilon_{it},
+\]
+where $\alpha_i$ are country fixed effects, $\lambda_t$ are year fixed effects, and standard errors are clustered at the country level. The parameter of interest for H1--H3 is $\beta_3$.
+
+Moderation tests for H4 and H5 extend the equation with triple interactions:
+\[
+zECI_{it}\times PE_{it}\times zCOI_{it}
+\quad\text{and}\quad
+zECI_{it}\times PE_{it}\times zGPR_{it}.
+\]
+
+Inference is based on:
+\begin{itemize}
+\item cluster-robust country-level standard errors,
+\item wild-cluster bootstrap p-values for primary H1--H3 terms,
+\item Benjamini--Hochberg FDR adjustment across the confirmatory family.
+\end{itemize}
+
+\subsection{Identification Diagnostics and Transparency Protocol}
+
+We report event-time pre-trend tests and placebo pseudo-shock tests as explicit identification diagnostics. In our confirmatory run, pre-trend tests do not reject parallel pre-trends for H1--H3, while the H1 placebo term is statistically significant; therefore, H1 is treated as not confirmed in strict confirmatory inference. H2 and H3 do not show significant focal effects under confirmatory criteria.
+
+To avoid HARKing, global H1--H5 remain the primary confirmatory hypotheses. Any subgroup, regime, or income-class patterns are reported as exploratory heterogeneity analyses and interpreted as hypothesis-generating rather than confirmatory evidence.

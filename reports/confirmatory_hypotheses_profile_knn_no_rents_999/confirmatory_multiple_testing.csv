@@ -1,0 +1,10 @@
+family_test_id,hypothesis_id,dv,coef,expected_sign,pvalue_for_fdr,source,fdr_bh_qvalue,sig_raw_p_lt_0p05,sig_fdr_q_lt_0p05
+H1_DV1_GVC_Linkage_Stability,H1,DV1_GVC_Linkage_Stability,0.02205995793237868,positive,0.8018018018018018,primary_bootstrap,0.9439439439439439,0,0
+H2_DV2_Export_Recovery,H2,DV2_Export_Recovery,-0.11432428366309368,positive,0.23123123123123124,primary_bootstrap,0.6200331847620366,0,0
+H3_DV3_Partner_Diversification,H3,DV3_Partner_Diversification,0.0011429698799472685,positive,0.943943943943944,primary_bootstrap,0.9439439439439439,0,0
+H4_DV1_GVC_Linkage_Stability,H4,DV1_GVC_Linkage_Stability,0.09052488647187606,positive,0.4133554565080244,moderation_cluster,0.6200331847620366,0,0
+H5_DV1_GVC_Linkage_Stability,H5,DV1_GVC_Linkage_Stability,-0.5579108523700032,negative,0.29409227667262494,moderation_cluster,0.6200331847620366,0,0
+H4_DV2_Export_Recovery,H4,DV2_Export_Recovery,0.14360440203735328,positive,0.15852866647817854,moderation_cluster,0.6200331847620366,0,0
+H5_DV2_Export_Recovery,H5,DV2_Export_Recovery,-0.09330964861301061,negative,0.26033557840801336,moderation_cluster,0.6200331847620366,0,0
+H4_DV3_Partner_Diversification,H4,DV3_Partner_Diversification,0.002340938681973711,positive,0.8604711782281718,moderation_cluster,0.9439439439439439,0,0
+H5_DV3_Partner_Diversification,H5,DV3_Partner_Diversification,0.012406470219487698,negative,0.35794977071122736,moderation_cluster,0.6200331847620366,0,0

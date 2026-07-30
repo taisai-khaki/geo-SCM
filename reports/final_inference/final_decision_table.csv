@@ -1,0 +1,4 @@
+claim_id,claim,evidence_metric,value,threshold,supports_claim,note
+C1,DV2 channel effect exists and is robust,high_precision_wild_bootstrap_p,0.1961961961961962,0.05,0,Two-sided wild cluster bootstrap on z_eci:pe (DV2)
+C2,Effect on DV3 is mediated by DV2,mediation_indirect_boot_p,0.18546365914786966,0.05,0,Cluster bootstrap indirect effect a*b
+C3,Meaningful evidence remains after FDR correction,count_fdr_significant_tests,7.0,1.0,1,DV2 FDR-significant tests: 5

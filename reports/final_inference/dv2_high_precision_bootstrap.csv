@@ -1,0 +1,2 @@
+dv,coef_obs,se_obs,p_obs_cluster,t_obs,bootstrap_reps_requested,bootstrap_reps_success,p_boot_wild_cluster,coef_boot_ci_low_2p5,coef_boot_ci_high_97p5,n_obs,n_countries,year_min,year_max
+DV2_Export_Recovery,-0.1030868624149686,0.07736823487694293,0.18272272769443443,-1.3324184347611407,999,999,0.1961961961961962,-0.16369748221629543,0.14805407014685718,1729,180,2012,2021

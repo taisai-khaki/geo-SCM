@@ -1,0 +1,7 @@
+dv,test,n_terms,stat,pvalue
+DV1_GVC_Linkage_Change,pretrend_joint_zero,4,5.003836953540092,0.28690402631639716
+DV1_GVC_Linkage_Change,post_joint_zero,3,9.186774537927496,0.02690797559250172
+DV2_Export_Recovery,pretrend_joint_zero,5,8.737461952833815,0.12000537300007764
+DV2_Export_Recovery,post_joint_zero,3,0.13448111462493373,0.987400396165264
+DV3_Partner_Diversification,pretrend_joint_zero,5,6.7665992746618215,0.23858531830464508
+DV3_Partner_Diversification,post_joint_zero,3,2.5993488057783942,0.4576037210734356

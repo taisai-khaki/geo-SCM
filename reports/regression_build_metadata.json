@@ -1,0 +1,36 @@
+{
+  "panel_file": "C:\\Users\\L03128674\\projects\\geo-SCM\\data\\processed\\regression_panel_2012_2022.csv",
+  "start_year": 2012,
+  "end_year": 2022,
+  "n_rows_panel": 2533,
+  "n_rows_model_input": 880,
+  "n_countries_model_input": 80,
+  "control_missing_counts": {
+    "wdi_gdp_pc_const_2015_usd": 300,
+    "wdi_trade_openness_pct_gdp": 562,
+    "wdi_natural_resource_rents_pct_gdp": 516,
+    "wdi_tariff_applied_weighted_mean_all_products_pct": 923,
+    "wgi_institutional_quality_composite": 324,
+    "gpr_global_annual": 0,
+    "gpr_country_annual": 2049,
+    "gpr_for_model_annual": 0
+  },
+  "control_sources": {
+    "wdi_indicators": {
+      "NY.GDP.PCAP.KD": "wdi_gdp_pc_const_2015_usd",
+      "NE.TRD.GNFS.ZS": "wdi_trade_openness_pct_gdp",
+      "NY.GDP.TOTL.RT.ZS": "wdi_natural_resource_rents_pct_gdp",
+      "TM.TAX.MRCH.WM.AR.ZS": "wdi_tariff_applied_weighted_mean_all_products_pct"
+    },
+    "wgi_indicators": {
+      "GOV_WGI_CC.EST": "wgi_cc_est",
+      "GOV_WGI_GE.EST": "wgi_ge_est",
+      "GOV_WGI_PV.EST": "wgi_pv_est",
+      "GOV_WGI_RL.EST": "wgi_rl_est",
+      "GOV_WGI_RQ.EST": "wgi_rq_est",
+      "GOV_WGI_VA.EST": "wgi_va_est"
+    },
+    "gpr_source": "https://www.matteoiacoviello.com/gpr_files/data_gpr_export.dta",
+    "tariff_indicator_source_note": "WDI indicator TM.TAX.MRCH.WM.AR.ZS (WITS/TRAINS/WTO-based)."
+  }
+}

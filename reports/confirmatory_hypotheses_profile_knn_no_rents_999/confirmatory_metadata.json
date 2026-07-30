@@ -1,0 +1,21 @@
+{
+  "panel_rows": 2533,
+  "panel_countries": 231,
+  "bootstrap_reps": 999,
+  "include_rents_main": false,
+  "gpr_column": "gpr_profile_knn_annual",
+  "gpr_country_missing_before": 2049,
+  "gpr_profile_missing_after": 0,
+  "gpr_profile_methods": {
+    "knn_profile_year": 2045,
+    "observed_country_gpr": 484,
+    "knn_profile_year_min1": 4
+  },
+  "knn_k": 5,
+  "knn_min_common_first_pass": 2,
+  "primary_tests": 3,
+  "moderation_tests": 6,
+  "fdr_tests": 9,
+  "robustness_rows": 18,
+  "hypotheses_in_matrix": 5
+}

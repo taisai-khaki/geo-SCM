@@ -1,0 +1,30 @@
+{
+  "metrics": {
+    "start_year": 2012,
+    "end_year": 2024,
+    "country_year_rows": 2995,
+    "bilateral_rows": 412984,
+    "tiva_rows": 4312,
+    "databank_rows": 2995,
+    "databank_countries": 231,
+    "databank_years": 13
+  },
+  "missing_counts": {
+    "eci": 6,
+    "coi": 6,
+    "export_recovery_index": 6,
+    "partner_diversification_1_minus_hhi": 6,
+    "tiva_fexgr_dva_share": 2115,
+    "delta_tiva_fexgr_dva_share": 2195
+  },
+  "source_coverage": {
+    "atlas_country_year_min": 2012,
+    "atlas_country_year_max": 2024,
+    "atlas_bilateral_min": 2012,
+    "atlas_bilateral_max": 2024,
+    "tiva_min_year": 2012,
+    "tiva_max_year": 2022,
+    "post_2022_available_atlas": true,
+    "post_2022_available_tiva": false
+  }
+}

@@ -1,0 +1,4 @@
+hypothesis_id,dv,pretrend_joint_pvalue,pretrend_pass_p_gt_0p05,placebo_coef,placebo_pvalue,placebo_pass_p_gt_0p05
+H1,DV1_GVC_Linkage_Stability,0.22651184577788422,1,0.3526381043725966,0.011406866365907944,0
+H2,DV2_Export_Recovery,0.11728242338957937,1,-0.01204915968028055,0.8033675733454538,1
+H3,DV3_Partner_Diversification,0.23154603902732235,1,0.008824668712596488,0.2874404800427749,1

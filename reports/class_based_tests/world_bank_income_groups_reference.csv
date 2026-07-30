@@ -1,0 +1,216 @@
+country_iso3_code,wb_income_id,wb_income_name
+ABW,HIC,High income
+AFG,LIC,Low income
+AGO,LMC,Lower middle income
+ALB,UMC,Upper middle income
+AND,HIC,High income
+ARE,HIC,High income
+ARG,UMC,Upper middle income
+ARM,UMC,Upper middle income
+ASM,HIC,High income
+ATG,HIC,High income
+AUS,HIC,High income
+AUT,HIC,High income
+AZE,UMC,Upper middle income
+BDI,LIC,Low income
+BEL,HIC,High income
+BEN,LMC,Lower middle income
+BFA,LIC,Low income
+BGD,LMC,Lower middle income
+BGR,HIC,High income
+BHR,HIC,High income
+BHS,HIC,High income
+BIH,UMC,Upper middle income
+BLR,UMC,Upper middle income
+BLZ,UMC,Upper middle income
+BMU,HIC,High income
+BOL,LMC,Lower middle income
+BRA,UMC,Upper middle income
+BRB,HIC,High income
+BRN,HIC,High income
+BTN,LMC,Lower middle income
+BWA,UMC,Upper middle income
+CAF,LIC,Low income
+CAN,HIC,High income
+CHE,HIC,High income
+CHI,HIC,High income
+CHL,HIC,High income
+CHN,UMC,Upper middle income
+CIV,LMC,Lower middle income
+CMR,LMC,Lower middle income
+COD,LIC,Low income
+COG,LMC,Lower middle income
+COL,UMC,Upper middle income
+COM,LMC,Lower middle income
+CPV,UMC,Upper middle income
+CRI,HIC,High income
+CUB,UMC,Upper middle income
+CUW,HIC,High income
+CYM,HIC,High income
+CYP,HIC,High income
+CZE,HIC,High income
+DEU,HIC,High income
+DJI,LMC,Lower middle income
+DMA,UMC,Upper middle income
+DNK,HIC,High income
+DOM,UMC,Upper middle income
+DZA,UMC,Upper middle income
+ECU,UMC,Upper middle income
+EGY,LMC,Lower middle income
+ERI,LIC,Low income
+ESP,HIC,High income
+EST,HIC,High income
+FIN,HIC,High income
+FJI,UMC,Upper middle income
+FRA,HIC,High income
+FRO,HIC,High income
+FSM,LMC,Lower middle income
+GAB,UMC,Upper middle income
+GBR,HIC,High income
+GEO,UMC,Upper middle income
+GHA,LMC,Lower middle income
+GIB,HIC,High income
+GIN,LMC,Lower middle income
+GMB,LIC,Low income
+GNB,LIC,Low income
+GNQ,UMC,Upper middle income
+GRC,HIC,High income
+GRD,UMC,Upper middle income
+GRL,HIC,High income
+GTM,UMC,Upper middle income
+GUM,HIC,High income
+GUY,HIC,High income
+HKG,HIC,High income
+HND,LMC,Lower middle income
+HRV,HIC,High income
+HTI,LMC,Lower middle income
+HUN,HIC,High income
+IDN,UMC,Upper middle income
+IMN,HIC,High income
+IND,LMC,Lower middle income
+IRL,HIC,High income
+IRN,UMC,Upper middle income
+IRQ,UMC,Upper middle income
+ISL,HIC,High income
+ISR,HIC,High income
+ITA,HIC,High income
+JAM,UMC,Upper middle income
+JOR,LMC,Lower middle income
+JPN,HIC,High income
+KAZ,UMC,Upper middle income
+KEN,LMC,Lower middle income
+KGZ,LMC,Lower middle income
+KHM,LMC,Lower middle income
+KIR,LMC,Lower middle income
+KNA,HIC,High income
+KOR,HIC,High income
+KWT,HIC,High income
+LAO,LMC,Lower middle income
+LBN,LMC,Lower middle income
+LBR,LIC,Low income
+LBY,UMC,Upper middle income
+LCA,UMC,Upper middle income
+LIE,HIC,High income
+LKA,LMC,Lower middle income
+LSO,LMC,Lower middle income
+LTU,HIC,High income
+LUX,HIC,High income
+LVA,HIC,High income
+MAC,HIC,High income
+MAF,HIC,High income
+MAR,LMC,Lower middle income
+MCO,HIC,High income
+MDA,UMC,Upper middle income
+MDG,LIC,Low income
+MDV,UMC,Upper middle income
+MEX,UMC,Upper middle income
+MHL,UMC,Upper middle income
+MKD,UMC,Upper middle income
+MLI,LIC,Low income
+MLT,HIC,High income
+MMR,LMC,Lower middle income
+MNE,UMC,Upper middle income
+MNG,UMC,Upper middle income
+MNP,HIC,High income
+MOZ,LIC,Low income
+MRT,LMC,Lower middle income
+MUS,UMC,Upper middle income
+MWI,LIC,Low income
+MYS,UMC,Upper middle income
+NAM,LMC,Lower middle income
+NCL,HIC,High income
+NER,LIC,Low income
+NGA,LMC,Lower middle income
+NIC,LMC,Lower middle income
+NLD,HIC,High income
+NOR,HIC,High income
+NPL,LMC,Lower middle income
+NRU,HIC,High income
+NZL,HIC,High income
+OMN,HIC,High income
+PAK,LMC,Lower middle income
+PAN,HIC,High income
+PER,UMC,Upper middle income
+PHL,LMC,Lower middle income
+PLW,HIC,High income
+PNG,LMC,Lower middle income
+POL,HIC,High income
+PRI,HIC,High income
+PRK,LIC,Low income
+PRT,HIC,High income
+PRY,UMC,Upper middle income
+PSE,LMC,Lower middle income
+PYF,HIC,High income
+QAT,HIC,High income
+ROU,HIC,High income
+RUS,HIC,High income
+RWA,LIC,Low income
+SAU,HIC,High income
+SDN,LIC,Low income
+SEN,LMC,Lower middle income
+SGP,HIC,High income
+SLB,LMC,Lower middle income
+SLE,LIC,Low income
+SLV,UMC,Upper middle income
+SMR,HIC,High income
+SOM,LIC,Low income
+SRB,UMC,Upper middle income
+SSD,LIC,Low income
+STP,LMC,Lower middle income
+SUR,UMC,Upper middle income
+SVK,HIC,High income
+SVN,HIC,High income
+SWE,HIC,High income
+SWZ,LMC,Lower middle income
+SXM,HIC,High income
+SYC,HIC,High income
+SYR,LIC,Low income
+TCA,HIC,High income
+TCD,LIC,Low income
+TGO,LIC,Low income
+THA,UMC,Upper middle income
+TJK,LMC,Lower middle income
+TKM,UMC,Upper middle income
+TLS,LMC,Lower middle income
+TON,UMC,Upper middle income
+TTO,HIC,High income
+TUN,LMC,Lower middle income
+TUR,UMC,Upper middle income
+TUV,UMC,Upper middle income
+TZA,LMC,Lower middle income
+UGA,LIC,Low income
+UKR,UMC,Upper middle income
+URY,HIC,High income
+USA,HIC,High income
+UZB,LMC,Lower middle income
+VCT,UMC,Upper middle income
+VGB,HIC,High income
+VIR,HIC,High income
+VNM,LMC,Lower middle income
+VUT,LMC,Lower middle income
+WSM,UMC,Upper middle income
+XKX,UMC,Upper middle income
+YEM,LIC,Low income
+ZAF,UMC,Upper middle income
+ZMB,LMC,Lower middle income
+ZWE,LMC,Lower middle income

@@ -1,0 +1,10 @@
+{
+  "panel_rows_2012_2022": 2533,
+  "panel_countries_2012_2022": 231,
+  "event_coeff_rows": 30,
+  "event_joint_rows": 6,
+  "sample_split_rows": 6,
+  "quantile_rows": 9,
+  "regime_rows": 9,
+  "external_validation_rows": 4
+}

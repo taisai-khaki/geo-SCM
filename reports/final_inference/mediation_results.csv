@@ -1,0 +1,2 @@
+path_a_coef_x_to_m,path_a_pvalue,path_b_coef_m_to_y,path_b_pvalue,direct_coef_x_to_y_cond_m,direct_pvalue,total_coef_x_to_y,total_pvalue,indirect_coef_a_times_b,indirect_boot_pvalue,indirect_boot_ci_low_2p5,indirect_boot_ci_high_97p5,boot_reps_requested,boot_reps_success,n_obs,n_countries
+-0.1030868624149686,0.18272272769443443,-0.024509891191271057,3.1062513912270533e-09,-0.004265113968669807,0.7012356426379696,0.0005757448508210013,0.9630290252515152,0.0025266477810404102,0.18546365914786966,-0.0013794151988313751,0.007372644961601714,399,399,1729,180

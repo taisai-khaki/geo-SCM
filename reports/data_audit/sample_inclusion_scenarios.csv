@@ -1,0 +1,10 @@
+scenario,dv,n_total,n_post_2019_2022,n_pre_2012_2018,n_countries,year_min,year_max,rows_2022
+with_rents,gvc_linkage_stability,679,225,454,76,2013,2021,0
+with_rents,export_recovery_index,1729,519,1210,180,2012,2021,0
+with_rents,partner_diversification_1_minus_hhi,1729,519,1210,180,2012,2021,0
+no_rents,gvc_linkage_stability,754,300,454,76,2013,2022,75
+no_rents,export_recovery_index,1924,705,1219,180,2012,2022,176
+no_rents,partner_diversification_1_minus_hhi,1924,705,1219,180,2012,2022,176
+minimal_fe_controls,gvc_linkage_stability,800,320,480,80,2013,2022,80
+minimal_fe_controls,export_recovery_index,2529,920,1609,230,2012,2022,230
+minimal_fe_controls,partner_diversification_1_minus_hhi,2529,920,1609,230,2012,2022,230

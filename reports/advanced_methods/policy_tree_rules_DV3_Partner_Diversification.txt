@@ -1,0 +1,19 @@
+|--- eci <= 0.22
+|   |--- us_china_trade_intensity_pre <= 0.07
+|   |   |--- value: [0.10]
+|   |--- us_china_trade_intensity_pre >  0.07
+|   |   |--- wdi_trade_openness_pct_gdp <= 70.01
+|   |   |   |--- value: [0.01]
+|   |   |--- wdi_trade_openness_pct_gdp >  70.01
+|   |   |   |--- value: [-0.05]
+|--- eci >  0.22
+|   |--- wdi_trade_openness_pct_gdp <= 77.57
+|   |   |--- us_china_trade_intensity_pre <= 0.28
+|   |   |   |--- value: [-0.08]
+|   |   |--- us_china_trade_intensity_pre >  0.28
+|   |   |   |--- value: [-0.02]
+|   |--- wdi_trade_openness_pct_gdp >  77.57
+|   |   |--- eci <= 0.53
+|   |   |   |--- value: [-0.11]
+|   |   |--- eci >  0.53
+|   |   |   |--- value: [-0.16]

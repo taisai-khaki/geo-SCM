@@ -1,0 +1,13 @@
+spec,hypothesis_id,dv,outcome_col,term,coef,se,p_cluster,n_obs,n_countries,year_min,year_max,covid_contamination_coef,covid_contamination_p
+baseline_full,H1,DV1_GVC_Linkage_Stability,gvc_linkage_stability,z_eci:pe,0.014043210376014349,0.08477138132133902,0.8684246810051918,754,76,2013,2022,,
+baseline_full,H2,DV2_Export_Recovery,export_recovery_index,z_eci:pe,-0.11177738845051599,0.09981327201801894,0.2627713011589192,1924,180,2012,2022,,
+baseline_full,H3,DV3_Partner_Diversification,partner_diversification_1_minus_hhi,z_eci:pe,0.0013699167054816302,0.011750238399865645,0.9071879023647372,1924,180,2012,2022,,
+exclude_2020,H1,DV1_GVC_Linkage_Stability,gvc_linkage_stability,z_eci:pe,0.07378768319820142,0.1456185192602262,0.6123519358121972,679,76,2013,2022,,
+exclude_2020,H2,DV2_Export_Recovery,export_recovery_index,z_eci:pe,-0.12229703867622893,0.11046514621870396,0.2682464874117011,1747,180,2012,2022,,
+exclude_2020,H3,DV3_Partner_Diversification,partner_diversification_1_minus_hhi,z_eci:pe,-1.8857142529185014e-05,0.011706040376422791,0.9987146963538612,1747,180,2012,2022,,
+exclude_2020_2021,H1,DV1_GVC_Linkage_Stability,gvc_linkage_stability,z_eci:pe,0.2930333561584896,0.24550149721330938,0.23263005977813378,604,76,2013,2022,,
+exclude_2020_2021,H2,DV2_Export_Recovery,export_recovery_index,z_eci:pe,-0.11703625750037207,0.12025513368073489,0.33043754213160914,1571,180,2012,2022,,
+exclude_2020_2021,H3,DV3_Partner_Diversification,partner_diversification_1_minus_hhi,z_eci:pe,-0.0018242035076584152,0.012089213841564325,0.8800584413198353,1571,180,2012,2022,,
+covid_interaction_check,H1,DV1_GVC_Linkage_Stability,gvc_linkage_stability,z_eci:pe,0.2632773284056391,0.24657941034723863,0.28564763844090535,754,76,2013,2022,-0.4979170089623346,0.2799916286748668
+covid_interaction_check,H2,DV2_Export_Recovery,export_recovery_index,z_eci:pe,-0.11334011598051975,0.11787894113605246,0.33630289716238293,1924,180,2012,2022,0.003169772560340789,0.9550944068929834
+covid_interaction_check,H3,DV3_Partner_Diversification,partner_diversification_1_minus_hhi,z_eci:pe,-0.0008265314350231305,0.011904536299650928,0.944647384769008,1924,180,2012,2022,0.004417204151884881,0.4890766546774754

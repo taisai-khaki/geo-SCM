@@ -1,0 +1,641 @@
+[
+  {
+    "dvFileId": 13439575,
+    "dvFileName": "growth_proj_eci_rankings.csv",
+    "dvPublicationDate": "2026-02-08",
+    "repo": "rankings",
+    "tableName": "growth_proj_eci_rankings",
+    "yearMax": 2024,
+    "yearMin": 1995
+  },
+  {
+    "dvFileId": 13685114,
+    "dvFileName": "hs92_country_product_year_1.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs92",
+    "tableName": "hs92_country_product_year_1",
+    "yearMax": 2024,
+    "yearMin": 1995
+  },
+  {
+    "dvFileId": 13685112,
+    "dvFileName": "hs92_country_product_year_2.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs92",
+    "tableName": "hs92_country_product_year_2",
+    "yearMax": 2024,
+    "yearMin": 1995
+  },
+  {
+    "dvFileId": 13685110,
+    "dvFileName": "hs92_country_product_year_4.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs92",
+    "tableName": "hs92_country_product_year_4",
+    "yearMax": 2024,
+    "yearMin": 1995
+  },
+  {
+    "dvFileId": 13685115,
+    "dvFileName": "hs92_country_product_year_6.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs92",
+    "tableName": "hs92_country_product_year_6",
+    "yearMax": 2024,
+    "yearMin": 1995
+  },
+  {
+    "dvFileId": 13685109,
+    "dvFileName": "hs92_country_year.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs92",
+    "tableName": "hs92_country_year",
+    "yearMax": 2024,
+    "yearMin": 1995
+  },
+  {
+    "dvFileId": 13685117,
+    "dvFileName": "hs92_product_year_1.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs92",
+    "tableName": "hs92_product_year_1",
+    "yearMax": 2024,
+    "yearMin": 1995
+  },
+  {
+    "dvFileId": 13685111,
+    "dvFileName": "hs92_product_year_2.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs92",
+    "tableName": "hs92_product_year_2",
+    "yearMax": 2024,
+    "yearMin": 1995
+  },
+  {
+    "dvFileId": 13685116,
+    "dvFileName": "hs92_product_year_4.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs92",
+    "tableName": "hs92_product_year_4",
+    "yearMax": 2024,
+    "yearMin": 1995
+  },
+  {
+    "dvFileId": 13685119,
+    "dvFileName": "hs92_product_year_6.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs92",
+    "tableName": "hs92_product_year_6",
+    "yearMax": 2024,
+    "yearMin": 1995
+  },
+  {
+    "dvFileId": 13685107,
+    "dvFileName": "hs92_country_country_year.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs92",
+    "tableName": "hs92_country_country_year",
+    "yearMax": 2024,
+    "yearMin": 1995
+  },
+  {
+    "dvFileId": 13685106,
+    "dvFileName": "hs92_country_country_product_year_6_1995_1999.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs92",
+    "tableName": "hs92_country_country_product_year_6_1995_1999",
+    "yearMax": 1999,
+    "yearMin": 1995
+  },
+  {
+    "dvFileId": 13685108,
+    "dvFileName": "hs92_country_country_product_year_6_2000_2009.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs92",
+    "tableName": "hs92_country_country_product_year_6_2000_2009",
+    "yearMax": 2009,
+    "yearMin": 2000
+  },
+  {
+    "dvFileId": 13685120,
+    "dvFileName": "hs92_country_country_product_year_6_2010_2019.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs92",
+    "tableName": "hs92_country_country_product_year_6_2010_2019",
+    "yearMax": 2019,
+    "yearMin": 2010
+  },
+  {
+    "dvFileId": 13685118,
+    "dvFileName": "hs92_country_country_product_year_6_2020_2024.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs92",
+    "tableName": "hs92_country_country_product_year_6_2020_2024",
+    "yearMax": 2024,
+    "yearMin": 2020
+  },
+  {
+    "dvFileId": 13685182,
+    "dvFileName": "hs12_country_product_year_1.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs12",
+    "tableName": "hs12_country_product_year_1",
+    "yearMax": 2024,
+    "yearMin": 2012
+  },
+  {
+    "dvFileId": 13685186,
+    "dvFileName": "hs12_country_product_year_2.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs12",
+    "tableName": "hs12_country_product_year_2",
+    "yearMax": 2024,
+    "yearMin": 2012
+  },
+  {
+    "dvFileId": 13685176,
+    "dvFileName": "hs12_country_product_year_4.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs12",
+    "tableName": "hs12_country_product_year_4",
+    "yearMax": 2024,
+    "yearMin": 2012
+  },
+  {
+    "dvFileId": 13685185,
+    "dvFileName": "hs12_country_product_year_6.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs12",
+    "tableName": "hs12_country_product_year_6",
+    "yearMax": 2024,
+    "yearMin": 2012
+  },
+  {
+    "dvFileId": 13685175,
+    "dvFileName": "hs12_country_year.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs12",
+    "tableName": "hs12_country_year",
+    "yearMax": 2024,
+    "yearMin": 2012
+  },
+  {
+    "dvFileId": 13685178,
+    "dvFileName": "hs12_product_year_1.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs12",
+    "tableName": "hs12_product_year_1",
+    "yearMax": 2024,
+    "yearMin": 2012
+  },
+  {
+    "dvFileId": 13685184,
+    "dvFileName": "hs12_product_year_2.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs12",
+    "tableName": "hs12_product_year_2",
+    "yearMax": 2024,
+    "yearMin": 2012
+  },
+  {
+    "dvFileId": 13685180,
+    "dvFileName": "hs12_product_year_4.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs12",
+    "tableName": "hs12_product_year_4",
+    "yearMax": 2024,
+    "yearMin": 2012
+  },
+  {
+    "dvFileId": 13685177,
+    "dvFileName": "hs12_product_year_6.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs12",
+    "tableName": "hs12_product_year_6",
+    "yearMax": 2024,
+    "yearMin": 2012
+  },
+  {
+    "dvFileId": 13685174,
+    "dvFileName": "hs12_country_country_year.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs12",
+    "tableName": "hs12_country_country_year",
+    "yearMax": 2024,
+    "yearMin": 2012
+  },
+  {
+    "dvFileId": 13685181,
+    "dvFileName": "hs12_country_country_product_year_6_2012_2019.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs12",
+    "tableName": "hs12_country_country_product_year_6_2012_2019",
+    "yearMax": 2019,
+    "yearMin": 2012
+  },
+  {
+    "dvFileId": 13685183,
+    "dvFileName": "hs12_country_country_product_year_6_2020_2024.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs12",
+    "tableName": "hs12_country_country_product_year_6_2020_2024",
+    "yearMax": 2024,
+    "yearMin": 2020
+  },
+  {
+    "dvFileId": 13685121,
+    "dvFileName": "hs22_country_product_year_1.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs22",
+    "tableName": "hs22_country_product_year_1",
+    "yearMax": 2024,
+    "yearMin": 2022
+  },
+  {
+    "dvFileId": 13685125,
+    "dvFileName": "hs22_country_product_year_2.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs22",
+    "tableName": "hs22_country_product_year_2",
+    "yearMax": 2024,
+    "yearMin": 2022
+  },
+  {
+    "dvFileId": 13685123,
+    "dvFileName": "hs22_country_product_year_4.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs22",
+    "tableName": "hs22_country_product_year_4",
+    "yearMax": 2024,
+    "yearMin": 2022
+  },
+  {
+    "dvFileId": 13685126,
+    "dvFileName": "hs22_country_product_year_6.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs22",
+    "tableName": "hs22_country_product_year_6",
+    "yearMax": 2024,
+    "yearMin": 2022
+  },
+  {
+    "dvFileId": 13685130,
+    "dvFileName": "hs22_country_year.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs22",
+    "tableName": "hs22_country_year",
+    "yearMax": 2024,
+    "yearMin": 2022
+  },
+  {
+    "dvFileId": 13685132,
+    "dvFileName": "hs22_product_year_1.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs22",
+    "tableName": "hs22_product_year_1",
+    "yearMax": 2024,
+    "yearMin": 2022
+  },
+  {
+    "dvFileId": 13685129,
+    "dvFileName": "hs22_product_year_2.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs22",
+    "tableName": "hs22_product_year_2",
+    "yearMax": 2024,
+    "yearMin": 2022
+  },
+  {
+    "dvFileId": 13685128,
+    "dvFileName": "hs22_product_year_4.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs22",
+    "tableName": "hs22_product_year_4",
+    "yearMax": 2024,
+    "yearMin": 2022
+  },
+  {
+    "dvFileId": 13685127,
+    "dvFileName": "hs22_product_year_6.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs22",
+    "tableName": "hs22_product_year_6",
+    "yearMax": 2024,
+    "yearMin": 2022
+  },
+  {
+    "dvFileId": 13685124,
+    "dvFileName": "hs22_country_country_year.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs22",
+    "tableName": "hs22_country_country_year",
+    "yearMax": 2024,
+    "yearMin": 2022
+  },
+  {
+    "dvFileId": 13685131,
+    "dvFileName": "hs22_country_country_product_year_6_2022_2024.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "hs22",
+    "tableName": "hs22_country_country_product_year_6_2022_2024",
+    "yearMax": 2024,
+    "yearMin": 2022
+  },
+  {
+    "dvFileId": 13685144,
+    "dvFileName": "sitc_country_product_year_1.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "sitc",
+    "tableName": "sitc_country_product_year_1",
+    "yearMax": 2024,
+    "yearMin": 1962
+  },
+  {
+    "dvFileId": 13685146,
+    "dvFileName": "sitc_country_product_year_2.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "sitc",
+    "tableName": "sitc_country_product_year_2",
+    "yearMax": 2024,
+    "yearMin": 1962
+  },
+  {
+    "dvFileId": 13685155,
+    "dvFileName": "sitc_country_product_year_4.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "sitc",
+    "tableName": "sitc_country_product_year_4",
+    "yearMax": 2024,
+    "yearMin": 1962
+  },
+  {
+    "dvFileId": 13685143,
+    "dvFileName": "sitc_country_year.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "sitc",
+    "tableName": "sitc_country_year",
+    "yearMax": 2024,
+    "yearMin": 1962
+  },
+  {
+    "dvFileId": 13685157,
+    "dvFileName": "sitc_product_year_1.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "sitc",
+    "tableName": "sitc_product_year_1",
+    "yearMax": 2024,
+    "yearMin": 1962
+  },
+  {
+    "dvFileId": 13685145,
+    "dvFileName": "sitc_product_year_2.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "sitc",
+    "tableName": "sitc_product_year_2",
+    "yearMax": 2024,
+    "yearMin": 1962
+  },
+  {
+    "dvFileId": 13685156,
+    "dvFileName": "sitc_product_year_4.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "sitc",
+    "tableName": "sitc_product_year_4",
+    "yearMax": 2024,
+    "yearMin": 1962
+  },
+  {
+    "dvFileId": 13685154,
+    "dvFileName": "sitc_country_country_year.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "sitc",
+    "tableName": "sitc_country_country_year",
+    "yearMax": 2024,
+    "yearMin": 1962
+  },
+  {
+    "dvFileId": 13685151,
+    "dvFileName": "sitc_country_country_product_year_4_1962_1969.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "sitc",
+    "tableName": "sitc_country_country_product_year_4_1962_1969",
+    "yearMax": 1969,
+    "yearMin": 1962
+  },
+  {
+    "dvFileId": 13685148,
+    "dvFileName": "sitc_country_country_product_year_4_1970_1979.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "sitc",
+    "tableName": "sitc_country_country_product_year_4_1970_1979",
+    "yearMax": 1979,
+    "yearMin": 1970
+  },
+  {
+    "dvFileId": 13685150,
+    "dvFileName": "sitc_country_country_product_year_4_1980_1989.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "sitc",
+    "tableName": "sitc_country_country_product_year_4_1980_1989",
+    "yearMax": 1989,
+    "yearMin": 1980
+  },
+  {
+    "dvFileId": 13685158,
+    "dvFileName": "sitc_country_country_product_year_4_1990_1999.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "sitc",
+    "tableName": "sitc_country_country_product_year_4_1990_1999",
+    "yearMax": 1999,
+    "yearMin": 1990
+  },
+  {
+    "dvFileId": 13685153,
+    "dvFileName": "sitc_country_country_product_year_4_2000_2009.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "sitc",
+    "tableName": "sitc_country_country_product_year_4_2000_2009",
+    "yearMax": 2009,
+    "yearMin": 2000
+  },
+  {
+    "dvFileId": 13685149,
+    "dvFileName": "sitc_country_country_product_year_4_2010_2019.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "sitc",
+    "tableName": "sitc_country_country_product_year_4_2010_2019",
+    "yearMax": 2019,
+    "yearMin": 2010
+  },
+  {
+    "dvFileId": 13685152,
+    "dvFileName": "sitc_country_country_product_year_4_2020_2024.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "sitc",
+    "tableName": "sitc_country_country_product_year_4_2020_2024",
+    "yearMax": 2024,
+    "yearMin": 2020
+  },
+  {
+    "dvFileId": 13685141,
+    "dvFileName": "services_unilateral_country_product_year_1.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "services_unilateral",
+    "tableName": "services_unilateral_country_product_year_1",
+    "yearMax": 2024,
+    "yearMin": 1980
+  },
+  {
+    "dvFileId": 13685137,
+    "dvFileName": "services_unilateral_country_product_year_2.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "services_unilateral",
+    "tableName": "services_unilateral_country_product_year_2",
+    "yearMax": 2024,
+    "yearMin": 1980
+  },
+  {
+    "dvFileId": 13685139,
+    "dvFileName": "services_unilateral_country_product_year_4.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "services_unilateral",
+    "tableName": "services_unilateral_country_product_year_4",
+    "yearMax": 2024,
+    "yearMin": 1980
+  },
+  {
+    "dvFileId": 13685135,
+    "dvFileName": "services_unilateral_country_product_year_6.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "services_unilateral",
+    "tableName": "services_unilateral_country_product_year_6",
+    "yearMax": 2024,
+    "yearMin": 1980
+  },
+  {
+    "dvFileId": 13685142,
+    "dvFileName": "services_unilateral_country_year.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "services_unilateral",
+    "tableName": "services_unilateral_country_year",
+    "yearMax": 2024,
+    "yearMin": 1980
+  },
+  {
+    "dvFileId": 13685136,
+    "dvFileName": "services_unilateral_product_year_1.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "services_unilateral",
+    "tableName": "services_unilateral_product_year_1",
+    "yearMax": 2024,
+    "yearMin": 1980
+  },
+  {
+    "dvFileId": 13685133,
+    "dvFileName": "services_unilateral_product_year_2.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "services_unilateral",
+    "tableName": "services_unilateral_product_year_2",
+    "yearMax": 2024,
+    "yearMin": 1980
+  },
+  {
+    "dvFileId": 13685134,
+    "dvFileName": "services_unilateral_product_year_4.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "services_unilateral",
+    "tableName": "services_unilateral_product_year_4",
+    "yearMax": 2024,
+    "yearMin": 1980
+  },
+  {
+    "dvFileId": 13685138,
+    "dvFileName": "services_unilateral_product_year_6.csv",
+    "dvPublicationDate": "2026-04-22",
+    "repo": "services_unilateral",
+    "tableName": "services_unilateral_product_year_6",
+    "yearMax": 2024,
+    "yearMin": 1980
+  },
+  {
+    "dvFileId": 13809180,
+    "dvFileName": "location_country.csv",
+    "dvPublicationDate": "2026-05-04",
+    "repo": "classification",
+    "tableName": "location_country",
+    "yearMax": null,
+    "yearMin": null
+  },
+  {
+    "dvFileId": 13809181,
+    "dvFileName": "location_group.csv",
+    "dvPublicationDate": "2026-05-04",
+    "repo": "classification",
+    "tableName": "location_group",
+    "yearMax": null,
+    "yearMin": null
+  },
+  {
+    "dvFileId": 13438092,
+    "dvFileName": "product_hs12.csv",
+    "dvPublicationDate": "2026-02-08",
+    "repo": "classification",
+    "tableName": "product_hs12",
+    "yearMax": null,
+    "yearMin": null
+  },
+  {
+    "dvFileId": 13655310,
+    "dvFileName": "product_hs22.csv",
+    "dvPublicationDate": "2026-04-08",
+    "repo": "classification",
+    "tableName": "product_hs22",
+    "yearMax": null,
+    "yearMin": null
+  },
+  {
+    "dvFileId": 13438093,
+    "dvFileName": "product_hs92.csv",
+    "dvPublicationDate": "2026-02-08",
+    "repo": "classification",
+    "tableName": "product_hs92",
+    "yearMax": null,
+    "yearMin": null
+  },
+  {
+    "dvFileId": 13438095,
+    "dvFileName": "product_services_unilateral.csv",
+    "dvPublicationDate": "2026-02-08",
+    "repo": "classification",
+    "tableName": "product_services_unilateral",
+    "yearMax": null,
+    "yearMin": null
+  },
+  {
+    "dvFileId": 13438096,
+    "dvFileName": "product_sitc.csv",
+    "dvPublicationDate": "2026-02-08",
+    "repo": "classification",
+    "tableName": "product_sitc",
+    "yearMax": null,
+    "yearMin": null
+  },
+  {
+    "dvFileId": 13438220,
+    "dvFileName": "top_edges_hs92.csv",
+    "dvPublicationDate": "2026-02-08",
+    "repo": "product_space",
+    "tableName": "top_edges_hs92",
+    "yearMax": null,
+    "yearMin": null
+  },
+  {
+    "dvFileId": 13438222,
+    "dvFileName": "umap_layout_hs92.csv",
+    "dvPublicationDate": "2026-02-08",
+    "repo": "product_space",
+    "tableName": "umap_layout_hs92",
+    "yearMax": null,
+    "yearMin": null
+  }
+]

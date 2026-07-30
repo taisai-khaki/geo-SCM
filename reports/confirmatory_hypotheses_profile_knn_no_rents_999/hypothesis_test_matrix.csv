@@ -1,0 +1,6 @@
+hypothesis_id,hypothesis_label,n_tests,sign_correct_count,raw_sig_count,fdr_sig_count,pretrend_pass_all,placebo_pass_all,key_pvalue,key_qvalue,status
+H1,DV1_GVC_Linkage_Stability,1,1,0,0,1,0,0.8018018018018018,0.9439439439439439,NOT_SUPPORTED
+H2,DV2_Export_Recovery,1,0,0,0,1,1,0.23123123123123124,0.6200331847620366,NOT_SUPPORTED
+H3,DV3_Partner_Diversification,1,1,0,0,1,1,0.943943943943944,0.9439439439439439,NOT_SUPPORTED
+H4,Moderation across resilience outcomes,3,3,0,0,1,0,0.15852866647817854,0.6200331847620366,NOT_SUPPORTED
+H5,Moderation across resilience outcomes,3,2,0,0,1,0,0.26033557840801336,0.6200331847620366,NOT_SUPPORTED

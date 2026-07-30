@@ -1,0 +1,4 @@
+dv,n_obs_model,n_countries_model,coef_full_z_eci_pe,p_full_z_eci_pe,flagged_obs_count,flagged_obs_share,loo_coef_min,loo_coef_max,loo_sign_flip_count,loo_sig_count_p_lt_0_05
+DV1_GVC_Linkage_Change,679,76,0.35190352067303227,0.40763932671851133,41,0.060382916053019146,,,,
+DV2_Export_Recovery,1729,180,-0.1030868624149686,0.18272272769443443,76,0.04395604395604396,,,,
+DV3_Partner_Diversification,1729,180,0.0005757448508210013,0.9630290252515152,124,0.07171775592828225,,,,

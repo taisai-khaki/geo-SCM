@@ -1,0 +1,7 @@
+mode,dv,n_factors_scanned,factors_with_reversal_share_ge_0p5,factors_with_sig_reversal_ge_1,max_reversal_share,max_sig_reversal_share
+controlled_yearfe,H1_DV1_Stability,12,5,4,0.75,0.3333333333333333
+controlled_yearfe,H2_DV2_ExportRecovery,12,3,1,0.6666666666666666,0.25
+controlled_yearfe,H3_DV3_Diversification,12,6,5,0.75,0.5
+raw,H1_DV1_Stability,12,7,5,0.75,0.5
+raw,H2_DV2_ExportRecovery,12,10,10,1.0,1.0
+raw,H3_DV3_Diversification,12,4,5,0.75,0.5

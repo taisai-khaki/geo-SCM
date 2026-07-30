@@ -1,0 +1,3 @@
+dv,term,coef,se,pvalue
+DV3_Partner_Diversification,z_eci:pe,0.00556351582320083,0.02347758625333857,0.8126789996775418
+DV3_Partner_Diversification,z_eci:pe:C(cluster_label)[T.C1],-0.01236708879586967,0.031876302721647994,0.6980373146343961

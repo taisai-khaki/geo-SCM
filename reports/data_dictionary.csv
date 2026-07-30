@@ -1,0 +1,23 @@
+column,description
+country_id,Numeric country code from Atlas (UN M49 aligned).
+country_iso3_code,ISO3 country code.
+country_iso2_code,ISO2 country code from Atlas location table.
+country_name,Country short name from Atlas location table.
+year,Calendar year.
+export_value,Total exports (HS92) from Atlas source.
+import_value,Total imports (HS92) from Atlas source.
+eci,Economic Complexity Index from Atlas.
+coi,Complexity Outlook Index from Atlas.
+diversity,Country export diversity from Atlas.
+growth_proj,Growth projection field from Atlas rankings source.
+baseline_export_2015_2017,Average exports over 2015-2017.
+export_recovery_index,export_value / baseline_export_2015_2017.
+total_exports_to_partners,Sum of bilateral exports by year.
+partner_hhi_export,HHI based on export partner shares.
+partner_diversification_1_minus_hhi,1 - partner_hhi_export.
+tiva_exgr_dva_share,TiVA EXGR_DVA share measure.
+tiva_exgr_fva_share,TiVA EXGR_FVA share measure.
+tiva_fexgr_dva_share,TiVA FEXGR_DVA share measure (forward-linkage candidate).
+tiva_ffd_dva_share,TiVA FFD_DVA share measure (forward-linkage alternative).
+delta_tiva_fexgr_dva_share,Year-over-year change in tiva_fexgr_dva_share.
+delta_tiva_ffd_dva_share,Year-over-year change in tiva_ffd_dva_share.

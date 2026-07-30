@@ -1,0 +1,13 @@
+size_bin,flag_share,n,flag_n,dv
+Q1_smallest,,0,0,DV1_GVC_Linkage_Change
+Q2,0.037037037037037035,27,1,DV1_GVC_Linkage_Change
+Q3,0.09326424870466321,193,18,DV1_GVC_Linkage_Change
+Q4_largest,0.04793028322440087,459,22,DV1_GVC_Linkage_Change
+Q1_smallest,0.19,200,38,DV2_Export_Recovery
+Q2,0.06935123042505593,447,31,DV2_Export_Recovery
+Q3,0.011472275334608031,523,6,DV2_Export_Recovery
+Q4_largest,0.0017889087656529517,559,1,DV2_Export_Recovery
+Q1_smallest,0.26,200,52,DV3_Partner_Diversification
+Q2,0.12080536912751678,447,54,DV3_Partner_Diversification
+Q3,0.028680688336520075,523,15,DV3_Partner_Diversification
+Q4_largest,0.005366726296958855,559,3,DV3_Partner_Diversification

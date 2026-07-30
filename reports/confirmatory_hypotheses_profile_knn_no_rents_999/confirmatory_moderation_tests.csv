@@ -1,0 +1,7 @@
+hypothesis_id,dv,outcome_col,expected_sign,term,coef,se,p_cluster,n_obs,n_countries
+H4,DV1_GVC_Linkage_Stability,gvc_linkage_stability,positive,z_eci:pe:z_coi,0.09052488647187606,0.11066571031192037,0.4133554565080244,754,76
+H5,DV1_GVC_Linkage_Stability,gvc_linkage_stability,negative,z_eci:pe:z_gpr,-0.5579108523700032,0.5317556374551035,0.29409227667262494,754,76
+H4,DV2_Export_Recovery,export_recovery_index,positive,z_eci:pe:z_coi,0.14360440203735328,0.1018443987559384,0.15852866647817854,1924,180
+H5,DV2_Export_Recovery,export_recovery_index,negative,z_eci:pe:z_gpr,-0.09330964861301061,0.08289782130564871,0.26033557840801336,1924,180
+H4,DV3_Partner_Diversification,partner_diversification_1_minus_hhi,positive,z_eci:pe:z_coi,0.002340938681973711,0.013317858645356867,0.8604711782281718,1924,180
+H5,DV3_Partner_Diversification,partner_diversification_1_minus_hhi,negative,z_eci:pe:z_gpr,0.012406470219487698,0.013495873507176655,0.35794977071122736,1924,180

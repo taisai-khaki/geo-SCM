@@ -1,0 +1,8 @@
+{
+  "panel_rows": 2533,
+  "panel_countries": 231,
+  "dv2_bootstrap_reps_requested": 999,
+  "mediation_bootstrap_reps_requested": 399,
+  "fdr_hypotheses_count": 61,
+  "fdr_significant_count": 7
+}

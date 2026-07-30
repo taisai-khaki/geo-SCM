@@ -1,0 +1,13 @@
+{
+  "panel_rows": 2533,
+  "panel_countries": 231,
+  "include_rents_main": true,
+  "specifications": [
+    "baseline_full",
+    "exclude_2020",
+    "exclude_2020_2021",
+    "covid_interaction_check"
+  ],
+  "primary_rows": 12,
+  "moderation_rows": 24
+}

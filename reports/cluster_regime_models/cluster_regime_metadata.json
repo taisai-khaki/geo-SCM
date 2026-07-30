@@ -1,0 +1,26 @@
+[
+  {
+    "dv": "DV1_GVC_Linkage_Change",
+    "n_obs": 679,
+    "n_countries": 76,
+    "year_min": 2013,
+    "year_max": 2021,
+    "r2": 0.18312658063212917
+  },
+  {
+    "dv": "DV2_Export_Recovery",
+    "n_obs": 1729,
+    "n_countries": 180,
+    "year_min": 2012,
+    "year_max": 2021,
+    "r2": 0.40857888229985606
+  },
+  {
+    "dv": "DV3_Partner_Diversification",
+    "n_obs": 1729,
+    "n_countries": 180,
+    "year_min": 2012,
+    "year_max": 2021,
+    "r2": 0.897327886745618
+  }
+]

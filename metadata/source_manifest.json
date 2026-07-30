@@ -1,0 +1,36 @@
+{
+  "atlas_sources": [
+    {
+      "table_name": "hs92_country_year",
+      "out_file": "C:\\Users\\L03128674\\projects\\geo-SCM\\data\\raw\\atlas_hs92_country_year.csv",
+      "dv_file_id": 13685109,
+      "dv_file_name": "hs92_country_year.csv",
+      "dv_publication_date": "2026-04-22",
+      "year_min": 1995,
+      "year_max": 2024,
+      "repo": "hs92"
+    },
+    {
+      "table_name": "hs92_country_country_year",
+      "out_file": "C:\\Users\\L03128674\\projects\\geo-SCM\\data\\raw\\atlas_hs92_country_country_year.csv",
+      "dv_file_id": 13685107,
+      "dv_file_name": "hs92_country_country_year.csv",
+      "dv_publication_date": "2026-04-22",
+      "year_min": 1995,
+      "year_max": 2024,
+      "repo": "hs92"
+    }
+  ],
+  "year_window": {
+    "requested_start_year": 2012,
+    "requested_end_year": null,
+    "effective_start_year": 2012,
+    "effective_end_year": 2024,
+    "atlas_available_min_year": 1995,
+    "atlas_available_max_year": 2024
+  },
+  "oecd_tiva_source": {
+    "url": "https://sdmx.oecd.org/sti-public/rest/data/OECD.STI.PIE,DSD_TIVA_MAINSH@DF_MAINSH,1.1/EXGR_DVA+EXGR_FVA+FEXGR_DVA+FFD_DVA.._T.W..A?startPeriod=2012&endPeriod=2024&format=csvfile",
+    "out_file": "C:\\Users\\L03128674\\projects\\geo-SCM\\data\\raw\\oecd_tiva_mainsh_2012_2024_selected.csv"
+  }
+}

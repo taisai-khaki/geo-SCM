@@ -1,0 +1,9 @@
+class_id,n_countries
+ECI_low__COI_low__GPR_high,89
+ECI_high__COI_high__GPR_high,53
+ECI_high__COI_high__GPR_low,38
+ECI_low__COI_high__GPR_high,22
+ECI_high__COI_low__GPR_high,22
+ECI_low__COI_low__GPR_low,2
+ECI_high__COI_low__GPR_low,2
+ECI_low__COI_high__GPR_low,2

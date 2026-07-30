@@ -1,0 +1,10 @@
+{
+  "panel_rows": 2533,
+  "panel_countries": 231,
+  "bootstrap_reps": 299,
+  "primary_tests": 3,
+  "moderation_tests": 6,
+  "fdr_tests": 9,
+  "robustness_rows": 18,
+  "hypotheses_in_matrix": 5
+}

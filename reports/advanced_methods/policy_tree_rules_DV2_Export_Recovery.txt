@@ -1,0 +1,22 @@
+|--- log_gdp_pc <= 8.02
+|   |--- wdi_trade_openness_pct_gdp <= 69.65
+|   |   |--- gpr_for_model_annual <= 98.62
+|   |   |   |--- value: [0.11]
+|   |   |--- gpr_for_model_annual >  98.62
+|   |   |   |--- value: [0.28]
+|   |--- wdi_trade_openness_pct_gdp >  69.65
+|   |   |--- wdi_trade_openness_pct_gdp <= 100.41
+|   |   |   |--- value: [0.31]
+|   |   |--- wdi_trade_openness_pct_gdp >  100.41
+|   |   |   |--- value: [0.45]
+|--- log_gdp_pc >  8.02
+|   |--- gpr_for_model_annual <= 98.62
+|   |   |--- year <= 2020.50
+|   |   |   |--- value: [0.00]
+|   |   |--- year >  2020.50
+|   |   |   |--- value: [-0.14]
+|   |--- gpr_for_model_annual >  98.62
+|   |   |--- wdi_natural_resource_rents_pct_gdp <= 0.26
+|   |   |   |--- value: [0.04]
+|   |   |--- wdi_natural_resource_rents_pct_gdp >  0.26
+|   |   |   |--- value: [0.16]
