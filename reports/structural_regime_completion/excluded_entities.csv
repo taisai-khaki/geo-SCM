@@ -1,0 +1,30 @@
+country_iso3_code,country_name,wb_region,cluster_imputed_fields,pre_gdp_observations,pre_growth_observations,valid_entity,valid_exposure,valid_eci,valid_growth_history,primary_structural_sample,complete_case_structural_sample,primary_exclusion_reason
+AIA,Anguilla,,9,0,0,False,True,True,False,False,False,invalid_entity_or_aggregate_code
+ANS,Undeclared,,10,0,0,False,True,False,False,False,False,invalid_entity_or_aggregate_code
+ATA,Antarctica,,9,0,0,False,True,True,False,False,False,invalid_entity_or_aggregate_code
+ATF,French Southern and Antarctic Lands,,9,0,0,False,True,True,False,False,False,invalid_entity_or_aggregate_code
+BES,Bonaire,,9,0,0,False,True,True,False,False,False,invalid_entity_or_aggregate_code
+BLM,Saint Barthélemy,,9,0,0,False,True,True,False,False,False,invalid_entity_or_aggregate_code
+BVT,Bouvet Island,,9,0,0,False,True,True,False,False,False,invalid_entity_or_aggregate_code
+CAF,Central African Republic,Sub-Saharan Africa,0,6,5,False,True,True,True,False,False,invalid_entity_or_aggregate_code
+CCK,Cocos (Keeling) Islands,,9,0,0,False,True,True,False,False,False,invalid_entity_or_aggregate_code
+COK,Cook Islands,,9,0,0,False,True,True,False,False,False,invalid_entity_or_aggregate_code
+CXR,Christmas Island,,9,0,0,False,True,True,False,False,False,invalid_entity_or_aggregate_code
+ERI,Eritrea,Sub-Saharan Africa,7,0,0,True,True,True,False,False,False,fewer_than_three_pre_shock_growth_observations
+FLK,Falkland Islands,,9,0,0,False,True,True,False,False,False,invalid_entity_or_aggregate_code
+GIB,Gibraltar,Europe & Central Asia,8,0,0,True,True,True,False,False,False,fewer_than_three_pre_shock_growth_observations
+HMD,Heard and McDonald Islands,,9,0,0,False,True,True,False,False,False,invalid_entity_or_aggregate_code
+MSR,Montserrat,,9,0,0,False,True,True,False,False,False,invalid_entity_or_aggregate_code
+NCL,New Caledonia,East Asia & Pacific,4,1,0,True,True,True,False,False,False,fewer_than_three_pre_shock_growth_observations
+NFK,Norfolk Island,,9,0,0,False,True,True,False,False,False,invalid_entity_or_aggregate_code
+NIU,Niue,,9,0,0,False,True,True,False,False,False,invalid_entity_or_aggregate_code
+PCN,Pitcairn,,9,0,0,False,True,True,False,False,False,invalid_entity_or_aggregate_code
+PRK,North Korea,East Asia & Pacific,7,0,0,True,True,True,False,False,False,fewer_than_three_pre_shock_growth_observations
+SGS,South Georgia and South Sandwich Islds.,,9,0,0,False,True,True,False,False,False,invalid_entity_or_aggregate_code
+SHN,"Saint Helena, Ascension and Tristan da Cunha",,9,0,0,False,True,True,False,False,False,invalid_entity_or_aggregate_code
+SPM,Saint Pierre and Miquelon,,9,0,0,False,True,True,False,False,False,invalid_entity_or_aggregate_code
+TKL,Tokelau,,9,0,0,False,True,True,False,False,False,invalid_entity_or_aggregate_code
+TWN,Taiwan,,9,0,0,False,True,True,False,False,False,invalid_entity_or_aggregate_code
+VAT,Vatican City,,9,0,0,False,True,True,False,False,False,invalid_entity_or_aggregate_code
+VGB,British Virgin Islands,Latin America & Caribbean,8,0,0,True,True,True,False,False,False,fewer_than_three_pre_shock_growth_observations
+ZAF,South Africa,Sub-Saharan Africa,0,6,5,False,True,True,True,False,False,invalid_entity_or_aggregate_code

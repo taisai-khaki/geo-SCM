@@ -1,0 +1,40 @@
+analysis_component,authoritative_file,role
+H1-H3 and H4 confirmatory results,final_confirmatory_multiplicity_family.csv,final audited snapshot
+clean structural sample,valid_country_sample_audit.csv,final audited snapshot
+consensus assignments,structural_regime_assignment_probabilities.csv,final audited snapshot
+corrected regime equality,structural_regime_difference_tests_corrected.csv,final audited snapshot
+corrected event study,corrected_event_study_coefficients.csv,final audited snapshot
+event-study pretrend tests,corrected_event_study_pretrend_tests.csv,final audited snapshot
+event-study post tests,corrected_event_study_post_tests.csv,final audited snapshot
+2018 versus 2019 sensitivity,post_period_2018_2019_comparison.csv,final audited snapshot
+2019 continuous moderator sensitivity,post_period_2019_continuous_moderators.csv,final audited snapshot
+corrected event-study post summary,corrected_event_study_post_period_summary.csv,final audited snapshot
+outcome-specific power,regime_power_mde_outcome_specific.csv,final audited snapshot
+common-sample adjustment,progressive_adjustment_common_sample.csv,final audited snapshot
+weight diagnostics,residual_density_weight_diagnostics.csv,final audited snapshot
+theory balance,theory_based_balance_diagnostics.csv,final audited snapshot
+placebo comparison,placebo_2014_2015_comparison.csv,final audited snapshot
+equivalence and MDE,final_equivalence_tests.csv,final audited snapshot
+confirmatory multiplicity,final_confirmatory_multiplicity_family.csv,final audited snapshot
+structural multiplicity,final_structural_multiplicity_family.csv,final audited snapshot
+reproduction hashes,output_file_hashes.csv,final audited snapshot
+clean profile base,structural_profile_final_audit_base.csv,final audited snapshot
+clean exposure counts,structural_regime_exposure_counts_clean.csv,final audited snapshot
+regime-specific slopes,structural_regime_specific_coefficients_corrected.csv,final audited snapshot
+regime difference tests,structural_regime_difference_tests_corrected.csv,final audited snapshot
+regime omnibus validation,structural_regime_omnibus_validation.csv,final audited snapshot
+outcome-specific regime-difference power,regime_difference_power_mde.csv,final audited snapshot
+maximum-sample adjustment,progressive_adjustment_maximum_sample.csv,final audited snapshot
+coefficient stability,coefficient_stability_summary.csv,final audited snapshot
+weight balance,balance_before_after_weighting.csv,final audited snapshot
+trimmed weighting sensitivity,weighted_model_trimmed_sensitivity.csv,final audited snapshot
+moderator block omnibus,structural_moderator_block_omnibus_tests.csv,final audited snapshot
+assignment robustness,regime_assignment_robustness.csv,final audited snapshot
+assignment model sensitivity,regime_model_assignment_sensitivity.csv,final audited snapshot
+country influence detail,leave_one_country_out_summary.csv,final audited snapshot
+H6 directional tests,h6_directional_2018_2019.csv,final audited snapshot
+minimum detectable effects,final_minimum_detectable_effects.csv,final audited snapshot
+event-study figures,figure_corrected_event_study_gvc.png;figure_corrected_event_study_recovery.png;figure_corrected_event_study_diversification.png,final audited snapshot
+2019 regime-specific slopes,structural_regime_specific_coefficients_2019.csv,final audited snapshot
+2019 regime differences,structural_regime_difference_tests_2019.csv,final audited snapshot
+2019 regime omnibus validation,structural_regime_omnibus_validation_2019.csv,final audited snapshot

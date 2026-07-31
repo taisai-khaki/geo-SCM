@@ -1,0 +1,12 @@
+metric,value
+n_weighted_countries,164.0
+min_weight,0.005629402858694248
+max_weight,1.4151406990985982
+median_weight,1.0844378286351435
+p01_weight,0.06407826854052372
+p05_weight,0.19858260996255386
+p95_weight,1.4063404549647596
+p99_weight,1.4142544088272682
+effective_sample_size,144.01944080022994
+ess_fraction_of_weighted_countries,0.8781673219526216
+max_country_leverage_share,0.00862890670182072

@@ -1,0 +1,4 @@
+outcome_key,outcome,post_start,k,pairwise_p_wild,omnibus_p_wild,absolute_difference,tolerance,validation_passed
+gvc,Adverse forward-GVC deviation stability,2018,2,0.348,0.348,0.0,1e-12,True
+recovery,Log export recovery,2018,2,0.203,0.203,0.0,1e-12,True
+diversification,Partner diversification excluding US and China,2018,2,0.091,0.091,0.0,1e-12,True

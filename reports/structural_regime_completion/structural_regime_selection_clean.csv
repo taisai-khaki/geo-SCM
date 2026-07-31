@@ -1,0 +1,7 @@
+k,n_countries,silhouette_mean_across_imputations,within_cluster_sse_mean_across_imputations,bootstrap_mean_ari,mean_assignment_probability,proportion_assignment_probability_ge_0_80,min_assignment_probability,max_assignment_probability,n_imputations,stability_reps,sample,silhouette_gap_to_best,selection_basis,selected_k
+2,200,0.20290461257178066,1616.643399064233,0.9368267096136877,1.0,1.0,1.0,1.0,20,100,cleaned_primary,0.007483023940435263,silhouette gap <= 0.02; probability gap <= 0.02; ARI gap > 0.02,2
+3,200,0.21038763651221593,1421.3996533059956,0.8619148151921443,0.997,1.0,0.85,1.0,20,100,cleaned_primary,0.007483023940435263,silhouette gap <= 0.02; probability gap <= 0.02; ARI gap > 0.02,2
+2,164,0.20062302012517072,1336.7784492369306,0.9453303150449703,1.0,1.0,1.0,1.0,20,100,complete_case,0.0019109530141748488,silhouette gap <= 0.02; probability gap <= 0.02; ARI gap > 0.02,2
+3,164,0.20253397313934557,1159.284445951343,0.840432948421362,1.0,1.0,1.0,1.0,20,100,complete_case,0.0019109530141748488,silhouette gap <= 0.02; probability gap <= 0.02; ARI gap > 0.02,2
+2,229,0.18545308659363674,1881.4615608662848,0.9499471882106529,0.998471615720524,0.9956331877729258,0.65,1.0,20,100,broad_legacy,0.007348436912175682,silhouette gap <= 0.02; probability gap <= 0.02; ARI gap > 0.02,2
+3,229,0.19280152350581242,1664.7831105607008,0.8290790588181267,0.9986899563318776,1.0,0.9,1.0,20,100,broad_legacy,0.007348436912175682,silhouette gap <= 0.02; probability gap <= 0.02; ARI gap > 0.02,2

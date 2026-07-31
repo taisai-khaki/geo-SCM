@@ -1,0 +1,7 @@
+outcome_key,outcome,regime,n_countries_used,n_country_year_observations,n_exposed_countries_used,effective_number_of_clusters,standard_error,mde_80pct,mde_90pct,mde_rule
+gvc,Adverse forward-GVC deviation stability,R1,34,374,12,34,0.24314410382998194,0.6808034907239494,0.7877868964091416,two-sided cluster-power approximation
+gvc,Adverse forward-GVC deviation stability,R2,42,462,9,42,0.2952636798492764,0.8267383035779738,0.9566543227116555,two-sided cluster-power approximation
+recovery,Log export recovery,R1,106,1166,41,106,0.030995623670487048,0.08678774627736373,0.10042582069237804,two-sided cluster-power approximation
+recovery,Log export recovery,R2,94,1034,30,94,0.11021533835928952,0.30860294740601063,0.3570976962840981,two-sided cluster-power approximation
+diversification,Partner diversification excluding US and China,R1,106,1166,41,106,0.012920945851659638,0.03617864838464698,0.04186386455937723,two-sided cluster-power approximation
+diversification,Partner diversification excluding US and China,R2,94,1034,30,94,0.017041272291064908,0.04771556241498174,0.05521372222305031,two-sided cluster-power approximation

@@ -1,0 +1,11 @@
+item,value
+primary_sample_countries,200
+complete_case_countries,164
+broad_sample_countries,229
+selected_k,2
+confirmatory_family_tests,7
+confirmatory_q_lt_005,0
+structural_family_tests,141
+structural_q_lt_005,0
+bootstrap_reps,999
+mi_reps,20

@@ -1,0 +1,13 @@
+test_id,variant,outcome_key,outcome,test_type,wald_chi2,wald_df,p_cluster,p_wild_bootstrap,bootstrap_reps_requested,bootstrap_reps_success,pvalue_for_fdr,n_obs,n_countries
+corrected_event_pretrend_full_sample_gvc,full_sample,gvc,Adverse forward-GVC deviation stability,joint_pretrend,14.668501159495637,5,0.011876789647690247,0.144,999,999,0.144,836,76
+corrected_event_pretrend_pooled_regime_interacted_gvc,pooled_regime_interacted,gvc,Adverse forward-GVC deviation stability,joint_pretrend,18.04330774741731,10,0.05423748079328533,0.224,999,999,0.224,836,76
+corrected_event_pretrend_regime_R1_gvc,regime_R1,gvc,Adverse forward-GVC deviation stability,joint_pretrend,37.50651364854007,5,4.740199236778345e-07,0.11,999,999,0.11,374,34
+corrected_event_pretrend_regime_R2_gvc,regime_R2,gvc,Adverse forward-GVC deviation stability,joint_pretrend,1.3999052643859038,5,0.9243236355809046,0.956,999,999,0.956,462,42
+corrected_event_pretrend_full_sample_recovery,full_sample,recovery,Log export recovery,joint_pretrend,17.955634774820776,5,0.0030025235356544865,0.076,999,999,0.076,2200,200
+corrected_event_pretrend_pooled_regime_interacted_recovery,pooled_regime_interacted,recovery,Log export recovery,joint_pretrend,25.030865148290165,10,0.005287307369790817,0.18,999,999,0.18,2200,200
+corrected_event_pretrend_regime_R1_recovery,regime_R1,recovery,Log export recovery,joint_pretrend,26.60797101264662,5,6.799555389782053e-05,0.116,999,999,0.116,1166,106
+corrected_event_pretrend_regime_R2_recovery,regime_R2,recovery,Log export recovery,joint_pretrend,7.243899475600527,5,0.2031239185374778,0.244,999,999,0.244,1034,94
+corrected_event_pretrend_full_sample_diversification,full_sample,diversification,Partner diversification excluding US and China,joint_pretrend,6.6789671078426345,5,0.2456314091624762,0.746,999,999,0.746,2200,200
+corrected_event_pretrend_pooled_regime_interacted_diversification,pooled_regime_interacted,diversification,Partner diversification excluding US and China,joint_pretrend,29.549762823304953,10,0.0010145552453781274,0.216,999,999,0.216,2200,200
+corrected_event_pretrend_regime_R1_diversification,regime_R1,diversification,Partner diversification excluding US and China,joint_pretrend,18.139654626959256,5,0.002776376080939866,0.425,999,999,0.425,1166,106
+corrected_event_pretrend_regime_R2_diversification,regime_R2,diversification,Partner diversification excluding US and China,joint_pretrend,6.790559420701373,5,0.23668845094700047,0.375,999,999,0.375,1034,94

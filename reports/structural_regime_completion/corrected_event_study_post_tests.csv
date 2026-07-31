@@ -1,0 +1,13 @@
+test_id,variant,outcome_key,outcome,test_type,wald_chi2,wald_df,p_cluster,p_wild_bootstrap,bootstrap_reps_requested,bootstrap_reps_success,pvalue_for_fdr,n_obs,n_countries
+corrected_event_post_period_full_sample_gvc,full_sample,gvc,Adverse forward-GVC deviation stability,joint_post_period,4.920178302401767,5,0.42569928945684643,0.745,999,999,0.745,836,76
+corrected_event_post_period_pooled_regime_interacted_gvc,pooled_regime_interacted,gvc,Adverse forward-GVC deviation stability,joint_post_period,8.034199565696346,10,0.6254962456851957,0.892,999,999,0.892,836,76
+corrected_event_post_period_regime_R1_gvc,regime_R1,gvc,Adverse forward-GVC deviation stability,joint_post_period,11.055658590832824,5,0.05028753717822459,0.574,999,999,0.574,374,34
+corrected_event_post_period_regime_R2_gvc,regime_R2,gvc,Adverse forward-GVC deviation stability,joint_post_period,3.3882025860752054,5,0.6403673149885623,0.789,999,999,0.789,462,42
+corrected_event_post_period_full_sample_recovery,full_sample,recovery,Log export recovery,joint_post_period,6.4041329051645555,5,0.2688562777431556,0.583,999,999,0.583,2200,200
+corrected_event_post_period_pooled_regime_interacted_recovery,pooled_regime_interacted,recovery,Log export recovery,joint_post_period,17.156744606665203,10,0.07096677933728988,0.423,999,999,0.423,2200,200
+corrected_event_post_period_regime_R1_recovery,regime_R1,recovery,Log export recovery,joint_post_period,9.940341757822251,5,0.07694339205774461,0.613,999,999,0.613,1166,106
+corrected_event_post_period_regime_R2_recovery,regime_R2,recovery,Log export recovery,joint_post_period,5.980606232752656,5,0.30811059345410247,0.524,999,999,0.524,1034,94
+corrected_event_post_period_full_sample_diversification,full_sample,diversification,Partner diversification excluding US and China,joint_post_period,5.441219540230076,5,0.3644344304870233,0.779,999,999,0.779,2200,200
+corrected_event_post_period_pooled_regime_interacted_diversification,pooled_regime_interacted,diversification,Partner diversification excluding US and China,joint_post_period,14.830674847526652,10,0.13835817594287161,0.71,999,999,0.71,2200,200
+corrected_event_post_period_regime_R1_diversification,regime_R1,diversification,Partner diversification excluding US and China,joint_post_period,12.462870203440694,5,0.028967354255562777,0.612,999,999,0.612,1166,106
+corrected_event_post_period_regime_R2_diversification,regime_R2,diversification,Partner diversification excluding US and China,joint_post_period,2.4156219060056547,5,0.7891454619571817,0.898,999,999,0.898,1034,94

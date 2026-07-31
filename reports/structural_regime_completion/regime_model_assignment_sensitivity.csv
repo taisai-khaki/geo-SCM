@@ -1,0 +1,37 @@
+sample,test_id,outcome_key,outcome,test_type,regime,regime_left,regime_right,estimate,se,p_cluster,p_wild_bootstrap,n_obs,n_countries
+cleaned_primary,regime_slope_2018_gvc_R1,gvc,Adverse forward-GVC deviation stability,regime_specific_slope,R1,,,0.25869860876291484,0.24314410382998194,0.2907548531813159,0.38,836,76
+cleaned_primary,regime_slope_2018_gvc_R2,gvc,Adverse forward-GVC deviation stability,regime_specific_slope,R2,,,-0.13226721596921492,0.2952636798492764,0.6554712158703176,0.638,836,76
+cleaned_primary,regime_slope_2018_recovery_R1,recovery,Log export recovery,regime_specific_slope,R1,,,0.027912172615002163,0.030995623670487048,0.3689321878341081,0.543,2200,200
+cleaned_primary,regime_slope_2018_recovery_R2,recovery,Log export recovery,regime_specific_slope,R2,,,-0.14120832277693549,0.11021533835928952,0.20161302720200458,0.276,2200,200
+cleaned_primary,regime_slope_2018_diversification_R1,diversification,Partner diversification excluding US and China,regime_specific_slope,R1,,,-0.017812018765647798,0.012920945851659638,0.16958489421127956,0.565,2200,200
+cleaned_primary,regime_slope_2018_diversification_R2,diversification,Partner diversification excluding US and China,regime_specific_slope,R2,,,0.026498640887776082,0.017041272291064908,0.1215424954800106,0.179,2200,200
+cleaned_primary,pairwise_2018_gvc_R2_minus_R1,gvc,Adverse forward-GVC deviation stability,pairwise_regime_difference,,R2,R1,-0.39096582473212976,0.3824914324078671,0.30999295377138997,0.345,836,76
+cleaned_primary,omnibus_2018_gvc_regime_equality,gvc,Adverse forward-GVC deviation stability,omnibus_regime_equality,,R2,R1,,,0.30670718074117853,0.345,836,76
+cleaned_primary,pairwise_2018_recovery_R2_minus_R1,recovery,Log export recovery,pairwise_regime_difference,,R2,R1,-0.16912049539193766,0.11449082712765744,0.14121536966565604,0.215,2200,200
+cleaned_primary,omnibus_2018_recovery_regime_equality,recovery,Log export recovery,omnibus_regime_equality,,R2,R1,,,0.13963456686935188,0.215,2200,200
+cleaned_primary,pairwise_2018_diversification_R2_minus_R1,diversification,Partner diversification excluding US and China,pairwise_regime_difference,,R2,R1,0.04431065965342388,0.021385878588445668,0.039558453637538515,0.084,2200,200
+cleaned_primary,omnibus_2018_diversification_regime_equality,diversification,Partner diversification excluding US and China,omnibus_regime_equality,,R2,R1,,,0.038269282217262404,0.084,2200,200
+complete_case,regime_slope_2018_gvc_R1,gvc,Adverse forward-GVC deviation stability,regime_specific_slope,R1,,,0.10668853290756214,0.25731470745216917,0.6796681913053998,0.815,792,72
+complete_case,regime_slope_2018_gvc_R2,gvc,Adverse forward-GVC deviation stability,regime_specific_slope,R2,,,-0.15987373932482252,0.2800051903908495,0.5698248360917089,0.582,792,72
+complete_case,regime_slope_2018_recovery_R1,recovery,Log export recovery,regime_specific_slope,R1,,,0.03208105923409984,0.03673696471842599,0.3838040094900411,0.598,1804,164
+complete_case,regime_slope_2018_recovery_R2,recovery,Log export recovery,regime_specific_slope,R2,,,-0.14088456585333425,0.11641076866036454,0.22794022310968254,0.373,1804,164
+complete_case,regime_slope_2018_diversification_R1,diversification,Partner diversification excluding US and China,regime_specific_slope,R1,,,-0.02061048219612767,0.011918276277791344,0.08564549241674287,0.432,1804,164
+complete_case,regime_slope_2018_diversification_R2,diversification,Partner diversification excluding US and China,regime_specific_slope,R2,,,0.017107711587616987,0.016656586706396994,0.3059027160713111,0.427,1804,164
+complete_case,pairwise_2018_gvc_R2_minus_R1,gvc,Adverse forward-GVC deviation stability,pairwise_regime_difference,,R2,R1,-0.26656227223238466,0.38028116613502344,0.4856183661391871,0.515,792,72
+complete_case,omnibus_2018_gvc_regime_equality,gvc,Adverse forward-GVC deviation stability,omnibus_regime_equality,,R2,R1,,,0.48332734487897,0.515,792,72
+complete_case,pairwise_2018_recovery_R2_minus_R1,recovery,Log export recovery,pairwise_regime_difference,,R2,R1,-0.1729656250874341,0.12206994567386269,0.1584093165950695,0.293,1804,164
+complete_case,omnibus_2018_recovery_regime_equality,recovery,Log export recovery,omnibus_regime_equality,,R2,R1,,,0.15650086260373877,0.293,1804,164
+complete_case,pairwise_2018_diversification_R2_minus_R1,diversification,Partner diversification excluding US and China,pairwise_regime_difference,,R2,R1,0.03771819378374466,0.0204813864311351,0.06735342939996344,0.177,1804,164
+complete_case,omnibus_2018_diversification_regime_equality,diversification,Partner diversification excluding US and China,omnibus_regime_equality,,R2,R1,,,0.06553602152366163,0.177,1804,164
+broad_legacy,regime_slope_2018_gvc_R1,gvc,Adverse forward-GVC deviation stability,regime_specific_slope,R1,,,0.26519418374457465,0.2492780440888533,0.2907220497458152,0.373,858,78
+broad_legacy,regime_slope_2018_gvc_R2,gvc,Adverse forward-GVC deviation stability,regime_specific_slope,R2,,,0.05124539248175819,0.30004681678590994,0.8648358514156556,0.866,858,78
+broad_legacy,regime_slope_2018_recovery_R1,recovery,Log export recovery,regime_specific_slope,R1,,,-0.05548551209759741,0.07188842446814876,0.4410189471492286,0.49,2507,228
+broad_legacy,regime_slope_2018_recovery_R2,recovery,Log export recovery,regime_specific_slope,R2,,,-0.09313659385054676,0.1079295981455941,0.38908212467883363,0.437,2507,228
+broad_legacy,regime_slope_2018_diversification_R1,diversification,Partner diversification excluding US and China,regime_specific_slope,R1,,,-0.011298964342166373,0.015138071796057249,0.4562018045260048,0.758,2507,228
+broad_legacy,regime_slope_2018_diversification_R2,diversification,Partner diversification excluding US and China,regime_specific_slope,R2,,,0.020930147883885974,0.018389653970853393,0.2562584861475068,0.254,2507,228
+broad_legacy,pairwise_2018_gvc_R2_minus_R1,gvc,Adverse forward-GVC deviation stability,pairwise_regime_difference,,R2,R1,-0.21394879126281646,0.39008670257791844,0.5849596046537013,0.569,858,78
+broad_legacy,omnibus_2018_gvc_regime_equality,gvc,Adverse forward-GVC deviation stability,omnibus_regime_equality,,R2,R1,,,0.5833728525644497,0.569,858,78
+broad_legacy,pairwise_2018_recovery_R2_minus_R1,recovery,Log export recovery,pairwise_regime_difference,,R2,R1,-0.037651081752949345,0.12967938821717984,0.7718213904179607,0.785,2507,228
+broad_legacy,omnibus_2018_recovery_regime_equality,recovery,Log export recovery,omnibus_regime_equality,,R2,R1,,,0.7715563282341996,0.785,2507,228
+broad_legacy,pairwise_2018_diversification_R2_minus_R1,diversification,Partner diversification excluding US and China,pairwise_regime_difference,,R2,R1,0.03222911222605235,0.023818912461955652,0.1773731580093059,0.251,2507,228
+broad_legacy,omnibus_2018_diversification_regime_equality,diversification,Partner diversification excluding US and China,omnibus_regime_equality,,R2,R1,,,0.17602714865616087,0.251,2507,228
