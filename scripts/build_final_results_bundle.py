@@ -22,6 +22,12 @@ def safe_read_text(path: Path) -> str:
     return path.read_text(encoding="utf-8", errors="ignore")
 
 
+def safe_read_json(path: Path) -> dict[str, Any]:
+    if not path.exists():
+        return {"missing_file": str(path)}
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
 def make_json_safe(value: Any) -> Any:
     """Convert pandas missing values and non-finite numbers to strict JSON values."""
     if isinstance(value, dict):
@@ -82,7 +88,7 @@ def build_recommendation_lines(base_dir: Path) -> list[str]:
 
     lines.extend(
         [
-            "Final interpretation:",
+            "Legacy package interpretation (superseded by completed tariff-weighted redesign):",
             "- DV2 (Export Recovery): most stable signal; becomes stronger under outlier-robust specs.",
             "- DV1 (GVC Linkage Change): direction is sensitive to influential-country treatment.",
             "- DV3 (Partner Diversification): weak average effect; heterogeneity dominates.",
@@ -100,6 +106,17 @@ def build_recommendation_lines(base_dir: Path) -> list[str]:
                 "- Use the frozen pre-shock capability package as the current conservative evidence base.",
                 "- Treat H6 as theory-refining/exploratory, not a retroactive confirmatory hypothesis.",
                 "- The legacy tables remain useful as an audit trail but do not supersede the redesigned outputs.",
+            ]
+        )
+    completed_summary_path = base_dir / "reports" / "final_design_completion" / "analysis_summary.md"
+    if completed_summary_path.exists():
+        lines.extend(
+            [
+                "Current authoritative completed-design interpretation:",
+                "- The pre-shock, tariff-weighted design is the current evidence base and supersedes legacy global-effect tables.",
+                "- No H1-H5 or H6 test survives the 66-test Benjamini-Hochberg correction at q < .05.",
+                "- Direct-country GPR results and profile-matched GPR results must be reported as separate primary and sensitivity evidence.",
+                "- Use the final-design output README and analysis summary as the entry point for external review.",
             ]
         )
     return lines
@@ -127,6 +144,23 @@ def build_metadata_rows(base_dir: Path) -> list[dict[str, Any]]:
         for k, v in reg_meta.items():
             if isinstance(v, (str, int, float, bool)) or v is None:
                 meta_rows.append({"item": f"reg_meta:{k}", "path": str(reg_meta_path), "value": v})
+
+    completed_meta_path = base_dir / "reports" / "final_design_completion" / "analysis_metadata.json"
+    if completed_meta_path.exists():
+        completed_meta = safe_read_json(completed_meta_path)
+        for k, v in completed_meta.items():
+            if isinstance(v, (str, int, float, bool)) or v is None:
+                meta_rows.append(
+                    {"item": f"completed_design_meta:{k}", "path": str(completed_meta_path), "value": v}
+                )
+            elif isinstance(v, list):
+                meta_rows.append(
+                    {
+                        "item": f"completed_design_meta:{k}",
+                        "path": str(completed_meta_path),
+                        "value": json.dumps(v),
+                    }
+                )
 
     meta_rows.append(
         {
@@ -224,6 +258,24 @@ def build_package(base_dir: Path) -> dict[str, Any]:
     package["capability_conversion_manuscript_decision_note_text"] = safe_read_text(
         base_dir / "reports" / "capability_conversion_redesign" / "manuscript_decision_note.md"
     )
+
+    completed_design_dir = base_dir / "reports" / "final_design_completion"
+    package["completed_design_summary_text"] = safe_read_text(completed_design_dir / "analysis_summary.md")
+    package["completed_design_methods_addendum_text"] = safe_read_text(
+        completed_design_dir / "completed_design_methods_addendum.tex"
+    )
+    package["completed_design_readme_text"] = safe_read_text(completed_design_dir / "README.md")
+    package["completed_design_data_sources_text"] = safe_read_text(
+        base_dir / "docs" / "completed_design_data_sources.md"
+    )
+    package["completed_design_metadata"] = safe_read_json(
+        completed_design_dir / "analysis_metadata.json"
+    )
+    package["completed_design_visual_assets"] = [
+        "reports/final_design_completion/figure_completed_confirmatory_coefficients.png",
+        "reports/final_design_completion/figure_h6_tariff_weighted_threshold.png",
+        "reports/final_design_completion/figure_targeted_exploratory_heterogeneity.png",
+    ]
 
     csv_map = {
         "did_model_results": "reports/did_model_results.csv",
@@ -332,6 +384,44 @@ def build_package(base_dir: Path) -> dict[str, Any]:
         "capability_destination_mechanisms": "reports/capability_conversion_redesign/mechanism_destination_entry_tests.csv",
         "capability_h6_temporal_regimes": "reports/capability_conversion_redesign/h6_temporal_regime_exploration.csv",
         "world_bank_country_regions": "data/processed/world_bank_country_regions.csv",
+        "completed_tariff_weighted_profiles": "data/processed/tariff_weighted_channel_exposure_2015_2017.csv",
+        "completed_source_construction_audit": "reports/final_design_completion/source_and_construction_audit.csv",
+        "completed_third_country_sample_audit": "reports/final_design_completion/third_country_sample_audit.csv",
+        "completed_annual_section301_rate_schedule": "reports/final_design_completion/annual_section301_rate_schedule.csv",
+        "completed_baci_tariff_profile_audit": "reports/final_design_completion/baci_tariff_profile_audit.csv",
+        "completed_ustr_tariff_line_extraction_audit": "reports/final_design_completion/ustr_tariff_line_extraction_audit.csv",
+        "completed_ustr_hs6_membership_audit": "reports/final_design_completion/ustr_section301_hs6_membership_audit.csv",
+        "completed_ustr_tariff_lines_hs8": "reports/final_design_completion/ustr_section301_tariff_lines_hs8.csv",
+        "completed_frozen_pre_shock_constructs": "reports/final_design_completion/frozen_pre_shock_constructs_completed.csv",
+        "completed_historical_income_groups": "reports/final_design_completion/historical_income_groups_2015_2017.csv",
+        "completed_historical_income_group_audit": "reports/final_design_completion/historical_income_group_audit.csv",
+        "completed_frozen_regime_thresholds": "reports/final_design_completion/frozen_regime_thresholds.csv",
+        "completed_confirmatory_tariff_weighted_tests": "reports/final_design_completion/confirmatory_tariff_weighted_tests.csv",
+        "completed_equivalence_and_mde": "reports/final_design_completion/equivalence_and_mde_tariff_weighted.csv",
+        "completed_h4_tariff_weighted_tests": "reports/final_design_completion/h4_tariff_weighted_tests.csv",
+        "completed_h5_and_h4_omnibus_tests": "reports/final_design_completion/h5_and_h4_omnibus_tests.csv",
+        "completed_h5_profile_matched_gpr_sensitivity": "reports/final_design_completion/h5_profile_matched_gpr_sensitivity.csv",
+        "completed_h6_tariff_weighted_tests": "reports/final_design_completion/h6_tariff_weighted_tests.csv",
+        "completed_h6_tariff_weighted_coefficients": "reports/final_design_completion/h6_tariff_weighted_coefficients.csv",
+        "completed_h6_tariff_weighted_threshold_summary": "reports/final_design_completion/h6_tariff_weighted_threshold_summary.csv",
+        "completed_h6_tariff_weighted_threshold_search": "reports/final_design_completion/h6_tariff_weighted_threshold_search.csv",
+        "completed_h6_tariff_weighted_threshold_bootstrap": "reports/final_design_completion/h6_tariff_weighted_threshold_bootstrap.csv",
+        "completed_E1_upper_middle_income_gvc_tests": "reports/final_design_completion/E1_upper_middle_income_gvc_tests.csv",
+        "completed_E1_upper_middle_income_gvc_omnibus": "reports/final_design_completion/E1_upper_middle_income_gvc_omnibus.csv",
+        "completed_E2_low_eci_export_recovery_tests": "reports/final_design_completion/E2_low_eci_export_recovery_tests.csv",
+        "completed_E2_low_eci_export_recovery_omnibus": "reports/final_design_completion/E2_low_eci_export_recovery_omnibus.csv",
+        "completed_E3_high_income_gpr_diversification_observed": "reports/final_design_completion/E3_high_income_gpr_diversification_observed.csv",
+        "completed_E3_high_income_gpr_diversification_observed_omnibus": "reports/final_design_completion/E3_high_income_gpr_diversification_observed_omnibus.csv",
+        "completed_E3_high_income_gpr_diversification_profile_matched": "reports/final_design_completion/E3_high_income_gpr_diversification_profile_matched.csv",
+        "completed_E3_high_income_gpr_diversification_profile_matched_omnibus": "reports/final_design_completion/E3_high_income_gpr_diversification_profile_matched_omnibus.csv",
+        "completed_frozen_controls_by_year_sensitivity": "reports/final_design_completion/frozen_pre_shock_controls_by_year_sensitivity.csv",
+        "completed_destination_entry_mechanism_tests": "reports/final_design_completion/destination_entry_mechanism_tests.csv",
+        "completed_gpr_coverage_audit": "reports/final_design_completion/gpr_coverage_audit.csv",
+        "completed_gpr_profile_matching_validation": "reports/final_design_completion/gpr_profile_matching_validation.csv",
+        "completed_gpr_profile_matching_validation_detail": "reports/final_design_completion/gpr_profile_matching_validation_detail.csv",
+        "completed_gpr_profile_matched_imputed_values": "reports/final_design_completion/gpr_profile_matched_imputed_values.csv",
+        "completed_full_reported_multiplicity_family": "reports/final_design_completion/full_reported_multiplicity_family.csv",
+        "completed_design_panel": "reports/final_design_completion/panel_with_completed_design_constructs.csv",
     }
 
     tables: dict[str, Any] = {}

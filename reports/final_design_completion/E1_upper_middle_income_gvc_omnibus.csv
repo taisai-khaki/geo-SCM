@@ -1,0 +1,2 @@
+test_id,hypothesis,outcome,test_type,wald_chi2,df,p_cluster,pvalue_for_fdr,multiplicity_family,n_obs,n_countries,available_groups,qvalue_bh_full_reported_family,fdr_significant_0_05
+E1_omnibus,E1 formal equality across available groups,Adverse forward-GVC deviation stability,cluster_wald_omnibus,0.35585294400712264,2,0.8370039644507659,0.8370039644507659,full_reported_family,858,78,"HIC,LMC,UMC",0.993,0

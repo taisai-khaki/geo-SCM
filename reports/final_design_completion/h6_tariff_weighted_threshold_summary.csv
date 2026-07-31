@@ -1,0 +1,3 @@
+threshold_type,primary_outcome,primary_treatment,threshold_eci_pre,threshold_ci_low_95_wild,threshold_ci_high_95_wild,threshold_bootstrap_reps,threshold_grid_quantiles
+pre_specified_pre_shock_median,log_export_recovery,s_tariff_weighted_us_diversion,0.09166666666666667,,,0,not applicable
+exploratory_outcome_selected_grid,log_export_recovery,s_tariff_weighted_us_diversion,-0.907,-0.907,0.28161667,999,0.20 to 0.80 by 0.05

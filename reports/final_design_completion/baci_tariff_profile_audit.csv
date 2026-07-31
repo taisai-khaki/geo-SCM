@@ -1,0 +1,9 @@
+metric,value
+baci_rows_scanned_2015_2017,32864341
+baci_rows_exporter_to_us,591637
+baci_rows_china_to_third_country,1567224
+countries_with_baci_tariff_profile,221
+covered_hs6_with_us_imports,4798
+china_share_of_covered_us_imports_pre,0.18946116843655963
+baci_archive_sha256,2dd0dd6174f11e9fc33b9bacf001d50c1913dbfeed9cba30876a1668b2b75bf9
+tariff_profile_cache_reused,1

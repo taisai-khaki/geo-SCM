@@ -1,0 +1,23 @@
+{
+  "analysis_type": "completed_pre_shock_tariff_weighted_design",
+  "baseline_years": [
+    2015,
+    2017
+  ],
+  "policy_start_year": 2018,
+  "primary_treatment": "s_tariff_weighted_us_diversion",
+  "primary_treatment_interpretation": "HS6 tariff-weighted US-market diversion opportunity",
+  "income_group_rule": "World Bank modal analytical classification over 2015-2017; latest-year tie break",
+  "regime_rule": "2015-2017 ECI/COI terciles",
+  "wild_cluster_bootstrap_reps": 999,
+  "threshold_bootstrap_reps": 999,
+  "full_reported_family_tests": 66,
+  "hs6_tariff_mapping_caveat": "Any-covered-HTS8 HS6 approximation; not an exact tariff-liability measure.",
+  "direct_policy_parties_excluded_from_causal_sample": [
+    "USA",
+    "CHN"
+  ],
+  "h5_status": "exploratory; direct-country-observation analysis plus profile-matched KNN sensitivity",
+  "gpr_profile_matching": "same-historical-income-prioritised KNN, k=10; no outcome variables used",
+  "direct_mechanism": "new and persistent non-US/China destination entry"
+}

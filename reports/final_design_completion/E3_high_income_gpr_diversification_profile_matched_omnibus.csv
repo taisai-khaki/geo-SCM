@@ -1,0 +1,2 @@
+test_id,hypothesis,outcome,test_type,wald_chi2,df,p_cluster,pvalue_for_fdr,multiplicity_family,n_obs,n_countries,gpr_sample,available_groups,qvalue_bh_full_reported_family,fdr_significant_0_05
+E3_profile_matched_knn_k10_omnibus,E3 formal equality across available income groups,Partner diversification excluding US and China,cluster_wald_omnibus,0.8887769854358825,3,0.8281353016741806,0.8281353016741806,full_reported_family,2288,208,profile_matched_knn_k10,"HIC,LIC,LMC,UMC",0.993,0

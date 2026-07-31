@@ -1,0 +1,2 @@
+test_id,hypothesis,outcome,test_type,wald_chi2,df,p_cluster,pvalue_for_fdr,multiplicity_family,n_obs,n_countries,available_groups,qvalue_bh_full_reported_family,fdr_significant_0_05
+E2_omnibus,E2 formal equality across available groups,Log export recovery,cluster_wald_omnibus,5.259820644135006,2,0.07208492637607813,0.07208492637607813,full_reported_family,2507,228,"high,low,middle",0.5947006426026447,0

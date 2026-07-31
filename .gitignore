@@ -11,3 +11,6 @@ Thumbs.db
 .env
 .env.*
 !.env.example
+
+# Downloaded raw sources for the completed tariff-weighted redesign.
+data/raw/capability_redesign_sources/

@@ -1,0 +1,5 @@
+construct,quantile,value
+eci_pre_raw,q33,-0.4142222222222226
+eci_pre_raw,q67,0.5901111111111107
+coi_pre_raw,q33,-0.7586666666666668
+coi_pre_raw,q67,0.11233333333333322

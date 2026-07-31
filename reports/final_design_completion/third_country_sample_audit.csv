@@ -1,0 +1,5 @@
+metric,value
+panel_countries_before_direct_party_exclusion,231
+excluded_direct_policy_parties,"USA, CHN"
+analysis_countries_after_direct_party_exclusion,229
+analysis_rows_after_direct_party_exclusion,2511
