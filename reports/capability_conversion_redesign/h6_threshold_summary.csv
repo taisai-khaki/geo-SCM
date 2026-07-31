@@ -1,0 +1,2 @@
+primary_outcome,primary_exposure,threshold_eci_pre,threshold_ci_low_95_wild,threshold_ci_high_95_wild,threshold_bootstrap_reps,threshold_grid_quantiles
+log_export_recovery,z_nexus_exposure_pre,-0.901,-0.901,0.751784166499994,999,0.20 to 0.80 by 0.05

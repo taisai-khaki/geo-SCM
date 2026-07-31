@@ -1,4 +1,4 @@
-﻿# JSCM Databank Builder
+# JSCM Databank Builder
 
 This project builds a country-year databank aligned with the paper's data streams:
 
@@ -98,3 +98,24 @@ Key outputs:
 - `reports/cluster_regime_models/DV1_GVC_Linkage_Change_interaction_terms.csv`
 - `reports/cluster_regime_models/DV2_Export_Recovery_interaction_terms.csv`
 - `reports/cluster_regime_models/DV3_Partner_Diversification_interaction_terms.csv`
+## Capability-Conversion Redesign
+
+The current conservative analysis is the theory-refining H6 package. It freezes ECI, COI, income groups, and exposure at their 2015-2017 values; uses continuous pre-shock US-China nexus exposure as the primary feasible treatment measure; uses signed GVC change, log export recovery, and diversification excluding the United States and China; and reports 999-replication country wild-bootstrap inference.
+
+Run the full package:
+
+    python .\scripts\run_capability_conversion_analysis.py --bootstrap-reps 999 --threshold-bootstrap-reps 999 --holdout-splits 100
+
+Key outputs:
+
+- `reports/capability_conversion_redesign/analysis_summary.md`
+- `reports/capability_conversion_redesign/h6_theory_methods_addendum.tex`
+- `reports/capability_conversion_redesign/h6_primary_and_robustness_tests.csv`
+- `reports/capability_conversion_redesign/h6_holdout_validation_summary.csv`
+- `reports/capability_conversion_redesign/redesigned_h1_h3_tests.csv`
+- `reports/capability_conversion_redesign/h4_omnibus_joint_test.csv`
+- `reports/capability_conversion_redesign/mechanism_destination_entry_tests.csv`
+- `reports/capability_conversion_redesign/figure_h6_capability_conversion_threshold.png`
+
+The package explicitly labels H6 as theory-refining rather than confirmatory. The stored bilateral data are country-partner-year aggregates, so product-level tariff-weighted exposure is not claimed; the report records this constraint and provides continuous exposure plus destination-redirection mechanisms as the valid analyses supported by the current databank.
+Current empirical decision: the final 999-replication corrected analysis does not validate H6. Read `reports/capability_conversion_redesign/manuscript_decision_note.md` before treating the theory addendum as a claim for the paper.

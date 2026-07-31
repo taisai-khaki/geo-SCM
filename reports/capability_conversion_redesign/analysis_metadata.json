@@ -1,0 +1,33 @@
+{
+  "analysis_type": "theory_refining_exploratory_H6",
+  "input_panel": "data/processed/regression_panel_2012_2022.csv",
+  "input_bilateral": "data/processed/source_atlas_country_country_year_2012_2022.csv",
+  "baseline_years": [
+    2015,
+    2017
+  ],
+  "post_start": 2019,
+  "countries_in_panel": 231,
+  "rows_in_panel": 2533,
+  "countries_with_frozen_eci": 230,
+  "primary_exposure": "z_nexus_exposure_pre",
+  "primary_outcome": "log_export_recovery",
+  "gvc_construct": "signed annual change in TiVA forward-linkage share",
+  "partner_diversification_construct": "1-HHI after excluding US and China",
+  "h6_threshold": {
+    "primary_outcome": "log_export_recovery",
+    "primary_exposure": "z_nexus_exposure_pre",
+    "threshold_eci_pre": -0.901,
+    "threshold_ci_low_95_wild": -0.901,
+    "threshold_ci_high_95_wild": 0.751784166499994,
+    "threshold_bootstrap_reps": 999,
+    "threshold_grid_quantiles": "0.20 to 0.80 by 0.05"
+  },
+  "wild_cluster_bootstrap_reps": 999,
+  "threshold_wild_bootstrap_reps": 999,
+  "holdout_splits": 100,
+  "holdout_stratification": "World Bank region",
+  "product_level_tariff_weighted_exposure_available": false,
+  "product_level_tariff_weighted_exposure_reason": "Stored bilateral data are country-partner-year aggregates without product identifiers.",
+  "h5_primary_status": "not_primary_due_to_limited_observed_country_gpr_coverage"
+}

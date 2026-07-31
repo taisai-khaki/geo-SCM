@@ -1,0 +1,4 @@
+hypothesis,outcome,outcome_col,standardized_term,coef_standardized_outcome,se_standardized_outcome,equivalence_bound_abs_sd,tost_p_lower,tost_p_upper,tost_pvalue,equivalent_within_bound_0_05,mde_80pct_power_abs_sd,n_obs,n_countries
+H1,Signed forward-GVC linkage change,gvc_signed_change,eci_pre_x_exposure_post,-0.007974953203137115,0.19781991959449888,0.1,0.32153542943632957,0.29336231444568617,0.32153542943632957,0,0.5611448899212563,800,80
+H2,Log export recovery,log_export_recovery,eci_pre_x_exposure_post,-0.002708025161172,0.0819114789214436,0.1,0.11807731475869014,0.10558015401720086,0.11807731475869014,0,0.2304637571438972,2529,230
+H3,Partner diversification excluding US and China,partner_diversification_excl_us_china,eci_pre_x_exposure_post,-0.04236217590208977,0.06489209402900552,0.1,0.1876798166298803,0.014626705853475983,0.1876798166298803,0,0.18257851031114186,2529,230

@@ -1,0 +1,2 @@
+hypothesis,test,wald_chi2,df,pvalue_cluster_wald,n_obs_stacked,n_country_clusters
+H4,joint_wald_all_three_outcome_specific_interactions_zero,0.953214439141283,3,0.8125705786251243,5858,230

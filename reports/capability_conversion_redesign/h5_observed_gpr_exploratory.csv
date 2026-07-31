@@ -1,0 +1,4 @@
+hypothesis,outcome,outcome_col,expected_direction,estimate,se,tvalue,p_cluster,ci_low_95,ci_high_95,p_wild_bootstrap,bootstrap_reps_requested,bootstrap_reps_success,n_obs,n_countries,n_years
+H5 exploratory observed-GPR-only,H1 outcome,gvc_signed_change,negative,-0.7863099751961813,0.8440510776605439,-0.9315905115311225,0.17843628912548146,-2.4896740112671143,0.9170540608747517,0.201,999,999,430,43,10
+H5 exploratory observed-GPR-only,H2 outcome,log_export_recovery,negative,-0.2378228581200621,0.17639213740750864,-1.3482622389830992,0.09231678175260548,-0.5935515056349072,0.11790578939478302,0.177,999,999,484,44,11
+H5 exploratory observed-GPR-only,H3 outcome,partner_diversification_excl_us_china,negative,-0.04630235690327429,0.03673166196326225,-1.2605570896733265,0.10713296783651505,-0.12037881304925865,0.02777409924271007,0.211,999,999,484,44,11

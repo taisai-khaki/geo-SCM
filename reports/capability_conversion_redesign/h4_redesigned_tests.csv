@@ -1,0 +1,4 @@
+hypothesis,outcome,outcome_col,term,expected_direction,estimate,se,tvalue,p_cluster,ci_low_95,ci_high_95,p_wild_bootstrap,bootstrap_reps_requested,bootstrap_reps_success,n_obs,n_countries,n_years,qvalue_bh_h4_outcome_family
+H4,H1 outcome,gvc_signed_change,h4_eci_exposure_coi_post,positive,-0.24705528933796173,0.3331598986271027,-0.7415517004178356,0.7697210851353979,-0.9101934796005267,0.4160829009246032,0.729,999,999,800,80,10,0.729
+H4,H2 outcome,log_export_recovery,h4_eci_exposure_coi_post,positive,0.024725752399651968,0.04910125041330511,0.5035666544441393,0.3075249920435916,-0.07202223599763335,0.12147374079693729,0.338,999,999,2529,230,11,0.6915
+H4,H3 outcome,partner_diversification_excl_us_china,h4_eci_exposure_coi_post,positive,0.0008972940100461374,0.008205979865948138,0.10934635774206375,0.45651176831593115,-0.015271582305249873,0.017066170325342148,0.461,999,999,2529,230,11,0.6915

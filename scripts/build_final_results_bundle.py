@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from datetime import date
 from pathlib import Path
 from typing import Any
@@ -19,6 +20,31 @@ def safe_read_text(path: Path) -> str:
     if not path.exists():
         return f"[Missing] {path}"
     return path.read_text(encoding="utf-8", errors="ignore")
+
+
+def make_json_safe(value: Any) -> Any:
+    """Convert pandas missing values and non-finite numbers to strict JSON values."""
+    if isinstance(value, dict):
+        return {str(key): make_json_safe(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [make_json_safe(item) for item in value]
+    if value is None:
+        return None
+    if isinstance(value, float):
+        return value if math.isfinite(value) else None
+    if isinstance(value, (str, int, bool)):
+        return value
+    try:
+        if bool(pd.isna(value)):
+            return None
+    except (TypeError, ValueError):
+        pass
+    if hasattr(value, "item"):
+        try:
+            return make_json_safe(value.item())
+        except (TypeError, ValueError):
+            pass
+    return value
 
 
 def build_recommendation_lines(base_dir: Path) -> list[str]:
@@ -66,6 +92,16 @@ def build_recommendation_lines(base_dir: Path) -> list[str]:
         ]
     )
 
+    capability_summary_path = base_dir / "reports" / "capability_conversion_redesign" / "analysis_summary.md"
+    if capability_summary_path.exists():
+        lines.extend(
+            [
+                "Current methodological-redesign priority:",
+                "- Use the frozen pre-shock capability package as the current conservative evidence base.",
+                "- Treat H6 as theory-refining/exploratory, not a retroactive confirmatory hypothesis.",
+                "- The legacy tables remain useful as an audit trail but do not supersede the redesigned outputs.",
+            ]
+        )
     return lines
 
 
@@ -178,6 +214,17 @@ def build_package(base_dir: Path) -> dict[str, Any]:
         base_dir / "reports" / "covid_sensitivity_no_rents" / "covid_sensitivity_summary.md"
     )
 
+    package["capability_conversion_summary_text"] = safe_read_text(
+        base_dir / "reports" / "capability_conversion_redesign" / "analysis_summary.md"
+    )
+    package["capability_conversion_h6_theory_methods_addendum_text"] = safe_read_text(
+        base_dir / "reports" / "capability_conversion_redesign" / "h6_theory_methods_addendum.tex"
+    )
+
+    package["capability_conversion_manuscript_decision_note_text"] = safe_read_text(
+        base_dir / "reports" / "capability_conversion_redesign" / "manuscript_decision_note.md"
+    )
+
     csv_map = {
         "did_model_results": "reports/did_model_results.csv",
         "main_models_2_4": "reports/comprehensive_table2_4_main_models.csv",
@@ -264,6 +311,27 @@ def build_package(base_dir: Path) -> dict[str, Any]:
         "covid_legacy_moderation_terms": "reports/covid_sensitivity_legacy_with_rents/covid_sensitivity_moderation_terms.csv",
         "covid_no_rents_primary_terms": "reports/covid_sensitivity_no_rents/covid_sensitivity_primary_terms.csv",
         "covid_no_rents_moderation_terms": "reports/covid_sensitivity_no_rents/covid_sensitivity_moderation_terms.csv",
+        "capability_conversion_data_audit": "reports/capability_conversion_redesign/data_construction_audit.csv",
+        "capability_frozen_country_constructs": "reports/capability_conversion_redesign/frozen_country_constructs.csv",
+        "capability_threshold_summary": "reports/capability_conversion_redesign/h6_threshold_summary.csv",
+        "capability_threshold_search": "reports/capability_conversion_redesign/h6_threshold_search.csv",
+        "capability_threshold_bootstrap_distribution": "reports/capability_conversion_redesign/h6_threshold_bootstrap_distribution.csv",
+        "capability_h6_primary_and_robustness": "reports/capability_conversion_redesign/h6_primary_and_robustness_tests.csv",
+        "capability_h6_model_coefficients": "reports/capability_conversion_redesign/h6_model_coefficients.csv",
+        "capability_h6_holdout_detail": "reports/capability_conversion_redesign/h6_holdout_validation.csv",
+        "capability_h6_holdout_summary": "reports/capability_conversion_redesign/h6_holdout_validation_summary.csv",
+        "capability_redesigned_h1_h3": "reports/capability_conversion_redesign/redesigned_h1_h3_tests.csv",
+        "capability_equivalence_mde": "reports/capability_conversion_redesign/equivalence_mde.csv",
+        "capability_h4_by_outcome": "reports/capability_conversion_redesign/h4_redesigned_tests.csv",
+        "capability_h4_omnibus": "reports/capability_conversion_redesign/h4_omnibus_joint_test.csv",
+        "capability_h5_observed_gpr": "reports/capability_conversion_redesign/h5_observed_gpr_exploratory.csv",
+        "capability_gpr_coverage": "reports/capability_conversion_redesign/gpr_observed_coverage.csv",
+        "capability_gpr_profile_validation": "reports/capability_conversion_redesign/gpr_pre_shock_profile_validation.csv",
+        "capability_income_heterogeneity": "reports/capability_conversion_redesign/income_heterogeneity_log_recovery.csv",
+        "capability_income_heterogeneity_omnibus": "reports/capability_conversion_redesign/income_heterogeneity_log_recovery_omnibus.csv",
+        "capability_destination_mechanisms": "reports/capability_conversion_redesign/mechanism_destination_entry_tests.csv",
+        "capability_h6_temporal_regimes": "reports/capability_conversion_redesign/h6_temporal_regime_exploration.csv",
+        "world_bank_country_regions": "data/processed/world_bank_country_regions.csv",
     }
 
     tables: dict[str, Any] = {}
@@ -289,7 +357,7 @@ def main() -> None:
     package = build_package(base_dir)
 
     if out_path.suffix.lower() == ".json":
-        out_path.write_text(json.dumps(package, indent=2, ensure_ascii=True), encoding="utf-8")
+        out_path.write_text(json.dumps(make_json_safe(package), indent=2, ensure_ascii=True, allow_nan=False), encoding="utf-8")
         print(f"Wrote final JSON package: {out_path}")
         print(f"Tables included: {len(package['tables'])}")
         return
@@ -313,7 +381,7 @@ def main() -> None:
         print(f"Sheets: {3 + len(package['tables'])}")
     except ModuleNotFoundError:
         fallback = out_path.with_suffix(".json")
-        fallback.write_text(json.dumps(package, indent=2, ensure_ascii=True), encoding="utf-8")
+        fallback.write_text(json.dumps(make_json_safe(package), indent=2, ensure_ascii=True, allow_nan=False), encoding="utf-8")
         print(f"openpyxl not available. Wrote fallback JSON package: {fallback}")
 
 

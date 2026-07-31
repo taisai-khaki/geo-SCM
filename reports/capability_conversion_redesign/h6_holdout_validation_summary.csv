@@ -1,0 +1,2 @@
+stratification,splits_requested,splits_successful,median_train_threshold,threshold_iqr_low,threshold_iqr_high,share_low_negative,share_difference_positive,share_both_directions,share_both_cluster_p_lt_0_05
+wb_region,100,100,-0.87108333,-0.9838,0.28134167,0.51,0.46,0.4,0.09

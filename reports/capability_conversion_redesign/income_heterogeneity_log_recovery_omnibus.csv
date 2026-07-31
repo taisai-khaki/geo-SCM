@@ -1,0 +1,2 @@
+outcome,reference_group,test,wald_chi2,df,pvalue_cluster_wald,n_obs,n_countries
+Log export recovery,HIC,joint_wald_income_group_differences_in_eci_exposure_post_effect,2.3525020850853853,3,0.5025375786050632,2277,207
