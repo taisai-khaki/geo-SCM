@@ -305,6 +305,11 @@ def build_package(base_dir: Path) -> dict[str, Any]:
     ]
     package["final_audited_analysis_readme_text"] = safe_read_text(structural_dir / "FINAL_ANALYSIS_README.md")
     package["final_audited_family_definition_text"] = safe_read_text(structural_dir / "multiplicity_family_definition.md")
+    market_dir = base_dir / "reports" / "market_connectivity_completion"
+    package["market_connectivity_summary_text"] = safe_read_text(market_dir / "analysis_summary.md")
+    package["market_connectivity_readme_text"] = safe_read_text(market_dir / "README.md")
+    package["market_connectivity_visual_assets"] = ["reports/market_connectivity_completion/figure_market_connectivity_event_study.png"]
+    package["market_connectivity_metadata"] = safe_read_json(market_dir / "analysis_metadata.json")
     package["final_audited_visual_assets"] = [
         "reports/structural_regime_completion/figure_corrected_event_study_gvc.png",
         "reports/structural_regime_completion/figure_corrected_event_study_recovery.png",
@@ -536,6 +541,23 @@ def build_package(base_dir: Path) -> dict[str, Any]:
         "reproduction_manifest": "reports/structural_regime_completion/reproduction_manifest.csv",
         "output_file_hashes": "reports/structural_regime_completion/output_file_hashes.csv",
         "final_audit_summary": "reports/structural_regime_completion/final_audit_summary.csv",
+        "market_connectivity_primary": "reports/market_connectivity_completion/market_connectivity_primary_test.csv",
+        "market_connectivity_alternatives": "reports/market_connectivity_completion/market_connectivity_alternative_diversification.csv",
+        "market_connectivity_mechanisms": "reports/market_connectivity_completion/market_connectivity_mechanism_tests.csv",
+        "market_connectivity_industrial_trade_omnibus": "reports/market_connectivity_completion/market_connectivity_industrial_trade_omnibus.csv",
+        "market_connectivity_event_coefficients": "reports/market_connectivity_completion/market_connectivity_event_study_coefficients.csv",
+        "market_connectivity_event_joint_tests": "reports/market_connectivity_completion/market_connectivity_event_study_joint_tests.csv",
+        "market_connectivity_holdout_validation": "reports/market_connectivity_completion/market_connectivity_holdout_validation.csv",
+        "market_connectivity_holdout_summary": "reports/market_connectivity_completion/market_connectivity_holdout_summary.csv",
+        "market_connectivity_leave_one_country": "reports/market_connectivity_completion/market_connectivity_leave_one_country_out.csv",
+        "market_connectivity_leave_one_country_summary": "reports/market_connectivity_completion/market_connectivity_leave_one_country_summary.csv",
+        "market_connectivity_leave_one_region": "reports/market_connectivity_completion/market_connectivity_leave_one_region_out.csv",
+        "market_connectivity_leave_one_region_summary": "reports/market_connectivity_completion/market_connectivity_leave_one_region_summary.csv",
+        "market_connectivity_market_access": "reports/market_connectivity_completion/market_connectivity_market_access_robustness.csv",
+        "market_connectivity_market_access_coverage": "reports/market_connectivity_completion/market_access_measure_coverage.csv",
+        "market_connectivity_family": "reports/market_connectivity_completion/market_connectivity_multiplicity_family.csv",
+        "market_connectivity_reproducibility": "reports/market_connectivity_completion/market_connectivity_reproducibility.csv",
+        "market_connectivity_profile": "reports/market_connectivity_completion/frozen_market_connectivity_profile.csv",
     }
 
     tables: dict[str, Any] = {}

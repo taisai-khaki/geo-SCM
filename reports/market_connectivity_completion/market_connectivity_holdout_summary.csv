@@ -1,0 +1,2 @@
+validation,repetitions_requested,repetitions_successful,positive_sign_proportion,min_estimate,max_estimate,median_estimate,mean_estimate,held_out_countries_mean
+region_stratified_repeated_holdout,100,100,1.0,0.00856818822790668,0.036684545038960265,0.025049937735326305,0.023935844162892232,36.0

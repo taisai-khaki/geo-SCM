@@ -1,0 +1,2 @@
+analysis,baseline_estimate,min_estimate,max_estimate,positive_sign_proportion,successful_exclusions,total_countries
+leave_one_country_out_openness_interaction,0.024791001768477764,0.018906516599907625,0.027951597233767538,1.0,181,181

@@ -1,0 +1,2 @@
+test_id,outcome_key,outcome,test_type,moderators,wald_chi2,wald_df,p_cluster,p_wild_bootstrap,pvalue_for_fdr,bootstrap_reps_requested,bootstrap_reps_success,n_obs,n_countries,n_years,family_component
+market_connectivity_industrial_trade_structure_omnibus,diversification,Partner diversification excluding US and China,joint_wald_omnibus,openness;manufacturing;export_concentration,4.042495413500702,3,0.256911804580834,0.358,0.358,999,999,1870,170,11,industrial_trade_structure_omnibus

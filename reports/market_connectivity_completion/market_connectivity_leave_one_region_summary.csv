@@ -1,0 +1,2 @@
+analysis,baseline_estimate,min_estimate,max_estimate,positive_sign_proportion,successful_exclusions,total_regions,region_with_minimum,region_with_maximum
+leave_one_region_out_openness_interaction,0.024791001768477764,0.011591047850369282,0.02962208616951824,1.0,7,7,Sub-Saharan Africa,Europe & Central Asia

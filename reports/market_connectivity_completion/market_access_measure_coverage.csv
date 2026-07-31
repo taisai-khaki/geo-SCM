@@ -1,0 +1,7 @@
+measure,available,label,reason
+openness,1,Pre-shock trade openness,Primary frozen WDI profile measure
+established_destinations,1,Pre-shock established non-US/China destinations,Mean 2015-2017 established destinations
+destination_entropy,1,Pre-shock destination entropy excluding US and China,Mean 2015-2017 destination entropy
+outside_us_china_share,1,Pre-shock export share outside US and China,One minus pre-shock US and China export shares
+import_source_breadth,0,Pre-shock import-source breadth,Frozen panel has no bilateral import-source counts
+logistics_trade_facilitation,0,Logistics/trade-facilitation capacity,No harmonized frozen logistics series

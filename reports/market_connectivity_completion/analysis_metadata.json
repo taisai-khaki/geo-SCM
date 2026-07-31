@@ -1,0 +1,29 @@
+{
+  "python": "3.14.3",
+  "seed": 20260731,
+  "bootstrap_reps": 999,
+  "holdout_reps": 100,
+  "primary_outcome": "partner_diversification_excl_us_china",
+  "primary_estimand": "ECI_pre x Exposure_pre x Post x Openness_pre",
+  "primary_n_countries": 181,
+  "primary_n_obs": 1991,
+  "primary_estimate": 0.024791001768477764,
+  "primary_p_cluster": 0.0001489890125487594,
+  "primary_p_wild_bootstrap": 0.009,
+  "family_tests": 9,
+  "family_q_lt_005": 2,
+  "event_years": [
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022
+  ],
+  "event_post_joint_p_wild": 0.259,
+  "holdout_positive_sign_proportion": 1.0
+}

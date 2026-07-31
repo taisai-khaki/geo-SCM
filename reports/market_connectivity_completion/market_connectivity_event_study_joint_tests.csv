@@ -1,0 +1,3 @@
+test_id,test_type,years,outcome_key,outcome,wald_chi2,wald_df,p_cluster,p_wild_bootstrap,pvalue_for_fdr,bootstrap_reps_requested,bootstrap_reps_success,n_obs,n_countries,n_years,lower_order_terms_per_year
+market_connectivity_event_pretrend_joint,pretrend_joint_wald,2012;2013;2014;2015;2016,diversification,Partner diversification excluding US and China,7.362830735777611,5,0.19502403480185213,0.402,0.402,999,999,1991,181,11,7
+market_connectivity_event_post_period_joint,post_period_joint_wald,2018;2019;2020;2021;2022,diversification,Partner diversification excluding US and China,21.808311222560256,5,0.0005693987975771332,0.259,0.259,999,999,1991,181,11,7
