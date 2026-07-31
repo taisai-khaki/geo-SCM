@@ -1,0 +1,11 @@
+variable,label,exposure_measure,pearson_r,p_value,n
+pre_log_real_gdp_pc,Log real GDP per capita,exposure_pre,-0.05616059689103262,0.42611774095108207,203
+pre_real_gdp_pc_growth_mean,Mean real GDP-per-capita growth,exposure_pre,-0.042387653854551864,0.5491912865119696,202
+pre_real_gdp_pc_growth_slope,Real GDP-per-capita growth trend,exposure_pre,-0.16440769697094712,0.019381846139815462,202
+pre_real_gdp_pc_growth_volatility,GDP-per-capita growth volatility,exposure_pre,0.09609828539285503,0.17367552767220873,202
+pre_manufacturing_value_added_share,Manufacturing value-added share,exposure_pre,-0.12564167920478064,0.08411848183098855,190
+pre_trade_openness,Trade openness,exposure_pre,-0.1284310429469951,0.08488218325950497,181
+pre_resource_rents,Natural-resource-rent dependence,exposure_pre,0.08290141933200162,0.23963691199471526,203
+pre_institutional_quality,Institutional quality,exposure_pre,-0.20939202661589498,0.0030699754329292467,198
+pre_export_concentration,Export concentration,exposure_pre,0.265996224090878,4.7437664285149294e-05,228
+pre_log_population,Log population,exposure_pre,0.10714792463772883,0.12437113315398536,207

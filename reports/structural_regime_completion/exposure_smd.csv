@@ -1,0 +1,21 @@
+variable,label,comparison,n_low,n_comparison,standardized_mean_difference
+pre_log_real_gdp_pc,Log real GDP per capita,middle-low,61,71,-0.3660371327780367
+pre_log_real_gdp_pc,Log real GDP per capita,high-low,61,71,-0.3227063567657081
+pre_real_gdp_pc_growth_mean,Mean real GDP-per-capita growth,middle-low,61,70,-0.30371651398876787
+pre_real_gdp_pc_growth_mean,Mean real GDP-per-capita growth,high-low,61,71,-0.29462507774456065
+pre_real_gdp_pc_growth_slope,Real GDP-per-capita growth trend,middle-low,61,70,0.016232936880930884
+pre_real_gdp_pc_growth_slope,Real GDP-per-capita growth trend,high-low,61,71,-0.36646236327121445
+pre_real_gdp_pc_growth_volatility,GDP-per-capita growth volatility,middle-low,61,70,0.1520806588634407
+pre_real_gdp_pc_growth_volatility,GDP-per-capita growth volatility,high-low,61,71,0.17214966617234878
+pre_manufacturing_value_added_share,Manufacturing value-added share,middle-low,56,66,-0.05585063086103005
+pre_manufacturing_value_added_share,Manufacturing value-added share,high-low,56,68,-0.349298300353134
+pre_trade_openness,Trade openness,middle-low,57,64,-0.42068026740728764
+pre_trade_openness,Trade openness,high-low,57,60,-0.4307599189388432
+pre_resource_rents,Natural-resource-rent dependence,middle-low,61,71,0.7564281438714671
+pre_resource_rents,Natural-resource-rent dependence,high-low,61,71,0.5378419241969076
+pre_institutional_quality,Institutional quality,middle-low,59,69,-0.6730185568206507
+pre_institutional_quality,Institutional quality,high-low,59,70,-0.5810378836670015
+pre_export_concentration,Export concentration,middle-low,75,76,-0.36999686567062584
+pre_export_concentration,Export concentration,high-low,75,77,0.23146314171722318
+pre_log_population,Log population,middle-low,61,73,0.36759745658212345
+pre_log_population,Log population,high-low,61,73,0.30165100367024816

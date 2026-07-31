@@ -1,0 +1,16 @@
+item,value
+repository_commit,e2be0ec89bb2a4e78734fba6eec86e7037b0d657
+wdi_source_path,C:\Users\L03128674\projects\geo-SCM\data\raw\structural_wdi_2012_2017.csv
+wdi_source_sha256,255c7ee5d711aeda33524f4b71600483f2bd17fb3305fba5664ca37f3ff4995f
+wdi_downloaded_this_run,0
+baseline_start,2012
+baseline_end,2017
+primary_post_start,2018
+sensitivity_post_start,2019
+selected_k,2
+selected_regimes,"R1,R2"
+bootstrap_reps,999
+stability_reps,100
+structural_profile_countries,229
+full_family_tests,84
+full_family_fdr_significant,0

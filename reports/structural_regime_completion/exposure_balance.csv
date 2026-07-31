@@ -1,0 +1,31 @@
+variable,label,exposure_tercile,n,mean,sd
+pre_log_real_gdp_pc,Log real GDP per capita,high,71,8.606611158504457,1.4076565061951067
+pre_log_real_gdp_pc,Log real GDP per capita,low,61,9.057254384465915,1.3851524190955418
+pre_log_real_gdp_pc,Log real GDP per capita,middle,71,8.538618967874473,1.4479377705276488
+pre_real_gdp_pc_growth_mean,Mean real GDP-per-capita growth,high,71,0.013619092858229235,0.0333920417692676
+pre_real_gdp_pc_growth_mean,Mean real GDP-per-capita growth,low,61,0.021735222171574784,0.020066900186383227
+pre_real_gdp_pc_growth_mean,Mean real GDP-per-capita growth,middle,70,0.013468119488717378,0.03285048722099076
+pre_real_gdp_pc_growth_slope,Real GDP-per-capita growth trend,high,71,-0.0028468242057214177,0.02025528973655217
+pre_real_gdp_pc_growth_slope,Real GDP-per-capita growth trend,low,61,0.003209529947111493,0.011660881215873812
+pre_real_gdp_pc_growth_slope,Real GDP-per-capita growth trend,middle,70,0.003483871321597994,0.02086297182950809
+pre_real_gdp_pc_growth_volatility,GDP-per-capita growth volatility,high,71,0.027005785966330235,0.036912610614615954
+pre_real_gdp_pc_growth_volatility,GDP-per-capita growth volatility,low,61,0.022005884691082077,0.018015489224301743
+pre_real_gdp_pc_growth_volatility,GDP-per-capita growth volatility,middle,70,0.026426603311592734,0.0369508926906422
+pre_manufacturing_value_added_share,Manufacturing value-added share,high,68,9.710059341719148,6.19650475265641
+pre_manufacturing_value_added_share,Manufacturing value-added share,low,56,11.852485244675043,6.069868938402806
+pre_manufacturing_value_added_share,Manufacturing value-added share,middle,66,11.511963422796807,6.124029600368729
+pre_trade_openness,Trade openness,high,60,83.91769810552782,59.94765680658155
+pre_trade_openness,Trade openness,low,57,108.87018203808054,55.832558831406864
+pre_trade_openness,Trade openness,middle,64,86.05627341562104,52.580667268211535
+pre_resource_rents,Natural-resource-rent dependence,high,71,5.899871486055198,7.4029351949485696
+pre_resource_rents,Natural-resource-rent dependence,low,61,2.5767020557618,4.64214090078276
+pre_resource_rents,Natural-resource-rent dependence,middle,71,9.424822244969366,11.931998206782799
+pre_institutional_quality,Institutional quality,high,70,-0.1612763703571423,0.9095199305250027
+pre_institutional_quality,Institutional quality,low,59,0.3499460203389834,0.8491304829781703
+pre_institutional_quality,Institutional quality,middle,69,-0.23041555100644043,0.8753231183099208
+pre_export_concentration,Export concentration,high,77,0.2382979250186924,0.1886924155749381
+pre_export_concentration,Export concentration,low,75,0.19807537478340986,0.1574509512071021
+pre_export_concentration,Export concentration,middle,76,0.1473565722647967,0.11309511775864252
+pre_log_population,Log population,high,73,15.39592419248501,2.4273346147790638
+pre_log_population,Log population,low,61,14.709735561337004,2.1112232057472835
+pre_log_population,Log population,middle,73,15.539619408582723,2.395026020215271

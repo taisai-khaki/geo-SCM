@@ -1,0 +1,2 @@
+weight,definition,method
+gps_overlap_weight,exp(-0.5 * standardized exposure residual squared),continuous GPS overlap weighting

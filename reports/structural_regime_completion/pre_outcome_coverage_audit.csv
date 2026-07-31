@@ -1,0 +1,4 @@
+outcome_key,outcome,label,n_countries_with_pre_mean,n_countries_with_pre_slope,pre_period
+gvc,gvc_adverse_deviation_stability,Adverse forward-GVC deviation stability,78,78,2012-2017
+recovery,log_export_recovery,Log export recovery,228,228,2012-2017
+diversification,partner_diversification_excl_us_china,Partner diversification excluding US and China,228,228,2012-2017

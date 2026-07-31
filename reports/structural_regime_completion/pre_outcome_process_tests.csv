@@ -1,0 +1,61 @@
+variable,label,outcome_key,outcome_label,outcome_process_metric,pearson_r,p_value,n
+pre_log_real_gdp_pc,Log real GDP per capita,gvc,Adverse forward-GVC deviation stability,pre_mean,-0.030426433227070764,0.792793629947262,77
+pre_log_real_gdp_pc,Log real GDP per capita,gvc,Adverse forward-GVC deviation stability,pre_slope,0.12097046016799681,0.29463694954918085,77
+pre_log_real_gdp_pc,Log real GDP per capita,recovery,Log export recovery,pre_mean,0.11257113319095967,0.10980407204507421,203
+pre_log_real_gdp_pc,Log real GDP per capita,recovery,Log export recovery,pre_slope,-0.13047677634662452,0.06352941706980877,203
+pre_log_real_gdp_pc,Log real GDP per capita,diversification,Partner diversification excluding US and China,pre_mean,0.1849181773717349,0.008260640394862016,203
+pre_log_real_gdp_pc,Log real GDP per capita,diversification,Partner diversification excluding US and China,pre_slope,-0.06171654980640777,0.38172098494873735,203
+pre_real_gdp_pc_growth_mean,Mean real GDP-per-capita growth,gvc,Adverse forward-GVC deviation stability,pre_mean,0.23508836110264622,0.03958143686505487,77
+pre_real_gdp_pc_growth_mean,Mean real GDP-per-capita growth,gvc,Adverse forward-GVC deviation stability,pre_slope,-0.22748966726577385,0.046620220164377155,77
+pre_real_gdp_pc_growth_mean,Mean real GDP-per-capita growth,recovery,Log export recovery,pre_mean,-0.4482939006827735,2.22638729627485e-11,202
+pre_real_gdp_pc_growth_mean,Mean real GDP-per-capita growth,recovery,Log export recovery,pre_slope,0.4417243787542611,4.681244482033243e-11,202
+pre_real_gdp_pc_growth_mean,Mean real GDP-per-capita growth,diversification,Partner diversification excluding US and China,pre_mean,0.03615348157381208,0.6094800555139055,202
+pre_real_gdp_pc_growth_mean,Mean real GDP-per-capita growth,diversification,Partner diversification excluding US and China,pre_slope,0.023455884569490673,0.7403820026717723,202
+pre_real_gdp_pc_growth_slope,Real GDP-per-capita growth trend,gvc,Adverse forward-GVC deviation stability,pre_mean,0.03438167545576322,0.7665802157630062,77
+pre_real_gdp_pc_growth_slope,Real GDP-per-capita growth trend,gvc,Adverse forward-GVC deviation stability,pre_slope,0.067975838565943,0.5569288486185092,77
+pre_real_gdp_pc_growth_slope,Real GDP-per-capita growth trend,recovery,Log export recovery,pre_mean,-0.10451491505652852,0.1387999443358469,202
+pre_real_gdp_pc_growth_slope,Real GDP-per-capita growth trend,recovery,Log export recovery,pre_slope,0.026945627311992296,0.7034542031550484,202
+pre_real_gdp_pc_growth_slope,Real GDP-per-capita growth trend,diversification,Partner diversification excluding US and China,pre_mean,0.10072559846181398,0.15377437031205102,202
+pre_real_gdp_pc_growth_slope,Real GDP-per-capita growth trend,diversification,Partner diversification excluding US and China,pre_slope,-0.04368256134428513,0.5370449481994564,202
+pre_real_gdp_pc_growth_volatility,GDP-per-capita growth volatility,gvc,Adverse forward-GVC deviation stability,pre_mean,-0.08610759979347578,0.4565033026496735,77
+pre_real_gdp_pc_growth_volatility,GDP-per-capita growth volatility,gvc,Adverse forward-GVC deviation stability,pre_slope,0.05972544272040464,0.605870168053335,77
+pre_real_gdp_pc_growth_volatility,GDP-per-capita growth volatility,recovery,Log export recovery,pre_mean,0.2019935805451067,0.003941223849687307,202
+pre_real_gdp_pc_growth_volatility,GDP-per-capita growth volatility,recovery,Log export recovery,pre_slope,-0.24552133757952618,0.00042843081054592805,202
+pre_real_gdp_pc_growth_volatility,GDP-per-capita growth volatility,diversification,Partner diversification excluding US and China,pre_mean,-0.20950775952855782,0.0027673187139097034,202
+pre_real_gdp_pc_growth_volatility,GDP-per-capita growth volatility,diversification,Partner diversification excluding US and China,pre_slope,0.04015840389648486,0.5704118048505302,202
+pre_manufacturing_value_added_share,Manufacturing value-added share,gvc,Adverse forward-GVC deviation stability,pre_mean,0.16912327883672554,0.14415524793125215,76
+pre_manufacturing_value_added_share,Manufacturing value-added share,gvc,Adverse forward-GVC deviation stability,pre_slope,-0.07409629418936897,0.5246941303344149,76
+pre_manufacturing_value_added_share,Manufacturing value-added share,recovery,Log export recovery,pre_mean,-0.04462375548503698,0.5409734074553755,190
+pre_manufacturing_value_added_share,Manufacturing value-added share,recovery,Log export recovery,pre_slope,0.1376983563926721,0.05815197770035704,190
+pre_manufacturing_value_added_share,Manufacturing value-added share,diversification,Partner diversification excluding US and China,pre_mean,0.3732500614782489,1.1336495003584925e-07,190
+pre_manufacturing_value_added_share,Manufacturing value-added share,diversification,Partner diversification excluding US and China,pre_slope,0.038664553512562344,0.5963648401717044,190
+pre_trade_openness,Trade openness,gvc,Adverse forward-GVC deviation stability,pre_mean,0.03113024800748007,0.7923214930167107,74
+pre_trade_openness,Trade openness,gvc,Adverse forward-GVC deviation stability,pre_slope,0.02884517286446111,0.8072603525104048,74
+pre_trade_openness,Trade openness,recovery,Log export recovery,pre_mean,-0.09761106796330608,0.1911283583072062,181
+pre_trade_openness,Trade openness,recovery,Log export recovery,pre_slope,0.0704943022099653,0.34567733863101957,181
+pre_trade_openness,Trade openness,diversification,Partner diversification excluding US and China,pre_mean,0.026463915135033014,0.7236155463372765,181
+pre_trade_openness,Trade openness,diversification,Partner diversification excluding US and China,pre_slope,-0.05633015308005785,0.45133420637118166,181
+pre_resource_rents,Natural-resource-rent dependence,gvc,Adverse forward-GVC deviation stability,pre_mean,-0.3376308967287189,0.002673752111516485,77
+pre_resource_rents,Natural-resource-rent dependence,gvc,Adverse forward-GVC deviation stability,pre_slope,0.18914596574312037,0.0994532604643183,77
+pre_resource_rents,Natural-resource-rent dependence,recovery,Log export recovery,pre_mean,0.354141840754766,2.1768684920571626e-07,203
+pre_resource_rents,Natural-resource-rent dependence,recovery,Log export recovery,pre_slope,-0.386558840087827,1.222174208178963e-08,203
+pre_resource_rents,Natural-resource-rent dependence,diversification,Partner diversification excluding US and China,pre_mean,-0.07320013040032544,0.29931937589266255,203
+pre_resource_rents,Natural-resource-rent dependence,diversification,Partner diversification excluding US and China,pre_slope,0.037330104611656485,0.5969635620665845,203
+pre_institutional_quality,Institutional quality,gvc,Adverse forward-GVC deviation stability,pre_mean,0.04746160416559007,0.6818844303864088,77
+pre_institutional_quality,Institutional quality,gvc,Adverse forward-GVC deviation stability,pre_slope,0.04964095791437388,0.6681143870787754,77
+pre_institutional_quality,Institutional quality,recovery,Log export recovery,pre_mean,-0.07569301131211069,0.2892025284645195,198
+pre_institutional_quality,Institutional quality,recovery,Log export recovery,pre_slope,0.051393376056901356,0.4721005649696157,198
+pre_institutional_quality,Institutional quality,diversification,Partner diversification excluding US and China,pre_mean,0.1666661380785266,0.01893593705736324,198
+pre_institutional_quality,Institutional quality,diversification,Partner diversification excluding US and China,pre_slope,-0.026505567246939612,0.7108832811350752,198
+pre_export_concentration,Export concentration,gvc,Adverse forward-GVC deviation stability,pre_mean,-0.12898239260801886,0.2603946636147949,78
+pre_export_concentration,Export concentration,gvc,Adverse forward-GVC deviation stability,pre_slope,0.10211939464421166,0.3736475354086726,78
+pre_export_concentration,Export concentration,recovery,Log export recovery,pre_mean,-0.10929341647613317,0.09973108309898006,228
+pre_export_concentration,Export concentration,recovery,Log export recovery,pre_slope,-0.008594616279584877,0.8973062548210491,228
+pre_export_concentration,Export concentration,diversification,Partner diversification excluding US and China,pre_mean,-0.8041760001555107,5.733030951374643e-53,228
+pre_export_concentration,Export concentration,diversification,Partner diversification excluding US and China,pre_slope,0.03379460972658387,0.6117144329917256,228
+pre_log_population,Log population,gvc,Adverse forward-GVC deviation stability,pre_mean,0.19880454335038378,0.08303947954669656,77
+pre_log_population,Log population,gvc,Adverse forward-GVC deviation stability,pre_slope,-0.2011902255446325,0.07933635521263367,77
+pre_log_population,Log population,recovery,Log export recovery,pre_mean,0.09207107896821722,0.18701705853946327,207
+pre_log_population,Log population,recovery,Log export recovery,pre_slope,0.035653040110260305,0.6100417220695651,207
+pre_log_population,Log population,diversification,Partner diversification excluding US and China,pre_mean,0.3998241868686882,2.39516639020974e-09,207
+pre_log_population,Log population,diversification,Partner diversification excluding US and China,pre_slope,0.10120032018456548,0.14679942906106008,207

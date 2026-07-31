@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import io
+import subprocess
 import math
 from datetime import date
 from pathlib import Path
@@ -13,7 +15,13 @@ import pandas as pd
 def safe_read_csv(path: Path) -> pd.DataFrame:
     if not path.exists():
         return pd.DataFrame({"missing_file": [str(path)]})
-    return pd.read_csv(path)
+    try:
+        return pd.read_csv(path)
+    except PermissionError:
+        repo = Path(__file__).resolve().parents[1]
+        relative = path.resolve().relative_to(repo).as_posix()
+        raw = subprocess.check_output(["git", "show", f"HEAD:{relative}"], cwd=repo)
+        return pd.read_csv(io.BytesIO(raw))
 
 
 def safe_read_text(path: Path) -> str:
@@ -117,6 +125,16 @@ def build_recommendation_lines(base_dir: Path) -> list[str]:
                 "- No H1-H5 or H6 test survives the 66-test Benjamini-Hochberg correction at q < .05.",
                 "- Direct-country GPR results and profile-matched GPR results must be reported as separate primary and sensitivity evidence.",
                 "- Use the final-design output README and analysis summary as the entry point for external review.",
+            ]
+        )
+    structural_summary_path = base_dir / "reports" / "structural_regime_completion" / "analysis_summary.md"
+    if structural_summary_path.exists():
+        lines.extend(
+            [
+                "Current structural-regime extension:",
+                "- The 2012-2017 structural profile and k=2 regime selection are outcome-independent and must remain separate from the tariff-weighted confirmatory results.",
+                "- The structural family contains 84 tests; use its full BH q-values before interpreting continuous moderators or regime differences.",
+                "- No structural-family result is promoted to primary theory unless the complete decision rule in structural_design_protocol.md is satisfied.",
             ]
         )
     return lines
@@ -277,6 +295,14 @@ def build_package(base_dir: Path) -> dict[str, Any]:
         "reports/final_design_completion/figure_targeted_exploratory_heterogeneity.png",
     ]
 
+    structural_dir = base_dir / "reports" / "structural_regime_completion"
+    package["structural_regime_summary_text"] = safe_read_text(structural_dir / "analysis_summary.md")
+    package["structural_regime_protocol_text"] = safe_read_text(structural_dir / "structural_design_protocol.md")
+    package["structural_regime_readme_text"] = safe_read_text(structural_dir / "README.md")
+    package["structural_regime_visual_assets"] = [
+        "reports/structural_regime_completion/figure_structural_regime_profiles.png",
+        "reports/structural_regime_completion/figure_structural_regime_coefficients.png",
+    ]
     csv_map = {
         "did_model_results": "reports/did_model_results.csv",
         "main_models_2_4": "reports/comprehensive_table2_4_main_models.csv",
@@ -422,7 +448,37 @@ def build_package(base_dir: Path) -> dict[str, Any]:
         "completed_gpr_profile_matched_imputed_values": "reports/final_design_completion/gpr_profile_matched_imputed_values.csv",
         "completed_full_reported_multiplicity_family": "reports/final_design_completion/full_reported_multiplicity_family.csv",
         "completed_design_panel": "reports/final_design_completion/panel_with_completed_design_constructs.csv",
-    }
+        "structural_wdi_source": "data/raw/structural_wdi_2012_2017.csv",
+        "structural_profile_2012_2017": "reports/structural_regime_completion/structural_profile_2012_2017.csv",
+        "structural_profile_audit": "reports/structural_regime_completion/structural_profile_audit.csv",
+        "structural_pre_outcome_coverage": "reports/structural_regime_completion/pre_outcome_coverage_audit.csv",
+        "structural_exposure_balance": "reports/structural_regime_completion/exposure_balance.csv",
+        "structural_exposure_smd": "reports/structural_regime_completion/exposure_smd.csv",
+        "structural_exposure_correlations": "reports/structural_regime_completion/exposure_correlations.csv",
+        "structural_pre_outcome_process_tests": "reports/structural_regime_completion/pre_outcome_process_tests.csv",
+        "structural_pretrend_by_exposure_tercile": "reports/structural_regime_completion/pretrend_by_exposure_tercile.csv",
+        "structural_vif": "reports/structural_regime_completion/structural_vif.csv",
+        "structural_confounder_candidates": "reports/structural_regime_completion/confounder_candidates.csv",
+        "structural_continuous_moderators": "reports/structural_regime_completion/continuous_structural_moderator_tests.csv",
+        "structural_progressive_adjustment": "reports/structural_regime_completion/progressive_adjustment_models.csv",
+        "structural_balancing_weight_definition": "reports/structural_regime_completion/balancing_weight_definition.csv",
+        "structural_regime_selection": "reports/structural_regime_completion/structural_regime_selection.csv",
+        "structural_regime_assignments": "reports/structural_regime_completion/structural_regime_assignments.csv",
+        "structural_regime_profiles": "reports/structural_regime_completion/structural_regime_profiles.csv",
+        "structural_regime_exposure_counts": "reports/structural_regime_completion/structural_regime_exposure_counts.csv",
+        "structural_regime_geographic_composition": "reports/structural_regime_completion/structural_regime_geographic_composition.csv",
+        "structural_regime_outcome_coverage": "reports/structural_regime_completion/structural_regime_outcome_coverage.csv",
+        "structural_regime_coefficients": "reports/structural_regime_completion/structural_regime_specific_coefficients.csv",
+        "structural_regime_difference_tests": "reports/structural_regime_completion/structural_regime_difference_tests.csv",
+        "structural_regime_power_mde": "reports/structural_regime_completion/structural_regime_power_mde.csv",
+        "structural_regime_event_study_coefficients": "reports/structural_regime_completion/structural_regime_event_study_coefficients.csv",
+        "structural_regime_pretrend_tests": "reports/structural_regime_completion/structural_regime_event_study_pretrend_tests.csv",
+        "structural_regime_placebo_tests": "reports/structural_regime_completion/structural_regime_placebo_tests.csv",
+        "structural_regime_leave_one_out": "reports/structural_regime_completion/structural_regime_leave_one_country_out.csv",
+        "structural_omitted_confounding": "reports/structural_regime_completion/omitted_confounding_sensitivity.csv",
+        "structural_analysis_metadata": "reports/structural_regime_completion/structural_analysis_metadata.csv",
+        "structural_full_multiplicity_family": "reports/structural_regime_completion/full_structural_multiplicity_family.csv",
+        "structural_regression_panel": "reports/structural_regime_completion/panel_with_structural_regimes.csv",    }
 
     tables: dict[str, Any] = {}
     for key, rel_path in csv_map.items():

@@ -1,0 +1,91 @@
+outcome_key,outcome_label,exposure_tercile,n,mean_pre_shock_slope,sd_pre_shock_slope
+gvc,Adverse forward-GVC deviation stability,high,22,0.10166883116884105,0.36532760203649
+gvc,Adverse forward-GVC deviation stability,low,30,0.11850476190477846,0.20712149501614466
+gvc,Adverse forward-GVC deviation stability,middle,26,0.1503179487179687,0.6226640708191935
+recovery,Log export recovery,high,77,-0.054950430851455956,0.19264787442357786
+recovery,Log export recovery,low,75,-0.008518834906168709,0.19120204678773514
+recovery,Log export recovery,middle,76,-0.0471275239353156,0.11480053453029435
+diversification,Partner diversification excluding US and China,high,77,-0.0008364727207229956,0.02541901770611694
+diversification,Partner diversification excluding US and China,low,75,0.005935506362940038,0.021649653884606223
+diversification,Partner diversification excluding US and China,middle,76,-1.4476422342465705e-05,0.017612476224159228
+gvc,Adverse forward-GVC deviation stability,high,22,0.10166883116884105,0.36532760203649
+gvc,Adverse forward-GVC deviation stability,low,30,0.11850476190477846,0.20712149501614466
+gvc,Adverse forward-GVC deviation stability,middle,26,0.1503179487179687,0.6226640708191935
+recovery,Log export recovery,high,77,-0.054950430851455956,0.19264787442357786
+recovery,Log export recovery,low,75,-0.008518834906168709,0.19120204678773514
+recovery,Log export recovery,middle,76,-0.0471275239353156,0.11480053453029435
+diversification,Partner diversification excluding US and China,high,77,-0.0008364727207229956,0.02541901770611694
+diversification,Partner diversification excluding US and China,low,75,0.005935506362940038,0.021649653884606223
+diversification,Partner diversification excluding US and China,middle,76,-1.4476422342465705e-05,0.017612476224159228
+gvc,Adverse forward-GVC deviation stability,high,22,0.10166883116884105,0.36532760203649
+gvc,Adverse forward-GVC deviation stability,low,30,0.11850476190477846,0.20712149501614466
+gvc,Adverse forward-GVC deviation stability,middle,26,0.1503179487179687,0.6226640708191935
+recovery,Log export recovery,high,77,-0.054950430851455956,0.19264787442357786
+recovery,Log export recovery,low,75,-0.008518834906168709,0.19120204678773514
+recovery,Log export recovery,middle,76,-0.0471275239353156,0.11480053453029435
+diversification,Partner diversification excluding US and China,high,77,-0.0008364727207229956,0.02541901770611694
+diversification,Partner diversification excluding US and China,low,75,0.005935506362940038,0.021649653884606223
+diversification,Partner diversification excluding US and China,middle,76,-1.4476422342465705e-05,0.017612476224159228
+gvc,Adverse forward-GVC deviation stability,high,22,0.10166883116884105,0.36532760203649
+gvc,Adverse forward-GVC deviation stability,low,30,0.11850476190477846,0.20712149501614466
+gvc,Adverse forward-GVC deviation stability,middle,26,0.1503179487179687,0.6226640708191935
+recovery,Log export recovery,high,77,-0.054950430851455956,0.19264787442357786
+recovery,Log export recovery,low,75,-0.008518834906168709,0.19120204678773514
+recovery,Log export recovery,middle,76,-0.0471275239353156,0.11480053453029435
+diversification,Partner diversification excluding US and China,high,77,-0.0008364727207229956,0.02541901770611694
+diversification,Partner diversification excluding US and China,low,75,0.005935506362940038,0.021649653884606223
+diversification,Partner diversification excluding US and China,middle,76,-1.4476422342465705e-05,0.017612476224159228
+gvc,Adverse forward-GVC deviation stability,high,22,0.10166883116884105,0.36532760203649
+gvc,Adverse forward-GVC deviation stability,low,30,0.11850476190477846,0.20712149501614466
+gvc,Adverse forward-GVC deviation stability,middle,26,0.1503179487179687,0.6226640708191935
+recovery,Log export recovery,high,77,-0.054950430851455956,0.19264787442357786
+recovery,Log export recovery,low,75,-0.008518834906168709,0.19120204678773514
+recovery,Log export recovery,middle,76,-0.0471275239353156,0.11480053453029435
+diversification,Partner diversification excluding US and China,high,77,-0.0008364727207229956,0.02541901770611694
+diversification,Partner diversification excluding US and China,low,75,0.005935506362940038,0.021649653884606223
+diversification,Partner diversification excluding US and China,middle,76,-1.4476422342465705e-05,0.017612476224159228
+gvc,Adverse forward-GVC deviation stability,high,22,0.10166883116884105,0.36532760203649
+gvc,Adverse forward-GVC deviation stability,low,30,0.11850476190477846,0.20712149501614466
+gvc,Adverse forward-GVC deviation stability,middle,26,0.1503179487179687,0.6226640708191935
+recovery,Log export recovery,high,77,-0.054950430851455956,0.19264787442357786
+recovery,Log export recovery,low,75,-0.008518834906168709,0.19120204678773514
+recovery,Log export recovery,middle,76,-0.0471275239353156,0.11480053453029435
+diversification,Partner diversification excluding US and China,high,77,-0.0008364727207229956,0.02541901770611694
+diversification,Partner diversification excluding US and China,low,75,0.005935506362940038,0.021649653884606223
+diversification,Partner diversification excluding US and China,middle,76,-1.4476422342465705e-05,0.017612476224159228
+gvc,Adverse forward-GVC deviation stability,high,22,0.10166883116884105,0.36532760203649
+gvc,Adverse forward-GVC deviation stability,low,30,0.11850476190477846,0.20712149501614466
+gvc,Adverse forward-GVC deviation stability,middle,26,0.1503179487179687,0.6226640708191935
+recovery,Log export recovery,high,77,-0.054950430851455956,0.19264787442357786
+recovery,Log export recovery,low,75,-0.008518834906168709,0.19120204678773514
+recovery,Log export recovery,middle,76,-0.0471275239353156,0.11480053453029435
+diversification,Partner diversification excluding US and China,high,77,-0.0008364727207229956,0.02541901770611694
+diversification,Partner diversification excluding US and China,low,75,0.005935506362940038,0.021649653884606223
+diversification,Partner diversification excluding US and China,middle,76,-1.4476422342465705e-05,0.017612476224159228
+gvc,Adverse forward-GVC deviation stability,high,22,0.10166883116884105,0.36532760203649
+gvc,Adverse forward-GVC deviation stability,low,30,0.11850476190477846,0.20712149501614466
+gvc,Adverse forward-GVC deviation stability,middle,26,0.1503179487179687,0.6226640708191935
+recovery,Log export recovery,high,77,-0.054950430851455956,0.19264787442357786
+recovery,Log export recovery,low,75,-0.008518834906168709,0.19120204678773514
+recovery,Log export recovery,middle,76,-0.0471275239353156,0.11480053453029435
+diversification,Partner diversification excluding US and China,high,77,-0.0008364727207229956,0.02541901770611694
+diversification,Partner diversification excluding US and China,low,75,0.005935506362940038,0.021649653884606223
+diversification,Partner diversification excluding US and China,middle,76,-1.4476422342465705e-05,0.017612476224159228
+gvc,Adverse forward-GVC deviation stability,high,22,0.10166883116884105,0.36532760203649
+gvc,Adverse forward-GVC deviation stability,low,30,0.11850476190477846,0.20712149501614466
+gvc,Adverse forward-GVC deviation stability,middle,26,0.1503179487179687,0.6226640708191935
+recovery,Log export recovery,high,77,-0.054950430851455956,0.19264787442357786
+recovery,Log export recovery,low,75,-0.008518834906168709,0.19120204678773514
+recovery,Log export recovery,middle,76,-0.0471275239353156,0.11480053453029435
+diversification,Partner diversification excluding US and China,high,77,-0.0008364727207229956,0.02541901770611694
+diversification,Partner diversification excluding US and China,low,75,0.005935506362940038,0.021649653884606223
+diversification,Partner diversification excluding US and China,middle,76,-1.4476422342465705e-05,0.017612476224159228
+gvc,Adverse forward-GVC deviation stability,high,22,0.10166883116884105,0.36532760203649
+gvc,Adverse forward-GVC deviation stability,low,30,0.11850476190477846,0.20712149501614466
+gvc,Adverse forward-GVC deviation stability,middle,26,0.1503179487179687,0.6226640708191935
+recovery,Log export recovery,high,77,-0.054950430851455956,0.19264787442357786
+recovery,Log export recovery,low,75,-0.008518834906168709,0.19120204678773514
+recovery,Log export recovery,middle,76,-0.0471275239353156,0.11480053453029435
+diversification,Partner diversification excluding US and China,high,77,-0.0008364727207229956,0.02541901770611694
+diversification,Partner diversification excluding US and China,low,75,0.005935506362940038,0.021649653884606223
+diversification,Partner diversification excluding US and China,middle,76,-1.4476422342465705e-05,0.017612476224159228

@@ -1,0 +1,11 @@
+variable,label,n_countries,missing_countries,source_period,used_in_cluster_features
+pre_log_real_gdp_pc,Log real GDP per capita,203,26,2012-2017,1
+pre_real_gdp_pc_growth_mean,Mean real GDP-per-capita growth,202,27,2012-2017,1
+pre_real_gdp_pc_growth_slope,Real GDP-per-capita growth trend,202,27,2012-2017,1
+pre_real_gdp_pc_growth_volatility,GDP-per-capita growth volatility,202,27,2012-2017,1
+pre_manufacturing_value_added_share,Manufacturing value-added share,190,39,2012-2017,1
+pre_trade_openness,Trade openness,181,48,2012-2017,1
+pre_resource_rents,Natural-resource-rent dependence,203,26,2012-2017,1
+pre_institutional_quality,Institutional quality,198,31,2012-2017,1
+pre_export_concentration,Export concentration,228,1,2012-2017,1
+pre_log_population,Log population,207,22,2012-2017,1

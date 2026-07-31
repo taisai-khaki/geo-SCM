@@ -1,0 +1,11 @@
+variable,label,exposure_association_p,minimum_pre_outcome_process_p,plausible_confounder_screen,screening_rule
+pre_log_real_gdp_pc,Log real GDP per capita,0.42611774095108207,0.008260640394862016,0,associated with exposure and at least one pre-shock outcome process at p<.05
+pre_real_gdp_pc_growth_mean,Mean real GDP-per-capita growth,0.5491912865119696,2.22638729627485e-11,0,associated with exposure and at least one pre-shock outcome process at p<.05
+pre_real_gdp_pc_growth_slope,Real GDP-per-capita growth trend,0.019381846139815462,0.1387999443358469,0,associated with exposure and at least one pre-shock outcome process at p<.05
+pre_real_gdp_pc_growth_volatility,GDP-per-capita growth volatility,0.17367552767220873,0.00042843081054592805,0,associated with exposure and at least one pre-shock outcome process at p<.05
+pre_manufacturing_value_added_share,Manufacturing value-added share,0.08411848183098855,1.1336495003584925e-07,0,associated with exposure and at least one pre-shock outcome process at p<.05
+pre_trade_openness,Trade openness,0.08488218325950497,0.1911283583072062,0,associated with exposure and at least one pre-shock outcome process at p<.05
+pre_resource_rents,Natural-resource-rent dependence,0.23963691199471526,1.222174208178963e-08,0,associated with exposure and at least one pre-shock outcome process at p<.05
+pre_institutional_quality,Institutional quality,0.0030699754329292467,0.01893593705736324,1,associated with exposure and at least one pre-shock outcome process at p<.05
+pre_export_concentration,Export concentration,4.7437664285149294e-05,5.733030951374643e-53,1,associated with exposure and at least one pre-shock outcome process at p<.05
+pre_log_population,Log population,0.12437113315398536,2.39516639020974e-09,0,associated with exposure and at least one pre-shock outcome process at p<.05

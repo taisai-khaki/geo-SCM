@@ -1,0 +1,11 @@
+variable,label,vif,n_complete
+pre_log_real_gdp_pc,Log real GDP per capita,3.8067429898004397,166
+pre_real_gdp_pc_growth_mean,Mean real GDP-per-capita growth,1.7494129773873572,166
+pre_real_gdp_pc_growth_slope,Real GDP-per-capita growth trend,1.6560099961497978,166
+pre_real_gdp_pc_growth_volatility,GDP-per-capita growth volatility,1.9348564672417707,166
+pre_manufacturing_value_added_share,Manufacturing value-added share,1.4325323369507486,166
+pre_trade_openness,Trade openness,1.5568028945130497,166
+pre_resource_rents,Natural-resource-rent dependence,1.7194058951740585,166
+pre_institutional_quality,Institutional quality,4.32903968718425,166
+pre_export_concentration,Export concentration,1.4603502005077489,166
+pre_log_population,Log population,1.8899186533641061,166

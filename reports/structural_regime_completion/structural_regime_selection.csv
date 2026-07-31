@@ -1,0 +1,3 @@
+﻿k,n_countries,silhouette,within_cluster_sse,bootstrap_mean_ari,bootstrap_assignment_stability,selection_rule,silhouette_gap_to_best,selection_score,selection_basis
+2,229,0.1951821884401739,1882.3970086552495,0.9778049187279507,0.6179912663755458,"silhouette primary; if gap <= 0.02, higher bootstrap stability; ties resolve to lower k; no outcomes used",0.009281301074764992,0.1951821884401739,"silhouette gap <= 0.02; higher bootstrap stability; ties resolve to lower k"
+3,229,0.2044634895149389,1636.9129723019305,0.9161715824021935,0.5359825327510918,"silhouette primary; if gap <= 0.02, higher bootstrap stability; ties resolve to lower k; no outcomes used",0.0,0.2044634895149389,"silhouette gap <= 0.02; higher bootstrap stability; ties resolve to lower k"
