@@ -1,0 +1,85 @@
+REPRODUCIBILITY PROOF
+BASE_DIR: C:\Users\L03128674\projects\geo-SCM
+PROOF_STARTED_UTC: 2026-07-31T20:57:31.020127+00:00
+
+COMMAND: python scripts/run_final_audited_analysis.py --bootstrap-reps 999 --mi-reps 20 --stability-reps 100 --seed 20260731
+START_UTC: 2026-07-31T20:57:31.020160+00:00
+EXIT_CODE: 0
+STDOUT_BEGIN
+                     item  value
+ primary_sample_countries    202
+  complete_case_countries    166
+   broad_sample_countries    229
+               selected_k      2
+confirmatory_family_tests      7
+    confirmatory_q_lt_005      0
+  structural_family_tests     84
+      structural_q_lt_005      0
+           bootstrap_reps    999
+                  mi_reps     20
+Final audited analysis written to reports/structural_regime_completion
+STDOUT_END
+STDERR_BEGIN
+
+STDERR_END
+
+COMMAND: python scripts/run_post_period_sensitivity.py --bootstrap-reps 999 --seed 20260731
+START_UTC: 2026-07-31T21:17:58.106900+00:00
+EXIT_CODE: 0
+STDOUT_BEGIN
+post-period sensitivity rows 48
+final structural family rows 147
+q<.05 0
+STDOUT_END
+STDERR_BEGIN
+
+STDERR_END
+
+COMMAND: python -m pytest -q
+START_UTC: 2026-07-31T21:20:34.390866+00:00
+EXIT_CODE: 0
+STDOUT_BEGIN
+...............                                                          [100%]
+15 passed in 5.09s
+STDOUT_END
+STDERR_BEGIN
+
+STDERR_END
+
+COMMAND: python scripts/run_final_audited_analysis.py --bootstrap-reps 999 --mi-reps 20 --stability-reps 100 --seed 20260731
+START_UTC: 2026-07-31T21:20:44.133773+00:00
+EXIT_CODE: 0
+STDOUT_BEGIN
+                     item  value
+ primary_sample_countries    202
+  complete_case_countries    166
+   broad_sample_countries    229
+               selected_k      2
+confirmatory_family_tests      7
+    confirmatory_q_lt_005      0
+  structural_family_tests     84
+      structural_q_lt_005      0
+           bootstrap_reps    999
+                  mi_reps     20
+Final audited analysis written to reports/structural_regime_completion
+STDOUT_END
+STDERR_BEGIN
+
+STDERR_END
+
+COMMAND: python scripts/run_post_period_sensitivity.py --bootstrap-reps 999 --seed 20260731
+START_UTC: 2026-07-31T21:37:25.924774+00:00
+EXIT_CODE: 0
+STDOUT_BEGIN
+post-period sensitivity rows 48
+final structural family rows 147
+q<.05 0
+STDOUT_END
+STDERR_BEGIN
+
+STDERR_END
+
+DETERMINISM_STATUS: PASS
+FILES_COMPARED: 90
+DIFFERING_FILES: none
+PROOF_FINISHED_UTC: 2026-07-31T21:40:39.078302+00:00

@@ -61,8 +61,23 @@ STABILITY_REPS = 100
 PRIMARY_POST = 2018
 SENSITIVITY_POST = 2019
 EVENT_REFERENCE = 2017
-INVALID_CODES = {"ANT", "CSK", "DDR", "SCG", "SUN", "TMP", "YUG", "ZAR"}
-INVALID_NAME_RE = r"world|africa|asia|europe|aggregate|income group|not classified|unspecified|trade total|regions"
+# Explicit non-economy, aggregate, and historical codes. Do not use substring
+# matching: legitimate names such as Central African Republic and South Africa
+# must remain eligible when their analytical inputs are complete.
+KNOWN_INVALID_CODES = frozenset(
+    {
+        "ANS", "ANT", "ATA", "ATF", "BES", "BLM", "BVT", "CCK", "CSK",
+        "CXR", "DDR", "FLK", "HMD", "MSR", "NFK", "NIU", "PCN", "SCG",
+        "SGS", "SHN", "SPM", "SUN", "TKL", "TMP", "VAT", "YUG", "ZAR",
+    }
+)
+EXACT_INVALID_NAMES = frozenset(
+    {
+        "world", "africa", "asia", "europe", "aggregate", "income group",
+        "not classified", "unspecified", "trade total", "regions", "undeclared",
+    }
+)
+ANALYTICAL_ECONOMY_CODES = frozenset({"HKG", "MAC", "PSE"})
 BLOCKS = {
     "development_reallocation_capacity": [
         "pre_log_real_gdp_pc",
@@ -158,10 +173,29 @@ def build_samples(panel: pd.DataFrame, profile: pd.DataFrame, out_dir: Path) -> 
     out["cluster_imputed_fields"] = out[STRUCTURAL_VARS].isna().sum(axis=1)
     names = out["country_name"].fillna("").astype(str)
     codes = out["country_iso3_code"].fillna("").astype(str)
+    normalized_names = names.str.strip().str.casefold()
+    out["known_invalid_code"] = codes.isin(KNOWN_INVALID_CODES)
+    out["known_aggregate_name"] = normalized_names.isin(EXACT_INVALID_NAMES)
+    out["sovereign_or_analytical_economy"] = (
+        out["wb_region"].notna() | codes.isin(ANALYTICAL_ECONOMY_CODES)
+    )
     out["valid_entity"] = (
-        ~codes.isin(INVALID_CODES)
-        & ~names.str.contains(INVALID_NAME_RE, case=False, regex=True, na=False)
-        & out["wb_region"].notna()
+        ~out["known_invalid_code"]
+        & ~out["known_aggregate_name"]
+        & out["sovereign_or_analytical_economy"]
+    )
+    out["entity_validity_reason"] = np.select(
+        [
+            out["known_invalid_code"],
+            out["known_aggregate_name"],
+            ~out["sovereign_or_analytical_economy"],
+        ],
+        [
+            "known_invalid_or_historical_code",
+            "exact_known_aggregate_name",
+            "missing_sovereign_or_analytical_economy_classification",
+        ],
+        default="valid_sovereign_or_analytical_economy",
     )
     out["valid_exposure"] = out["exposure_pre"].notna()
     out["valid_eci"] = out["eci_pre"].notna()
@@ -176,7 +210,7 @@ def build_samples(panel: pd.DataFrame, profile: pd.DataFrame, out_dir: Path) -> 
 
     def exclusion(row: pd.Series) -> str:
         if not row["valid_entity"]:
-            return "invalid_entity_or_aggregate_code"
+            return str(row["entity_validity_reason"])
         if not row["valid_exposure"]:
             return "missing_pre_shock_exposure"
         if not row["valid_eci"]:
@@ -192,6 +226,7 @@ def build_samples(panel: pd.DataFrame, profile: pd.DataFrame, out_dir: Path) -> 
         "country_iso3_code", "country_name", "wb_region",
         "cluster_imputed_fields", "pre_gdp_observations", "pre_growth_observations",
         "valid_entity", "valid_exposure", "valid_eci", "valid_growth_history",
+        "entity_validity_reason",
         "primary_structural_sample", "complete_case_structural_sample",
         "primary_exclusion_reason",
     ]
@@ -419,6 +454,15 @@ def prepare_panel(panel: pd.DataFrame, profile: pd.DataFrame, assignment: pd.Dat
     return out
 
 
+def prepare_confirmatory_event_panel(panel: pd.DataFrame, profile: pd.DataFrame) -> pd.DataFrame:
+    """Build event-study inputs without structural-sample assignment filtering."""
+    p = standardize_profile(profile)
+    cols = ["country_iso3_code", "z_eci_pre", "z_exposure_pre"]
+    merged = p[cols].merge(panel, on="country_iso3_code", how="right")
+    merged["post_2018"] = merged["year"].ge(PRIMARY_POST).astype(float)
+    merged["post_2019"] = merged["year"].ge(SENSITIVITY_POST).astype(float)
+    return merged
+
 def coefficient_row(fit: Any, term: str, reps: int, seed: int, extra: dict[str, Any] | None = None) -> dict[str, Any]:
     vector = np.zeros(len(fit.term_names))
     vector[fit.term_index(term)] = 1.0
@@ -591,10 +635,15 @@ def corrected_regime_models(
     return pd.DataFrame(slopes), pd.DataFrame(differences), pd.DataFrame(validation), fits
 
 
-def focal_event_terms(frame: pd.DataFrame, interacted: bool = False, regime_reference: str = "R1") -> tuple[pd.DataFrame, list[str], dict[int, str]]:
+def focal_event_terms(
+    frame: pd.DataFrame,
+    interacted: bool = False,
+    regime_reference: str = "R1",
+) -> tuple[pd.DataFrame, list[str], dict[int, str]]:
     out = frame.copy()
     terms = []
     triple = {}
+    regimes = sorted(out["structural_regime"].dropna().unique()) if interacted else []
     for year in sorted(num(out["year"]).dropna().astype(int).unique()):
         if year == EVENT_REFERENCE:
             continue
@@ -607,22 +656,35 @@ def focal_event_terms(frame: pd.DataFrame, interacted: bool = False, regime_refe
         out[t_term] = out["z_eci_pre"] * out["z_exposure_pre"] * year_flag
         terms += [e_term, c_term, t_term]
         triple[year] = t_term
-        if interacted:
-            for regime in sorted(out["structural_regime"].dropna().unique()):
-                if regime == regime_reference:
-                    continue
-                xterm = f"{t_term}_x_{regime}"
-                out[xterm] = out[t_term] * out["structural_regime"].eq(regime).astype(float)
+        for regime in regimes:
+            if regime == regime_reference:
+                continue
+            mask = out["structural_regime"].eq(regime).astype(float)
+            for base_term in (e_term, c_term, t_term):
+                xterm = f"{base_term}_x_{regime}"
+                out[xterm] = out[base_term] * mask
                 terms.append(xterm)
+            regime_year = f"regime_year_{regime}_{year}"
+            out[regime_year] = mask * year_flag
+            terms.append(regime_year)
     return out, terms, triple
 
-
 def corrected_event_studies(
-    frame: pd.DataFrame, regimes: list[str], out_dir: Path, reps: int, seed: int
+    frame: pd.DataFrame,
+    regimes: list[str],
+    out_dir: Path,
+    reps: int,
+    seed: int,
+    confirmatory_frame: pd.DataFrame | None = None,
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     coefficient_rows, pre_rows, post_rows = [], [], []
     for oi, (outcome_key, (outcome, label)) in enumerate(OUTCOMES.items()):
-        variants = [("full_sample", frame, False), ("pooled_regime_interacted", frame, True)]
+        confirmatory = confirmatory_frame if confirmatory_frame is not None else frame
+        variants = [
+            ("full_sample_confirmatory", confirmatory, False),
+            ("full_sample_cleaned_structural", frame, False),
+            ("pooled_regime_interacted", frame, True),
+        ]
         variants += [
             (f"regime_{regime}", frame.loc[frame["structural_regime"].eq(regime)], False)
             for regime in regimes
@@ -690,7 +752,7 @@ def corrected_event_studies(
     for outcome_key, (_, label) in OUTCOMES.items():
         plot = coefficients.loc[
             (coefficients["outcome_key"] == outcome_key)
-            & coefficients["variant"].eq("full_sample")
+            & coefficients["variant"].eq("full_sample_confirmatory")
         ]
         if plot.empty:
             continue
@@ -807,74 +869,66 @@ def residual_density_weights(profile: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
-def weight_and_balance(profile: pd.DataFrame, frame: pd.DataFrame, out_dir: Path) -> tuple[pd.DataFrame, pd.DataFrame]:
+def weight_and_balance(
+    profile: pd.DataFrame, frame: pd.DataFrame, out_dir: Path
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Report residual-density weighting only as a failed diagnostic."""
     weighted = residual_density_weights(profile)
     weights = weighted["residual_density_weight"].dropna()
     ess = (weights.sum() ** 2) / (weights.pow(2).sum())
     diagnostics = pd.DataFrame(
         [
-            {"metric": "n_weighted_countries", "value": len(weights)},
-            {"metric": "min_weight", "value": weights.min()},
-            {"metric": "max_weight", "value": weights.max()},
-            {"metric": "median_weight", "value": weights.median()},
-            {"metric": "p01_weight", "value": weights.quantile(0.01)},
-            {"metric": "p05_weight", "value": weights.quantile(0.05)},
-            {"metric": "p95_weight", "value": weights.quantile(0.95)},
-            {"metric": "p99_weight", "value": weights.quantile(0.99)},
-            {"metric": "effective_sample_size", "value": ess},
-            {"metric": "ess_fraction_of_weighted_countries", "value": ess / len(weights)},
-            {"metric": "max_country_leverage_share", "value": weights.max() / weights.sum()},
+            {"metric": "n_weighted_countries", "value": len(weights), "diagnostic_status": "failed_balance"},
+            {"metric": "min_weight", "value": weights.min(), "diagnostic_status": "failed_balance"},
+            {"metric": "max_weight", "value": weights.max(), "diagnostic_status": "failed_balance"},
+            {"metric": "median_weight", "value": weights.median(), "diagnostic_status": "failed_balance"},
+            {"metric": "p01_weight", "value": weights.quantile(0.01), "diagnostic_status": "failed_balance"},
+            {"metric": "p05_weight", "value": weights.quantile(0.05), "diagnostic_status": "failed_balance"},
+            {"metric": "p95_weight", "value": weights.quantile(0.95), "diagnostic_status": "failed_balance"},
+            {"metric": "p99_weight", "value": weights.quantile(0.99), "diagnostic_status": "failed_balance"},
+            {"metric": "effective_sample_size", "value": ess, "diagnostic_status": "failed_balance"},
+            {"metric": "ess_fraction_of_weighted_countries", "value": ess / len(weights), "diagnostic_status": "failed_balance"},
+            {"metric": "max_country_leverage_share", "value": weights.max() / weights.sum(), "diagnostic_status": "failed_balance"},
         ]
     )
     low = profile["exposure_tercile"].eq("low")
     high = profile["exposure_tercile"].eq("high")
     balance_rows = []
     for variable in STRUCTURAL_VARS:
+        before = smd(profile.loc[high, variable], profile.loc[low, variable])
+        after = weighted_smd(
+            weighted.loc[high, variable], weighted.loc[low, variable],
+            weighted.loc[high, "residual_density_weight"],
+            weighted.loc[low, "residual_density_weight"],
+        )
         balance_rows.append(
             {
-                "variable": variable, "label": STRUCTURAL_LABELS[variable],
-                "smd_before": smd(profile.loc[high, variable], profile.loc[low, variable]),
-                "smd_after_residual_density_weighting": weighted_smd(
-                    weighted.loc[high, variable], weighted.loc[low, variable],
-                    weighted.loc[high, "residual_density_weight"],
-                    weighted.loc[low, "residual_density_weight"],
-                ),
+                "variable": variable,
+                "label": STRUCTURAL_LABELS[variable],
+                "diagnostic_status": "failed_balance",
+                "smd_before": before,
+                "smd_after_residual_density_weighting_failed": after,
+                "absolute_smd_after": abs(after) if pd.notna(after) else np.nan,
+                "balance_improved": abs(after) < abs(before) if pd.notna(after) and pd.notna(before) else False,
             }
         )
     balance = pd.DataFrame(balance_rows)
-    trimmed = weighted.loc[
-        weighted["residual_density_weight"].between(
-            weights.quantile(0.01), weights.quantile(0.99)
-        )
-    ].copy()
-    trimmed_frame = frame.merge(
-        trimmed[["country_iso3_code", "residual_density_weight"]],
-        on="country_iso3_code", how="inner",
-    )
-    trimmed_results = []
-    for oi, (outcome_key, (outcome, label)) in enumerate(OUTCOMES.items()):
-        try:
-            work, terms = add_base_terms(trimmed_frame)
-            fit = fit_terms(work, outcome, terms, weight_col="residual_density_weight")
-            row = coefficient_row(fit, "eci_exposure_post", BOOTSTRAP_REPS, 72000 + oi)
-            row.update(
-                {
-                    "outcome_key": outcome_key, "outcome": label,
-                    "trim_rule": "drop country weights below p01 or above p99",
-                }
-            )
-            trimmed_results.append(row)
-        except Exception as exc:
-            trimmed_results.append({"outcome_key": outcome_key, "outcome": label, "error": str(exc)})
     write_csv(diagnostics, out_dir / "residual_density_weight_diagnostics.csv")
     write_csv(balance, out_dir / "balance_before_after_weighting.csv")
-    write_csv(pd.DataFrame(trimmed_results), out_dir / "weighted_model_trimmed_sensitivity.csv")
+    stale = out_dir / "weighted_model_trimmed_sensitivity.csv"
+    if stale.exists():
+        stale.unlink()
     return weighted, balance
 
 
-def theory_balance(profile: pd.DataFrame, weighted: pd.DataFrame, out_dir: Path) -> pd.DataFrame:
+def theory_balance(
+    profile: pd.DataFrame, weighted: pd.DataFrame, out_dir: Path
+) -> pd.DataFrame:
     rows = []
-    for weighting, use_weights in [("unadjusted", False), ("residual_density_weighted", True)]:
+    for weighting, use_weights in [
+        ("unadjusted", False),
+        ("residual_density_weighting_failed", True),
+    ]:
         low = profile["exposure_tercile"].eq("low")
         high = profile["exposure_tercile"].eq("high")
         values = []
@@ -890,81 +944,59 @@ def theory_balance(profile: pd.DataFrame, weighted: pd.DataFrame, out_dir: Path)
             values.append(value)
             rows.append(
                 {
-                    "weighting": weighting, "variable": variable,
-                    "smd": value, "absolute_smd": abs(value) if pd.notna(value) else np.nan,
+                    "weighting": weighting,
+                    "variable": variable,
+                    "smd": value,
+                    "absolute_smd": abs(value) if pd.notna(value) else np.nan,
                     "absolute_smd_gt_0_10": abs(value) > 0.10 if pd.notna(value) else np.nan,
+                    "diagnostic_status": "failed_balance" if use_weights else "descriptive_unadjusted",
                 }
             )
         valid = np.asarray([x for x in values if pd.notna(x)], dtype=float)
-        stat = float(np.sum(valid ** 2)) if len(valid) else np.nan
         rows.append(
             {
-                "weighting": weighting, "variable": "__joint_summary__",
+                "weighting": weighting,
+                "variable": "__summary__",
                 "max_absolute_smd": float(np.max(np.abs(valid))) if len(valid) else np.nan,
                 "proportion_absolute_smd_gt_0_10": float(np.mean(np.abs(valid) > 0.10)) if len(valid) else np.nan,
-                "joint_balance_statistic": stat,
-                "joint_balance_pvalue": float(stats.chi2.sf(stat, len(valid))) if len(valid) else np.nan,
+                "diagnostic_status": "failed_balance" if use_weights else "descriptive_unadjusted",
             }
         )
-    mapping.update(
-        {
-            "clean profile base": "structural_profile_final_audit_base.csv",
-            "clean exposure counts": "structural_regime_exposure_counts_clean.csv",
-            "regime-specific slopes": "structural_regime_specific_coefficients_corrected.csv",
-            "regime difference tests": "structural_regime_difference_tests_corrected.csv",
-            "regime omnibus validation": "structural_regime_omnibus_validation.csv",
-            "outcome-specific regime-difference power": "regime_difference_power_mde.csv",
-            "maximum-sample adjustment": "progressive_adjustment_maximum_sample.csv",
-            "coefficient stability": "coefficient_stability_summary.csv",
-            "weight balance": "balance_before_after_weighting.csv",
-            "trimmed weighting sensitivity": "weighted_model_trimmed_sensitivity.csv",
-            "moderator block omnibus": "structural_moderator_block_omnibus_tests.csv",
-            "assignment robustness": "regime_assignment_robustness.csv",
-            "assignment model sensitivity": "regime_model_assignment_sensitivity.csv",
-            "country influence detail": "leave_one_country_out_summary.csv",
-            "H6 directional tests": "h6_directional_2018_2019.csv",
-            "minimum detectable effects": "final_minimum_detectable_effects.csv",
-            "event-study figures": "figure_corrected_event_study_gvc.png;figure_corrected_event_study_recovery.png;figure_corrected_event_study_diversification.png",
-            "2019 regime-specific slopes": "structural_regime_specific_coefficients_2019.csv",
-            "2019 regime differences": "structural_regime_difference_tests_2019.csv",
-            "2019 regime omnibus validation": "structural_regime_omnibus_validation_2019.csv",
-        }
-    )
     result = pd.DataFrame(rows)
     write_csv(result, out_dir / "theory_based_balance_diagnostics.csv")
     return result
 
+def adjustment_models(
+    frame: pd.DataFrame, out_dir: Path
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    """Compare Models A-D on common and maximum-available samples.
 
-def adjustment_models(frame: pd.DataFrame, profile: pd.DataFrame, out_dir: Path) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-    weighted = residual_density_weights(profile)
-    work = frame.drop(columns=["residual_density_weight"], errors="ignore").merge(
-        weighted[["country_iso3_code", "residual_density_weight"]],
-        on="country_iso3_code", how="left",
-    )
-    common_cols = [
-        "log_export_recovery", "partner_diversification_excl_us_china",
-        "gvc_adverse_deviation_stability", "z_eci_pre", "z_coi_pre",
-        "z_exposure_pre", "wb_region", "residual_density_weight",
-    ] + [f"z_{v}" for v in STRUCTURAL_VARS]
-    common_by_outcome = {}
+    Residual-density weighting is intentionally excluded from the adjustment
+    evidence because its diagnostic balance check fails for all ten covariates.
+    """
+    work = frame.copy()
     rows_common, rows_max = [], []
+    model_names = ["A_FE", "B_structural_x_year", "C_region_x_year", "D_country_trends"]
     for outcome_key, (outcome, label) in OUTCOMES.items():
-        required = [outcome, "z_eci_pre", "z_coi_pre", "z_exposure_pre", "wb_region", "residual_density_weight"] + [f"z_{v}" for v in STRUCTURAL_VARS]
+        required = [
+            outcome, "z_eci_pre", "z_coi_pre", "z_exposure_pre", "wb_region",
+        ] + [f"z_{v}" for v in STRUCTURAL_VARS]
         common = work.dropna(subset=required).copy()
-        common_by_outcome[outcome_key] = common
-        for sample_name, subset in [("common_sample", common), ("maximum_available", work)]:
-            for model_name in ["A_FE", "B_structural_x_year", "C_region_x_year", "D_country_trends", "E_residual_density"]:
+        for sample_name, subset in [
+            ("common_sample", common),
+            ("maximum_available", work),
+        ]:
+            for model_name in model_names:
                 sub = subset.copy()
                 sub["post_2018"] = sub["year"].ge(PRIMARY_POST).astype(float)
                 sub, terms = add_base_terms(sub)
                 sub, mod_terms = add_moderator_terms(sub, "z_coi_pre")
                 terms += mod_terms
-                weight_col = None
                 if model_name == "B_structural_x_year":
                     for variable in STRUCTURAL_VARS:
                         col = f"z_{variable}"
-                        for year in sorted(sub["year"].unique()):
-                            if year == min(sub["year"]):
+                        for year in sorted(sub["year"].dropna().unique()):
+                            if year == min(sub["year"].dropna()):
                                 continue
                             term = f"adjust_structural_year_{variable}_{year}"
                             sub[term] = sub[col] * sub["year"].eq(year).astype(float)
@@ -973,10 +1005,8 @@ def adjustment_models(frame: pd.DataFrame, profile: pd.DataFrame, out_dir: Path)
                     terms += build_region_year_terms(sub)
                 elif model_name == "D_country_trends":
                     terms += build_country_trend_terms(sub, outcome)
-                elif model_name == "E_residual_density":
-                    weight_col = "residual_density_weight"
                 try:
-                    fit = fit_terms(sub, outcome, terms, weight_col=weight_col)
+                    fit = fit_terms(sub, outcome, terms)
                     for term in ["eci_exposure_post", "eci_exposure_post_x_moderator"]:
                         row = coefficient_row(fit, term, 0, 0)
                         row.update(
@@ -986,6 +1016,7 @@ def adjustment_models(frame: pd.DataFrame, profile: pd.DataFrame, out_dir: Path)
                                 "term": term,
                                 "common_sample_n_countries": common["country_iso3_code"].nunique(),
                                 "common_sample_n_obs": len(common),
+                                "adjustment_evidence": "Models A-D; no weighting model",
                             }
                         )
                         (rows_common if sample_name == "common_sample" else rows_max).append(row)
@@ -995,13 +1026,17 @@ def adjustment_models(frame: pd.DataFrame, profile: pd.DataFrame, out_dir: Path)
                         {
                             "outcome_key": outcome_key, "outcome": label,
                             "sample_type": sample_name, "model": model_name,
+                            "adjustment_evidence": "Models A-D; no weighting model",
                             "error": str(exc), "pvalue_for_fdr": np.nan,
                         }
                     )
     common_df, max_df = pd.DataFrame(rows_common), pd.DataFrame(rows_max)
     stability_rows = []
     for (outcome_key, term), group in common_df.groupby(["outcome_key", "term"]):
-        base = group.loc[group["model"].eq("A_FE")].iloc[0]
+        base_rows = group.loc[group["model"].eq("A_FE")]
+        if base_rows.empty:
+            continue
+        base = base_rows.iloc[0]
         for _, row in group.iterrows():
             estimate = row.get("estimate")
             base_estimate = base.get("estimate")
@@ -1022,12 +1057,16 @@ def adjustment_models(frame: pd.DataFrame, profile: pd.DataFrame, out_dir: Path)
                     "confidence_intervals_overlap": overlap,
                     "common_sample_n_countries": row["common_sample_n_countries"],
                     "common_sample_n_obs": row["common_sample_n_obs"],
+                    "adjustment_evidence": "Models A-D; no weighting model",
                 }
             )
     stability = pd.DataFrame(stability_rows)
     write_csv(common_df, out_dir / "progressive_adjustment_common_sample.csv")
     write_csv(max_df, out_dir / "progressive_adjustment_maximum_sample.csv")
     write_csv(stability, out_dir / "coefficient_stability_summary.csv")
+    stale = out_dir / "weighted_model_trimmed_sensitivity.csv"
+    if stale.exists():
+        stale.unlink()
     return common_df, max_df, stability
 
 def moderator_block_tests(frame: pd.DataFrame, out_dir: Path, reps: int, seed: int) -> pd.DataFrame:
@@ -1081,30 +1120,6 @@ def moderator_block_tests(frame: pd.DataFrame, out_dir: Path, reps: int, seed: i
                     "error": str(exc), "pvalue_for_fdr": np.nan,
                 }
             )
-    mapping.update(
-        {
-            "clean profile base": "structural_profile_final_audit_base.csv",
-            "clean exposure counts": "structural_regime_exposure_counts_clean.csv",
-            "regime-specific slopes": "structural_regime_specific_coefficients_corrected.csv",
-            "regime difference tests": "structural_regime_difference_tests_corrected.csv",
-            "regime omnibus validation": "structural_regime_omnibus_validation.csv",
-            "outcome-specific regime-difference power": "regime_difference_power_mde.csv",
-            "maximum-sample adjustment": "progressive_adjustment_maximum_sample.csv",
-            "coefficient stability": "coefficient_stability_summary.csv",
-            "weight balance": "balance_before_after_weighting.csv",
-            "trimmed weighting sensitivity": "weighted_model_trimmed_sensitivity.csv",
-            "moderator block omnibus": "structural_moderator_block_omnibus_tests.csv",
-            "assignment robustness": "regime_assignment_robustness.csv",
-            "assignment model sensitivity": "regime_model_assignment_sensitivity.csv",
-            "country influence detail": "leave_one_country_out_summary.csv",
-            "H6 directional tests": "h6_directional_2018_2019.csv",
-            "minimum detectable effects": "final_minimum_detectable_effects.csv",
-            "event-study figures": "figure_corrected_event_study_gvc.png;figure_corrected_event_study_recovery.png;figure_corrected_event_study_diversification.png",
-            "2019 regime-specific slopes": "structural_regime_specific_coefficients_2019.csv",
-            "2019 regime differences": "structural_regime_difference_tests_2019.csv",
-            "2019 regime omnibus validation": "structural_regime_omnibus_validation_2019.csv",
-        }
-    )
     result = pd.DataFrame(rows)
     write_csv(result, out_dir / "structural_moderator_block_omnibus_tests.csv")
     return result
@@ -1301,30 +1316,6 @@ def placebo_comparison(frame: pd.DataFrame, out_dir: Path, reps: int, seed: int)
                         "outcome": label, "error": str(exc), "pvalue_for_fdr": np.nan,
                     }
                 )
-    mapping.update(
-        {
-            "clean profile base": "structural_profile_final_audit_base.csv",
-            "clean exposure counts": "structural_regime_exposure_counts_clean.csv",
-            "regime-specific slopes": "structural_regime_specific_coefficients_corrected.csv",
-            "regime difference tests": "structural_regime_difference_tests_corrected.csv",
-            "regime omnibus validation": "structural_regime_omnibus_validation.csv",
-            "outcome-specific regime-difference power": "regime_difference_power_mde.csv",
-            "maximum-sample adjustment": "progressive_adjustment_maximum_sample.csv",
-            "coefficient stability": "coefficient_stability_summary.csv",
-            "weight balance": "balance_before_after_weighting.csv",
-            "trimmed weighting sensitivity": "weighted_model_trimmed_sensitivity.csv",
-            "moderator block omnibus": "structural_moderator_block_omnibus_tests.csv",
-            "assignment robustness": "regime_assignment_robustness.csv",
-            "assignment model sensitivity": "regime_model_assignment_sensitivity.csv",
-            "country influence detail": "leave_one_country_out_summary.csv",
-            "H6 directional tests": "h6_directional_2018_2019.csv",
-            "minimum detectable effects": "final_minimum_detectable_effects.csv",
-            "event-study figures": "figure_corrected_event_study_gvc.png;figure_corrected_event_study_recovery.png;figure_corrected_event_study_diversification.png",
-            "2019 regime-specific slopes": "structural_regime_specific_coefficients_2019.csv",
-            "2019 regime differences": "structural_regime_difference_tests_2019.csv",
-            "2019 regime omnibus validation": "structural_regime_omnibus_validation_2019.csv",
-        }
-    )
     result = pd.DataFrame(rows)
     write_csv(result, out_dir / "placebo_2014_2015_comparison.csv")
     return result
@@ -1406,30 +1397,6 @@ def equivalence_tests(
                 "mde_80pct": 2.80 * row["se"], "mde_90pct": 3.24 * row["se"],
             }
         )
-    mapping.update(
-        {
-            "clean profile base": "structural_profile_final_audit_base.csv",
-            "clean exposure counts": "structural_regime_exposure_counts_clean.csv",
-            "regime-specific slopes": "structural_regime_specific_coefficients_corrected.csv",
-            "regime difference tests": "structural_regime_difference_tests_corrected.csv",
-            "regime omnibus validation": "structural_regime_omnibus_validation.csv",
-            "outcome-specific regime-difference power": "regime_difference_power_mde.csv",
-            "maximum-sample adjustment": "progressive_adjustment_maximum_sample.csv",
-            "coefficient stability": "coefficient_stability_summary.csv",
-            "weight balance": "balance_before_after_weighting.csv",
-            "trimmed weighting sensitivity": "weighted_model_trimmed_sensitivity.csv",
-            "moderator block omnibus": "structural_moderator_block_omnibus_tests.csv",
-            "assignment robustness": "regime_assignment_robustness.csv",
-            "assignment model sensitivity": "regime_model_assignment_sensitivity.csv",
-            "country influence detail": "leave_one_country_out_summary.csv",
-            "H6 directional tests": "h6_directional_2018_2019.csv",
-            "minimum detectable effects": "final_minimum_detectable_effects.csv",
-            "event-study figures": "figure_corrected_event_study_gvc.png;figure_corrected_event_study_recovery.png;figure_corrected_event_study_diversification.png",
-            "2019 regime-specific slopes": "structural_regime_specific_coefficients_2019.csv",
-            "2019 regime differences": "structural_regime_difference_tests_2019.csv",
-            "2019 regime omnibus validation": "structural_regime_omnibus_validation_2019.csv",
-        }
-    )
     result = pd.DataFrame(rows)
     mde = result[
         [
@@ -1576,7 +1543,7 @@ The authoritative confirmatory family contains the prespecified H1-H3 outcome te
 
 The authoritative exploratory family contains the reduced theory-driven continuous moderator tests, moderator-block omnibus tests, cleaned-profile regime slopes and equality tests, corrected focal event-study joint tests, corrected placebo tests, H6 directional tests, and the prespecified 2019-start sensitivity results.
 
-Balance statistics, silhouette scores, VIFs, composition counts, power/MDE values, equivalence bounds, and leave-one-out ranges are descriptive diagnostics and are not assigned q-values.
+Balance statistics, silhouette scores, VIFs, composition counts, power/MDE values, equivalence bounds, leave-one-out ranges, and failed weighting diagnostics are descriptive and are not assigned q-values. Residual-density weighting is not an adjustment model.
 
 All q-values are recomputed from the exact rows in final_structural_multiplicity_family.csv using Benjamini-Hochberg adjustment.
 """
@@ -1585,26 +1552,66 @@ All q-values are recomputed from the exact rows in final_structural_multiplicity
 
 
 def write_reproduction(base_dir: Path, out_dir: Path) -> None:
+    pinned_requirements = (
+        "numpy==2.4.3\n"
+        "pandas==2.3.3\n"
+        "scipy==1.17.1\n"
+        "scikit-learn==1.8.0\n"
+        "matplotlib==3.10.8\n"
+        "pytest==9.1.1\n"
+    )
+    (base_dir / "environment.yml").write_text(
+        "name: geo-scm-final-analysis\n"
+        "channels:\n"
+        "  - conda-forge\n"
+        "dependencies:\n"
+        "  - python=3.14.3\n"
+        "  - numpy=2.4.3\n"
+        "  - pandas=2.3.3\n"
+        "  - scipy=1.17.1\n"
+        "  - scikit-learn=1.8.0\n"
+        "  - matplotlib=3.10.8\n"
+        "  - pytest=9.1.1\n",
+        encoding="utf-8",
+    )
+    (base_dir / "requirements.txt").write_text(pinned_requirements, encoding="utf-8")
     inputs = [
         "reports/final_design_completion/panel_with_completed_design_constructs.csv",
         "data/raw/structural_wdi_2012_2017.csv",
         "scripts/run_final_audited_analysis.py",
         "scripts/run_post_period_sensitivity.py",
+        "scripts/run_reproducibility_proof.py",
+        "tests/test_final_analysis_integrity.py",
+        "environment.yml",
+        "requirements.txt",
     ]
     manifest = []
     for relative in inputs:
         path = base_dir / relative
         manifest.append(
             {
-                "path": relative, "exists": path.exists(),
+                "path": relative,
+                "exists": path.exists(),
                 "sha256": sha256(path) if path.exists() else "",
             }
         )
     write_csv(pd.DataFrame(manifest), out_dir / "reproduction_manifest.csv")
+    (out_dir / "reproduction_log.txt").write_text(
+        "Commands are executed by scripts/run_reproducibility_proof.py.\n"
+        "Complete console output: reports/structural_regime_completion/reproducibility_proof.log\n"
+        "Environment and package versions: reports/structural_regime_completion/reproducibility_versions.csv\n"
+        "All inputs are repository-relative; no local absolute paths are required.\n",
+        encoding="utf-8",
+    )
     hashes = []
     for path in sorted(out_dir.glob("*")):
-        if path.is_file() and path.name != "output_file_hashes.csv":
-            hashes.append(
+        if not path.is_file() or path.name == "output_file_hashes.csv":
+            continue
+        if path.suffix.lower() == ".log" and path.name not in {
+            "reproducibility_proof.log", "reproduction_log.txt"
+        }:
+            continue
+        hashes.append(
                 {
                     "path": str(path.relative_to(base_dir)),
                     "sha256": sha256(path),
@@ -1612,21 +1619,6 @@ def write_reproduction(base_dir: Path, out_dir: Path) -> None:
                 }
             )
     write_csv(pd.DataFrame(hashes), out_dir / "output_file_hashes.csv")
-    (base_dir / "environment.yml").write_text(
-        "name: geo-scm-final-analysis\nchannels:\n  - conda-forge\ndependencies:\n  - python=3.11\n  - numpy\n  - pandas\n  - scipy\n  - scikit-learn\n  - matplotlib\n",
-        encoding="utf-8",
-    )
-    (base_dir / "requirements.txt").write_text(
-        "numpy\npandas\nscipy\nscikit-learn\nmatplotlib\n",
-        encoding="utf-8",
-    )
-    (out_dir / "reproduction_log.txt").write_text(
-        "python scripts/run_final_audited_analysis.py --bootstrap-reps 999 --mi-reps 20 --stability-reps 100 --seed 20260731\n"
-        "python scripts/run_post_period_sensitivity.py --bootstrap-reps 999 --seed 20260731\n"
-        "All inputs are repository-relative; no local absolute paths are required.\n",
-        encoding="utf-8",
-    )
-
 
 def write_tests(base_dir: Path) -> None:
     tests = """from pathlib import Path
@@ -1655,7 +1647,7 @@ def test_required_final_outputs_exist():
         'regime_difference_power_mde.csv', 'progressive_adjustment_common_sample.csv',
         'progressive_adjustment_maximum_sample.csv', 'coefficient_stability_summary.csv',
         'residual_density_weight_diagnostics.csv', 'balance_before_after_weighting.csv',
-        'weighted_model_trimmed_sensitivity.csv', 'theory_based_balance_diagnostics.csv',
+'theory_based_balance_diagnostics.csv',
         'structural_moderator_block_omnibus_tests.csv', 'regime_assignment_robustness.csv',
         'regime_model_assignment_sensitivity.csv', 'leave_one_country_out_summary_stats.csv',
         'leave_one_region_out_results.csv', 'influential_country_region_audit.csv',
@@ -1663,6 +1655,7 @@ def test_required_final_outputs_exist():
         'final_minimum_detectable_effects.csv', 'final_confirmatory_multiplicity_family.csv',
         'final_structural_multiplicity_family.csv', 'multiplicity_family_definition.md',
         'reproduction_manifest.csv', 'output_file_hashes.csv', 'reproduction_log.txt',
+        'reproducibility_proof.log', 'reproducibility_versions.csv',
     ]
     missing = [name for name in required if not (OUT / name).exists()]
     assert not missing, missing
@@ -1724,16 +1717,44 @@ def test_family_has_no_obsolete_or_duplicate_ids():
 def test_frozen_focal_reference_values():
     focal = pd.read_csv(OUT / 'final_focal_models_2018.csv').set_index('test_id')
     expected = {
-        'focal_2018_gvc_eci_exposure_post': 0.2357728268399806,
-        'focal_2018_recovery_eci_exposure_post': -0.05302766865390716,
-        'focal_2018_diversification_eci_exposure_post': -0.013234655899455036,
+        'focal_2018_gvc_eci_exposure_post': 0.23079135951473873,
+        'focal_2018_recovery_eci_exposure_post': -0.052508028999043645,
+        'focal_2018_diversification_eci_exposure_post': -0.013137820287150031,
     }
     for test_id, value in expected.items():
         assert np.isclose(float(focal.loc[test_id, 'estimate']), value, atol=1e-9)
-def test_weight_ess_is_not_catastrophic():
-    table = pd.read_csv(OUT / 'residual_density_weight_diagnostics.csv')
-    ess = float(table.loc[table['metric'] == 'ess_fraction_of_weighted_countries', 'value'].iloc[0])
-    assert ess > 0.05
+def test_country_validity_keeps_real_economies():
+    audit = pd.read_csv(OUT / 'valid_country_sample_audit.csv')
+    for code in ['CAF', 'ZAF']:
+        row = audit.loc[audit['country_iso3_code'].eq(code)].iloc[0]
+        assert bool(row['valid_entity'])
+        assert bool(row['primary_structural_sample'])
+        assert row['entity_validity_reason'] == 'valid_sovereign_or_analytical_economy'
+
+def test_event_study_scope_matches_confirmatory_samples():
+    coefficients = pd.read_csv(OUT / 'corrected_event_study_coefficients.csv')
+    full = coefficients.loc[coefficients['variant'].eq('full_sample_confirmatory')]
+    expected = {'gvc': 78, 'recovery': 228, 'diversification': 228}
+    for key, n in expected.items():
+        values = full.loc[full['outcome_key'].eq(key), 'n_countries'].unique()
+        assert len(values) == 1 and int(values[0]) == n
+    pretrend = pd.read_csv(OUT / 'corrected_event_study_pretrend_tests.csv')
+    assert 'full_sample_cleaned_structural' in set(pretrend['variant'])
+    assert 'pooled_regime_interacted' in set(pretrend['variant'])
+
+def test_weighting_is_diagnostic_only():
+    balance = pd.read_csv(OUT / 'balance_before_after_weighting.csv')
+    assert 'joint_balance_pvalue' not in balance.columns
+    assert balance['diagnostic_status'].eq('failed_balance').all()
+    assert (balance['absolute_smd_after'] > 0.10).all()
+    assert not (OUT / 'weighted_model_trimmed_sensitivity.csv').exists()
+
+def test_reproducibility_proof_is_complete():
+    log = (OUT / 'reproducibility_proof.log').read_text(encoding='utf-8')
+    versions = pd.read_csv(OUT / 'reproducibility_versions.csv')
+    assert 'EXIT_CODE: 0' in log
+    assert {'python', 'package', 'version'}.issubset(versions.columns)
+    assert versions['version'].notna().all()
 """
     tests_dir = base_dir / "tests"
     ensure_dir(tests_dir)
@@ -1754,6 +1775,8 @@ This is the corrected and reproducible analysis layer requested in the audit mem
 - Primary post period: 2018 onward; prespecified sensitivity: 2019 onward.
 - Wild-cluster bootstrap replications: {BOOTSTRAP_REPS}.
 - Equivalence bound: {EQUIVALENCE_RULE}.
+- Confirmatory event studies use the original outcome-specific samples (78 GVC countries; 228 recovery/diversification countries).
+- Residual-density weighting is reported only as a failed balance diagnostic; adjustment evidence uses Models A-D.
 
 ## Interpretation rule
 
@@ -1767,8 +1790,11 @@ A structural profile cannot enter the main theory unless it survives corrected s
 - authoritative_results_manifest.csv
 - corrected_event_study_coefficients.csv
 - post_period_2018_2019_comparison.csv
-- progressive_adjustment_common_sample.csv
+- progressive_adjustment_common_sample.csv (Models A-D only)
+- balance_before_after_weighting.csv (failed diagnostic only)
 - regime_assignment_robustness.csv
+- balance_before_after_weighting.csv (failed diagnostic only; not an adjustment model)
+- progressive_adjustment_common_sample.csv (Models A-D only)
 
 Legacy structural files remain as an audit trail; they are not authoritative after this snapshot.
 """
@@ -1796,6 +1822,8 @@ def write_authoritative_manifest(out_dir: Path) -> pd.DataFrame:
         "confirmatory multiplicity": "final_confirmatory_multiplicity_family.csv",
         "structural multiplicity": "final_structural_multiplicity_family.csv",
         "reproduction hashes": "output_file_hashes.csv",
+        "reproduction proof": "reproducibility_proof.log",
+        "reproducibility versions": "reproducibility_versions.csv",
     }
     mapping.update(
         {
@@ -1807,8 +1835,7 @@ def write_authoritative_manifest(out_dir: Path) -> pd.DataFrame:
             "outcome-specific regime-difference power": "regime_difference_power_mde.csv",
             "maximum-sample adjustment": "progressive_adjustment_maximum_sample.csv",
             "coefficient stability": "coefficient_stability_summary.csv",
-            "weight balance": "balance_before_after_weighting.csv",
-            "trimmed weighting sensitivity": "weighted_model_trimmed_sensitivity.csv",
+            "weight balance diagnostic": "balance_before_after_weighting.csv",
             "moderator block omnibus": "structural_moderator_block_omnibus_tests.csv",
             "assignment robustness": "regime_assignment_robustness.csv",
             "assignment model sensitivity": "regime_model_assignment_sensitivity.csv",
@@ -1858,6 +1885,7 @@ def main() -> None:
     primary_assignment, assignments, selection = run_clustering(profile, out_dir, args.seed)
     primary_profile = profile.loc[profile["primary_structural_sample"]].copy()
     model_panel = prepare_panel(panel, primary_profile, primary_assignment)
+    confirmatory_event_panel = prepare_confirmatory_event_panel(panel, raw_profile)
     regimes = sorted(primary_assignment["structural_profile"].dropna().unique())
     if len(regimes) != 2:
         raise ValueError(f"Expected two selected primary profiles, got {regimes}")
@@ -1874,12 +1902,13 @@ def main() -> None:
         raise AssertionError("Corrected k=2 omnibus test does not equal pairwise test")
 
     event_coefficients, event_pretrend, event_post = corrected_event_studies(
-        model_panel, regimes, out_dir, args.bootstrap_reps, args.seed + 400
+        model_panel, regimes, out_dir, args.bootstrap_reps, args.seed + 400,
+        confirmatory_frame=confirmatory_event_panel,
     )
     blocks = moderator_block_tests(model_panel, out_dir, args.bootstrap_reps, args.seed + 500)
     weighted, balance = weight_and_balance(primary_profile, model_panel, out_dir)
     theory = theory_balance(primary_profile, weighted, out_dir)
-    common, maximum, stability = adjustment_models(model_panel, primary_profile, out_dir)
+    common, maximum, stability = adjustment_models(model_panel, out_dir)
     power, difference_power = power_tables(model_panel, fits, slopes, differences, out_dir)
     placebo = placebo_comparison(model_panel, out_dir, args.bootstrap_reps, args.seed + 600)
     post_compare = post_period_comparison(model_panel, out_dir, regimes, args.bootstrap_reps, args.seed + 700)
@@ -1969,10 +1998,7 @@ def main() -> None:
         "structural_q_lt_005": int((structural["qvalue_final_structural_family"] < 0.05).sum()),
     }
     write_readme(out_dir, metadata)
-    write_authoritative_manifest(out_dir)
-    write_reproduction(base_dir, out_dir)
     write_tests(base_dir)
-    write_authoritative_manifest(out_dir)
     summary = pd.DataFrame(
         [
             {"item": key, "value": value}
@@ -1991,8 +2017,10 @@ def main() -> None:
         ]
     )
     write_csv(summary, out_dir / "final_audit_summary.csv")
+    write_authoritative_manifest(out_dir)
+    write_reproduction(base_dir, out_dir)
     print(summary.to_string(index=False))
-    print("Final audited analysis written to", out_dir)
+    print("Final audited analysis written to reports/structural_regime_completion")
 
 
 if __name__ == "__main__":

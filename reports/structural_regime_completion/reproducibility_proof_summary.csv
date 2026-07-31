@@ -1,0 +1,7 @@
+pass,command,exit_code,files_compared,differing_files
+pass_1,primary,0,,
+pass_1,post_period,0,,
+pass_1,pytest,0,,
+pass_2,primary,0,,
+pass_2,post_period,0,,
+comparison,all comparable output files,0,90.0,0.0

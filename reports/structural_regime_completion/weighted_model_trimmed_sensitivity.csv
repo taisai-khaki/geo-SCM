@@ -1,4 +1,0 @@
-estimate,se,tvalue,p_cluster,ci_low_95,ci_high_95,p_wild_bootstrap,bootstrap_reps_requested,bootstrap_reps_success,pvalue_for_fdr,n_obs,n_countries,n_years,outcome_key,outcome,trim_rule
-0.01878466670122455,0.23797313895626684,0.07893607986015881,0.9373086862295639,-0.45583779323783546,0.4934071266402845,0.944,999,999,0.944,781,71,11,gvc,Adverse forward-GVC deviation stability,drop country weights below p01 or above p99
-0.015014738549965993,0.03848441005790469,0.39015119440247126,0.6969469137650789,-0.06099182556498632,0.0910213026649183,0.923,999,999,0.923,1760,160,11,recovery,Log export recovery,drop country weights below p01 or above p99
--0.020085805370313035,0.011434411164020575,-1.7566103826592196,0.08090932426890411,-0.04266872411447981,0.002497113373853742,0.63,999,999,0.63,1760,160,11,diversification,Partner diversification excluding US and China,drop country weights below p01 or above p99

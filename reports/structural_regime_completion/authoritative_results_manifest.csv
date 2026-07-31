@@ -18,6 +18,8 @@ equivalence and MDE,final_equivalence_tests.csv,final audited snapshot
 confirmatory multiplicity,final_confirmatory_multiplicity_family.csv,final audited snapshot
 structural multiplicity,final_structural_multiplicity_family.csv,final audited snapshot
 reproduction hashes,output_file_hashes.csv,final audited snapshot
+reproduction proof,reproducibility_proof.log,final audited snapshot
+reproducibility versions,reproducibility_versions.csv,final audited snapshot
 clean profile base,structural_profile_final_audit_base.csv,final audited snapshot
 clean exposure counts,structural_regime_exposure_counts_clean.csv,final audited snapshot
 regime-specific slopes,structural_regime_specific_coefficients_corrected.csv,final audited snapshot
@@ -26,8 +28,7 @@ regime omnibus validation,structural_regime_omnibus_validation.csv,final audited
 outcome-specific regime-difference power,regime_difference_power_mde.csv,final audited snapshot
 maximum-sample adjustment,progressive_adjustment_maximum_sample.csv,final audited snapshot
 coefficient stability,coefficient_stability_summary.csv,final audited snapshot
-weight balance,balance_before_after_weighting.csv,final audited snapshot
-trimmed weighting sensitivity,weighted_model_trimmed_sensitivity.csv,final audited snapshot
+weight balance diagnostic,balance_before_after_weighting.csv,final audited snapshot
 moderator block omnibus,structural_moderator_block_omnibus_tests.csv,final audited snapshot
 assignment robustness,regime_assignment_robustness.csv,final audited snapshot
 assignment model sensitivity,regime_model_assignment_sensitivity.csv,final audited snapshot

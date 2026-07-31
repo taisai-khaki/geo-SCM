@@ -1,4 +1,4 @@
 sample,n_countries,n_complete_profiles,mean_imputed_fields,max_imputed_fields,n_exposed_top_tercile,n_with_gvc_pre_slope,n_with_recovery_pre_slope,n_with_diversification_pre_slope
 broad_legacy,229,166,1.1965065502183405,10,77,78,228,228
-cleaned_primary,200,164,0.205,2,71,76,200,200
-complete_case,164,164,0.0,0,56,72,164,164
+cleaned_primary,202,166,0.20297029702970298,2,71,77,202,202
+complete_case,166,166,0.0,0,56,73,166,166

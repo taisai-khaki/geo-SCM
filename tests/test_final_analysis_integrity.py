@@ -24,7 +24,7 @@ def test_required_final_outputs_exist():
         'regime_difference_power_mde.csv', 'progressive_adjustment_common_sample.csv',
         'progressive_adjustment_maximum_sample.csv', 'coefficient_stability_summary.csv',
         'residual_density_weight_diagnostics.csv', 'balance_before_after_weighting.csv',
-        'weighted_model_trimmed_sensitivity.csv', 'theory_based_balance_diagnostics.csv',
+'theory_based_balance_diagnostics.csv',
         'structural_moderator_block_omnibus_tests.csv', 'regime_assignment_robustness.csv',
         'regime_model_assignment_sensitivity.csv', 'leave_one_country_out_summary_stats.csv',
         'leave_one_region_out_results.csv', 'influential_country_region_audit.csv',
@@ -32,6 +32,7 @@ def test_required_final_outputs_exist():
         'final_minimum_detectable_effects.csv', 'final_confirmatory_multiplicity_family.csv',
         'final_structural_multiplicity_family.csv', 'multiplicity_family_definition.md',
         'reproduction_manifest.csv', 'output_file_hashes.csv', 'reproduction_log.txt',
+        'reproducibility_proof.log', 'reproducibility_versions.csv',
     ]
     missing = [name for name in required if not (OUT / name).exists()]
     assert not missing, missing
@@ -93,13 +94,41 @@ def test_family_has_no_obsolete_or_duplicate_ids():
 def test_frozen_focal_reference_values():
     focal = pd.read_csv(OUT / 'final_focal_models_2018.csv').set_index('test_id')
     expected = {
-        'focal_2018_gvc_eci_exposure_post': 0.2357728268399806,
-        'focal_2018_recovery_eci_exposure_post': -0.05302766865390716,
-        'focal_2018_diversification_eci_exposure_post': -0.013234655899455036,
+        'focal_2018_gvc_eci_exposure_post': 0.23079135951473873,
+        'focal_2018_recovery_eci_exposure_post': -0.052508028999043645,
+        'focal_2018_diversification_eci_exposure_post': -0.013137820287150031,
     }
     for test_id, value in expected.items():
         assert np.isclose(float(focal.loc[test_id, 'estimate']), value, atol=1e-9)
-def test_weight_ess_is_not_catastrophic():
-    table = pd.read_csv(OUT / 'residual_density_weight_diagnostics.csv')
-    ess = float(table.loc[table['metric'] == 'ess_fraction_of_weighted_countries', 'value'].iloc[0])
-    assert ess > 0.05
+def test_country_validity_keeps_real_economies():
+    audit = pd.read_csv(OUT / 'valid_country_sample_audit.csv')
+    for code in ['CAF', 'ZAF']:
+        row = audit.loc[audit['country_iso3_code'].eq(code)].iloc[0]
+        assert bool(row['valid_entity'])
+        assert bool(row['primary_structural_sample'])
+        assert row['entity_validity_reason'] == 'valid_sovereign_or_analytical_economy'
+
+def test_event_study_scope_matches_confirmatory_samples():
+    coefficients = pd.read_csv(OUT / 'corrected_event_study_coefficients.csv')
+    full = coefficients.loc[coefficients['variant'].eq('full_sample_confirmatory')]
+    expected = {'gvc': 78, 'recovery': 228, 'diversification': 228}
+    for key, n in expected.items():
+        values = full.loc[full['outcome_key'].eq(key), 'n_countries'].unique()
+        assert len(values) == 1 and int(values[0]) == n
+    pretrend = pd.read_csv(OUT / 'corrected_event_study_pretrend_tests.csv')
+    assert 'full_sample_cleaned_structural' in set(pretrend['variant'])
+    assert 'pooled_regime_interacted' in set(pretrend['variant'])
+
+def test_weighting_is_diagnostic_only():
+    balance = pd.read_csv(OUT / 'balance_before_after_weighting.csv')
+    assert 'joint_balance_pvalue' not in balance.columns
+    assert balance['diagnostic_status'].eq('failed_balance').all()
+    assert (balance['absolute_smd_after'] > 0.10).all()
+    assert not (OUT / 'weighted_model_trimmed_sensitivity.csv').exists()
+
+def test_reproducibility_proof_is_complete():
+    log = (OUT / 'reproducibility_proof.log').read_text(encoding='utf-8')
+    versions = pd.read_csv(OUT / 'reproducibility_versions.csv')
+    assert 'EXIT_CODE: 0' in log
+    assert {'python', 'package', 'version'}.issubset(versions.columns)
+    assert versions['version'].notna().all()

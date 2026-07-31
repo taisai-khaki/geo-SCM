@@ -1,31 +1,25 @@
-outcome_key,term,model,coefficient,p_cluster,percentage_change_from_model_A,sign_stability_vs_A,confidence_intervals_overlap,common_sample_n_countries,common_sample_n_obs
-diversification,eci_exposure_post,A_FE,-0.025601491323699065,0.024199911481018434,0.0,True,True,164,1804
-diversification,eci_exposure_post,B_structural_x_year,-0.02104382654435093,0.036849846483600075,17.802340971946215,True,True,164,1804
-diversification,eci_exposure_post,C_region_x_year,-0.03056147433170649,0.0075579180863221,-19.37380500727321,True,True,164,1804
-diversification,eci_exposure_post,D_country_trends,-0.0027950693168349045,0.7030456712614696,89.08239648427225,True,True,164,1804
-diversification,eci_exposure_post,E_residual_density,-0.02864951846384721,0.006556351049050471,-11.905662453837659,True,True,164,1804
-diversification,eci_exposure_post_x_moderator,A_FE,0.009572154182228999,0.22459506195333026,0.0,True,True,164,1804
-diversification,eci_exposure_post_x_moderator,B_structural_x_year,0.003930250059674653,0.6154321937764241,-58.94079864518601,True,True,164,1804
-diversification,eci_exposure_post_x_moderator,C_region_x_year,0.009022855041296069,0.29018893913718047,-5.738511211538159,True,True,164,1804
-diversification,eci_exposure_post_x_moderator,D_country_trends,0.004295130036247448,0.41659558370012445,-55.128908765160816,True,True,164,1804
-diversification,eci_exposure_post_x_moderator,E_residual_density,0.006616087708226845,0.39705425708942466,-30.8819354319447,True,True,164,1804
-gvc,eci_exposure_post,A_FE,0.10686505700753884,0.6424291134626583,0.0,True,True,72,792
-gvc,eci_exposure_post,B_structural_x_year,0.06258150827340567,0.8343061567288972,-41.438754607138954,True,True,72,792
-gvc,eci_exposure_post,C_region_x_year,0.09690856660432455,0.6719904475346428,-9.316881197669607,True,True,72,792
-gvc,eci_exposure_post,D_country_trends,0.2251665408107411,0.42604119475276814,110.70174584275628,True,True,72,792
-gvc,eci_exposure_post,E_residual_density,0.0754011346999869,0.7550399630843637,-29.442666469856754,True,True,72,792
-gvc,eci_exposure_post_x_moderator,A_FE,0.15648613849434678,0.444923002261489,0.0,True,True,72,792
-gvc,eci_exposure_post_x_moderator,B_structural_x_year,0.2165525829316485,0.3939172996226476,38.384514446608115,True,True,72,792
-gvc,eci_exposure_post_x_moderator,C_region_x_year,0.10380863752420862,0.6608973409567261,-33.66272660120704,True,True,72,792
-gvc,eci_exposure_post_x_moderator,D_country_trends,-0.1719578925820695,0.5643328085334771,-209.886980557247,False,True,72,792
-gvc,eci_exposure_post_x_moderator,E_residual_density,0.12064649929586403,0.5706722198724763,-22.90275646349181,True,True,72,792
-recovery,eci_exposure_post,A_FE,-0.00624286384268676,0.9173858657374391,0.0,True,True,164,1804
-recovery,eci_exposure_post,B_structural_x_year,-0.021788902469485495,0.6426794751775324,-249.02094645248806,True,True,164,1804
-recovery,eci_exposure_post,C_region_x_year,0.02113098849608771,0.7234482406930677,438.48228999646904,False,True,164,1804
-recovery,eci_exposure_post,D_country_trends,0.024134594392437467,0.480885664248191,486.5949186239274,False,True,164,1804
-recovery,eci_exposure_post,E_residual_density,0.05333140035621506,0.25486288952704567,954.277807431127,False,True,164,1804
-recovery,eci_exposure_post_x_moderator,A_FE,0.011918893283931503,0.7558968436343334,0.0,True,True,164,1804
-recovery,eci_exposure_post_x_moderator,B_structural_x_year,0.02474662603554039,0.48645557665318717,107.6252001425555,True,True,164,1804
-recovery,eci_exposure_post_x_moderator,C_region_x_year,-0.0014542911571956338,0.972963402688301,-112.20156202888603,False,True,164,1804
-recovery,eci_exposure_post_x_moderator,D_country_trends,0.013433241119662894,0.6365382478172052,12.705440007361796,True,True,164,1804
-recovery,eci_exposure_post_x_moderator,E_residual_density,0.020448557580599824,0.5886572247170995,71.56423078447743,True,True,164,1804
+outcome_key,term,model,coefficient,p_cluster,percentage_change_from_model_A,sign_stability_vs_A,confidence_intervals_overlap,common_sample_n_countries,common_sample_n_obs,adjustment_evidence
+diversification,eci_exposure_post,A_FE,-0.02537093635486192,0.023922433518303112,0.0,True,True,166,1826,Models A-D; no weighting model
+diversification,eci_exposure_post,B_structural_x_year,-0.020766443819926705,0.03706248276932408,18.148689786346182,True,True,166,1826,Models A-D; no weighting model
+diversification,eci_exposure_post,C_region_x_year,-0.03032458523726025,0.007367302193107671,-19.524895782764613,True,True,166,1826,Models A-D; no weighting model
+diversification,eci_exposure_post,D_country_trends,-0.002729372968463456,0.7076601819923501,89.2421275656213,True,True,166,1826,Models A-D; no weighting model
+diversification,eci_exposure_post_x_moderator,A_FE,0.009392000565571691,0.23118856543109667,0.0,True,True,166,1826,Models A-D; no weighting model
+diversification,eci_exposure_post_x_moderator,B_structural_x_year,0.003887307335664557,0.6165783489160703,-58.61044397809898,True,True,166,1826,Models A-D; no weighting model
+diversification,eci_exposure_post_x_moderator,C_region_x_year,0.008927832438341846,0.2930759538400387,-4.94216460049363,True,True,166,1826,Models A-D; no weighting model
+diversification,eci_exposure_post_x_moderator,D_country_trends,0.004348664297893271,0.40889739538766645,-53.69821086005686,True,True,166,1826,Models A-D; no weighting model
+gvc,eci_exposure_post,A_FE,0.10338980837129995,0.6472316085323252,0.0,True,True,73,803,Models A-D; no weighting model
+gvc,eci_exposure_post,B_structural_x_year,0.06318008602968275,0.830554629356241,-38.891379116608405,True,True,73,803,Models A-D; no weighting model
+gvc,eci_exposure_post,C_region_x_year,0.11929185306448772,0.6175822513530991,15.380669471868405,True,True,73,803,Models A-D; no weighting model
+gvc,eci_exposure_post,D_country_trends,0.2175362961888053,0.43432748850642805,110.40400365921496,True,True,73,803,Models A-D; no weighting model
+gvc,eci_exposure_post_x_moderator,A_FE,0.15729220940031446,0.4403719561287944,0.0,True,True,73,803,Models A-D; no weighting model
+gvc,eci_exposure_post_x_moderator,B_structural_x_year,0.2157581021140161,0.3931872115849871,37.170240621964815,True,True,73,803,Models A-D; no weighting model
+gvc,eci_exposure_post_x_moderator,C_region_x_year,0.12605840173481228,0.593631957929136,-19.85718668749257,True,True,73,803,Models A-D; no weighting model
+gvc,eci_exposure_post_x_moderator,D_country_trends,-0.1693328721542988,0.5689612570138787,-207.6549644765561,False,True,73,803,Models A-D; no weighting model
+recovery,eci_exposure_post,A_FE,-0.005986891195989618,0.9198045089683969,0.0,True,True,166,1826,Models A-D; no weighting model
+recovery,eci_exposure_post,B_structural_x_year,-0.021915569797260767,0.6397184538255145,-266.0592631438023,True,True,166,1826,Models A-D; no weighting model
+recovery,eci_exposure_post,C_region_x_year,0.020916487243067806,0.7232904764246272,449.37142764643755,False,True,166,1826,Models A-D; no weighting model
+recovery,eci_exposure_post,D_country_trends,0.023141485131441264,0.49446928513473876,486.53592279984696,False,True,166,1826,Models A-D; no weighting model
+recovery,eci_exposure_post_x_moderator,A_FE,0.011068146352475598,0.7717761802822701,0.0,True,True,166,1826,Models A-D; no weighting model
+recovery,eci_exposure_post_x_moderator,B_structural_x_year,0.023071531946001877,0.5135395946712383,108.44982720021133,True,True,166,1826,Models A-D; no weighting model
+recovery,eci_exposure_post_x_moderator,C_region_x_year,-0.0017496927274863018,0.9672961879777764,-115.80836277155794,False,True,166,1826,Models A-D; no weighting model
+recovery,eci_exposure_post_x_moderator,D_country_trends,0.013096997051692066,0.6434903076124455,18.33053733304383,True,True,166,1826,Models A-D; no weighting model

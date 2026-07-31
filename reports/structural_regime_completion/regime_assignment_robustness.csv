@@ -2,7 +2,7 @@ sample,country_iso3_code,primary_structural_profile,alternative_structural_profi
 cleaned_primary,ABW,R2,R2,False
 cleaned_primary,AFG,R1,R1,False
 cleaned_primary,AGO,R1,R1,False
-cleaned_primary,ALB,R1,R1,False
+cleaned_primary,ALB,R2,R2,False
 cleaned_primary,AND,R2,R2,False
 cleaned_primary,ARE,R2,R2,False
 cleaned_primary,ARG,R1,R1,False
@@ -30,6 +30,7 @@ cleaned_primary,BRB,R2,R2,False
 cleaned_primary,BRN,R2,R2,False
 cleaned_primary,BTN,R2,R2,False
 cleaned_primary,BWA,R2,R2,False
+cleaned_primary,CAF,R1,R1,False
 cleaned_primary,CAN,R2,R2,False
 cleaned_primary,CHE,R2,R2,False
 cleaned_primary,CHL,R2,R2,False
@@ -58,7 +59,7 @@ cleaned_primary,ESP,R2,R2,False
 cleaned_primary,EST,R2,R2,False
 cleaned_primary,ETH,R1,R1,False
 cleaned_primary,FIN,R2,R2,False
-cleaned_primary,FJI,R2,R2,False
+cleaned_primary,FJI,R1,R1,False
 cleaned_primary,FRA,R2,R2,False
 cleaned_primary,FRO,R2,R2,False
 cleaned_primary,FSM,R2,R2,False
@@ -75,7 +76,7 @@ cleaned_primary,GRD,R2,R2,False
 cleaned_primary,GRL,R2,R2,False
 cleaned_primary,GTM,R1,R1,False
 cleaned_primary,GUM,R2,R2,False
-cleaned_primary,GUY,R2,R2,False
+cleaned_primary,GUY,R1,R1,False
 cleaned_primary,HKG,R2,R2,False
 cleaned_primary,HND,R1,R1,False
 cleaned_primary,HRV,R2,R2,False
@@ -89,7 +90,7 @@ cleaned_primary,IRQ,R1,R1,False
 cleaned_primary,ISL,R2,R2,False
 cleaned_primary,ISR,R2,R2,False
 cleaned_primary,ITA,R2,R2,False
-cleaned_primary,JAM,R1,R1,False
+cleaned_primary,JAM,R2,R2,False
 cleaned_primary,JOR,R1,R1,False
 cleaned_primary,JPN,R2,R2,False
 cleaned_primary,KAZ,R1,R1,False
@@ -165,8 +166,8 @@ cleaned_primary,SMR,R2,R2,False
 cleaned_primary,SOM,R1,R1,False
 cleaned_primary,SRB,R1,R1,False
 cleaned_primary,SSD,R1,R1,False
-cleaned_primary,STP,R1,R1,False
-cleaned_primary,SUR,R2,R2,False
+cleaned_primary,STP,R2,R2,False
+cleaned_primary,SUR,R1,R1,False
 cleaned_primary,SVK,R2,R2,False
 cleaned_primary,SVN,R2,R2,False
 cleaned_primary,SWE,R2,R2,False
@@ -182,7 +183,7 @@ cleaned_primary,TJK,R1,R1,False
 cleaned_primary,TKM,R1,R1,False
 cleaned_primary,TLS,R1,R1,False
 cleaned_primary,TON,R2,R2,False
-cleaned_primary,TTO,R2,R2,False
+cleaned_primary,TTO,R1,R1,False
 cleaned_primary,TUN,R1,R1,False
 cleaned_primary,TUR,R1,R1,False
 cleaned_primary,TUV,R2,R2,False
@@ -197,11 +198,12 @@ cleaned_primary,VNM,R1,R1,False
 cleaned_primary,VUT,R2,R2,False
 cleaned_primary,WSM,R2,R2,False
 cleaned_primary,YEM,R1,R1,False
+cleaned_primary,ZAF,R1,R1,False
 cleaned_primary,ZMB,R1,R1,False
 cleaned_primary,ZWE,R1,R1,False
 complete_case,ABW,R2,R2,False
 complete_case,AGO,R1,R1,False
-complete_case,ALB,R1,R1,False
+complete_case,ALB,R2,R1,True
 complete_case,ARE,R2,R2,False
 complete_case,ARG,R1,R1,False
 complete_case,ARM,R1,R1,False
@@ -224,6 +226,7 @@ complete_case,BRA,R1,R1,False
 complete_case,BRN,R2,R2,False
 complete_case,BTN,R2,R2,False
 complete_case,BWA,R2,R2,False
+complete_case,CAF,R1,R1,False
 complete_case,CAN,R2,R2,False
 complete_case,CHE,R2,R2,False
 complete_case,CHL,R2,R2,False
@@ -361,13 +364,14 @@ complete_case,UZB,R1,R1,False
 complete_case,VNM,R1,R1,False
 complete_case,VUT,R2,R2,False
 complete_case,WSM,R2,R2,False
+complete_case,ZAF,R1,R1,False
 complete_case,ZMB,R1,R1,False
 complete_case,ZWE,R1,R1,False
 broad_legacy,ABW,R2,R2,False
 broad_legacy,AFG,R1,R1,False
 broad_legacy,AGO,R1,R1,False
 broad_legacy,AIA,,R2,False
-broad_legacy,ALB,R1,R2,True
+broad_legacy,ALB,R2,R2,False
 broad_legacy,AND,R2,R2,False
 broad_legacy,ANS,,R1,False
 broad_legacy,ARE,R2,R2,False
@@ -401,7 +405,7 @@ broad_legacy,BRN,R2,R2,False
 broad_legacy,BTN,R2,R2,False
 broad_legacy,BVT,,R2,False
 broad_legacy,BWA,R2,R2,False
-broad_legacy,CAF,,R1,False
+broad_legacy,CAF,R1,R1,False
 broad_legacy,CAN,R2,R2,False
 broad_legacy,CCK,,R1,False
 broad_legacy,CHE,R2,R2,False
@@ -434,7 +438,7 @@ broad_legacy,ESP,R2,R2,False
 broad_legacy,EST,R2,R2,False
 broad_legacy,ETH,R1,R1,False
 broad_legacy,FIN,R2,R2,False
-broad_legacy,FJI,R2,R2,False
+broad_legacy,FJI,R1,R2,True
 broad_legacy,FLK,,R2,False
 broad_legacy,FRA,R2,R2,False
 broad_legacy,FRO,R2,R2,False
@@ -453,7 +457,7 @@ broad_legacy,GRD,R2,R2,False
 broad_legacy,GRL,R2,R2,False
 broad_legacy,GTM,R1,R1,False
 broad_legacy,GUM,R2,R2,False
-broad_legacy,GUY,R2,R2,False
+broad_legacy,GUY,R1,R2,True
 broad_legacy,HKG,R2,R2,False
 broad_legacy,HMD,,R2,False
 broad_legacy,HND,R1,R1,False
@@ -468,7 +472,7 @@ broad_legacy,IRQ,R1,R1,False
 broad_legacy,ISL,R2,R2,False
 broad_legacy,ISR,R2,R2,False
 broad_legacy,ITA,R2,R2,False
-broad_legacy,JAM,R1,R2,True
+broad_legacy,JAM,R2,R2,False
 broad_legacy,JOR,R1,R1,False
 broad_legacy,JPN,R2,R2,False
 broad_legacy,KAZ,R1,R1,False
@@ -553,8 +557,8 @@ broad_legacy,SOM,R1,R1,False
 broad_legacy,SPM,,R1,False
 broad_legacy,SRB,R1,R1,False
 broad_legacy,SSD,R1,R1,False
-broad_legacy,STP,R1,R2,True
-broad_legacy,SUR,R2,R1,True
+broad_legacy,STP,R2,R2,False
+broad_legacy,SUR,R1,R1,False
 broad_legacy,SVK,R2,R2,False
 broad_legacy,SVN,R2,R2,False
 broad_legacy,SWE,R2,R2,False
@@ -571,7 +575,7 @@ broad_legacy,TKL,,R1,False
 broad_legacy,TKM,R1,R1,False
 broad_legacy,TLS,R1,R1,False
 broad_legacy,TON,R2,R2,False
-broad_legacy,TTO,R2,R2,False
+broad_legacy,TTO,R1,R2,True
 broad_legacy,TUN,R1,R1,False
 broad_legacy,TUR,R1,R1,False
 broad_legacy,TUV,R2,R2,False
@@ -589,6 +593,6 @@ broad_legacy,VNM,R1,R1,False
 broad_legacy,VUT,R2,R2,False
 broad_legacy,WSM,R2,R2,False
 broad_legacy,YEM,R1,R1,False
-broad_legacy,ZAF,,R1,False
+broad_legacy,ZAF,R1,R1,False
 broad_legacy,ZMB,R1,R1,False
 broad_legacy,ZWE,R1,R1,False

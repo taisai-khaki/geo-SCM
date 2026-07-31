@@ -1,13 +1,16 @@
 test_id,variant,outcome_key,outcome,test_type,wald_chi2,wald_df,p_cluster,p_wild_bootstrap,bootstrap_reps_requested,bootstrap_reps_success,pvalue_for_fdr,n_obs,n_countries
-corrected_event_pretrend_full_sample_gvc,full_sample,gvc,Adverse forward-GVC deviation stability,joint_pretrend,14.668501159495637,5,0.011876789647690247,0.144,999,999,0.144,836,76
-corrected_event_pretrend_pooled_regime_interacted_gvc,pooled_regime_interacted,gvc,Adverse forward-GVC deviation stability,joint_pretrend,18.04330774741731,10,0.05423748079328533,0.224,999,999,0.224,836,76
-corrected_event_pretrend_regime_R1_gvc,regime_R1,gvc,Adverse forward-GVC deviation stability,joint_pretrend,37.50651364854007,5,4.740199236778345e-07,0.11,999,999,0.11,374,34
-corrected_event_pretrend_regime_R2_gvc,regime_R2,gvc,Adverse forward-GVC deviation stability,joint_pretrend,1.3999052643859038,5,0.9243236355809046,0.956,999,999,0.956,462,42
-corrected_event_pretrend_full_sample_recovery,full_sample,recovery,Log export recovery,joint_pretrend,17.955634774820776,5,0.0030025235356544865,0.076,999,999,0.076,2200,200
-corrected_event_pretrend_pooled_regime_interacted_recovery,pooled_regime_interacted,recovery,Log export recovery,joint_pretrend,25.030865148290165,10,0.005287307369790817,0.18,999,999,0.18,2200,200
-corrected_event_pretrend_regime_R1_recovery,regime_R1,recovery,Log export recovery,joint_pretrend,26.60797101264662,5,6.799555389782053e-05,0.116,999,999,0.116,1166,106
-corrected_event_pretrend_regime_R2_recovery,regime_R2,recovery,Log export recovery,joint_pretrend,7.243899475600527,5,0.2031239185374778,0.244,999,999,0.244,1034,94
-corrected_event_pretrend_full_sample_diversification,full_sample,diversification,Partner diversification excluding US and China,joint_pretrend,6.6789671078426345,5,0.2456314091624762,0.746,999,999,0.746,2200,200
-corrected_event_pretrend_pooled_regime_interacted_diversification,pooled_regime_interacted,diversification,Partner diversification excluding US and China,joint_pretrend,29.549762823304953,10,0.0010145552453781274,0.216,999,999,0.216,2200,200
-corrected_event_pretrend_regime_R1_diversification,regime_R1,diversification,Partner diversification excluding US and China,joint_pretrend,18.139654626959256,5,0.002776376080939866,0.425,999,999,0.425,1166,106
-corrected_event_pretrend_regime_R2_diversification,regime_R2,diversification,Partner diversification excluding US and China,joint_pretrend,6.790559420701373,5,0.23668845094700047,0.375,999,999,0.375,1034,94
+corrected_event_pretrend_full_sample_confirmatory_gvc,full_sample_confirmatory,gvc,Adverse forward-GVC deviation stability,joint_pretrend,15.692206205321227,5,0.007780053120112756,0.126,999,999,0.126,858,78
+corrected_event_pretrend_full_sample_cleaned_structural_gvc,full_sample_cleaned_structural,gvc,Adverse forward-GVC deviation stability,joint_pretrend,14.669300077828805,5,0.011872894030690626,0.133,999,999,0.133,847,77
+corrected_event_pretrend_pooled_regime_interacted_gvc,pooled_regime_interacted,gvc,Adverse forward-GVC deviation stability,joint_pretrend,39.26905975660387,10,2.277651751802825e-05,0.149,999,999,0.149,847,77
+corrected_event_pretrend_regime_R1_gvc,regime_R1,gvc,Adverse forward-GVC deviation stability,joint_pretrend,35.889506846786404,5,9.99392386928846e-07,0.103,999,999,0.103,374,34
+corrected_event_pretrend_regime_R2_gvc,regime_R2,gvc,Adverse forward-GVC deviation stability,joint_pretrend,2.264580226883592,5,0.8114547732993087,0.858,999,999,0.858,473,43
+corrected_event_pretrend_full_sample_confirmatory_recovery,full_sample_confirmatory,recovery,Log export recovery,joint_pretrend,25.556850275163963,5,0.00010874320327393939,0.004,999,999,0.004,2507,228
+corrected_event_pretrend_full_sample_cleaned_structural_recovery,full_sample_cleaned_structural,recovery,Log export recovery,joint_pretrend,18.954108423342426,5,0.001960336227688612,0.066,999,999,0.066,2222,202
+corrected_event_pretrend_pooled_regime_interacted_recovery,pooled_regime_interacted,recovery,Log export recovery,joint_pretrend,33.84159177619857,10,0.0001964616884093939,0.113,999,999,0.113,2222,202
+corrected_event_pretrend_regime_R1_recovery,regime_R1,recovery,Log export recovery,joint_pretrend,27.173710170029466,5,5.276660227474598e-05,0.118,999,999,0.118,1199,109
+corrected_event_pretrend_regime_R2_recovery,regime_R2,recovery,Log export recovery,joint_pretrend,6.586134070626365,5,0.2532834722694695,0.312,999,999,0.312,1023,93
+corrected_event_pretrend_full_sample_confirmatory_diversification,full_sample_confirmatory,diversification,Partner diversification excluding US and China,joint_pretrend,6.406376459227063,5,0.26865964919370755,0.639,999,999,0.639,2507,228
+corrected_event_pretrend_full_sample_cleaned_structural_diversification,full_sample_cleaned_structural,diversification,Partner diversification excluding US and China,joint_pretrend,6.8473504703183465,5,0.23224284587752497,0.707,999,999,0.707,2222,202
+corrected_event_pretrend_pooled_regime_interacted_diversification,pooled_regime_interacted,diversification,Partner diversification excluding US and China,joint_pretrend,24.45578492152018,10,0.006478276167302001,0.468,999,999,0.468,2222,202
+corrected_event_pretrend_regime_R1_diversification,regime_R1,diversification,Partner diversification excluding US and China,joint_pretrend,17.782583367294336,5,0.0032316007105835814,0.504,999,999,0.504,1199,109
+corrected_event_pretrend_regime_R2_diversification,regime_R2,diversification,Partner diversification excluding US and China,joint_pretrend,6.599300234270812,5,0.2521863513153636,0.348,999,999,0.348,1023,93

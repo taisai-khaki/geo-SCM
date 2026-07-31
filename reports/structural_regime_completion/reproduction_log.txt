@@ -1,3 +1,4 @@
-python scripts/run_final_audited_analysis.py --bootstrap-reps 999 --mi-reps 20 --stability-reps 100 --seed 20260731
-python scripts/run_post_period_sensitivity.py --bootstrap-reps 999 --seed 20260731
+Commands are executed by scripts/run_reproducibility_proof.py.
+Complete console output: reports/structural_regime_completion/reproducibility_proof.log
+Environment and package versions: reports/structural_regime_completion/reproducibility_versions.csv
 All inputs are repository-relative; no local absolute paths are required.

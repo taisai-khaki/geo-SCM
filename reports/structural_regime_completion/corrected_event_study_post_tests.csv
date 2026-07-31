@@ -1,13 +1,16 @@
 test_id,variant,outcome_key,outcome,test_type,wald_chi2,wald_df,p_cluster,p_wild_bootstrap,bootstrap_reps_requested,bootstrap_reps_success,pvalue_for_fdr,n_obs,n_countries
-corrected_event_post_period_full_sample_gvc,full_sample,gvc,Adverse forward-GVC deviation stability,joint_post_period,4.920178302401767,5,0.42569928945684643,0.745,999,999,0.745,836,76
-corrected_event_post_period_pooled_regime_interacted_gvc,pooled_regime_interacted,gvc,Adverse forward-GVC deviation stability,joint_post_period,8.034199565696346,10,0.6254962456851957,0.892,999,999,0.892,836,76
-corrected_event_post_period_regime_R1_gvc,regime_R1,gvc,Adverse forward-GVC deviation stability,joint_post_period,11.055658590832824,5,0.05028753717822459,0.574,999,999,0.574,374,34
-corrected_event_post_period_regime_R2_gvc,regime_R2,gvc,Adverse forward-GVC deviation stability,joint_post_period,3.3882025860752054,5,0.6403673149885623,0.789,999,999,0.789,462,42
-corrected_event_post_period_full_sample_recovery,full_sample,recovery,Log export recovery,joint_post_period,6.4041329051645555,5,0.2688562777431556,0.583,999,999,0.583,2200,200
-corrected_event_post_period_pooled_regime_interacted_recovery,pooled_regime_interacted,recovery,Log export recovery,joint_post_period,17.156744606665203,10,0.07096677933728988,0.423,999,999,0.423,2200,200
-corrected_event_post_period_regime_R1_recovery,regime_R1,recovery,Log export recovery,joint_post_period,9.940341757822251,5,0.07694339205774461,0.613,999,999,0.613,1166,106
-corrected_event_post_period_regime_R2_recovery,regime_R2,recovery,Log export recovery,joint_post_period,5.980606232752656,5,0.30811059345410247,0.524,999,999,0.524,1034,94
-corrected_event_post_period_full_sample_diversification,full_sample,diversification,Partner diversification excluding US and China,joint_post_period,5.441219540230076,5,0.3644344304870233,0.779,999,999,0.779,2200,200
-corrected_event_post_period_pooled_regime_interacted_diversification,pooled_regime_interacted,diversification,Partner diversification excluding US and China,joint_post_period,14.830674847526652,10,0.13835817594287161,0.71,999,999,0.71,2200,200
-corrected_event_post_period_regime_R1_diversification,regime_R1,diversification,Partner diversification excluding US and China,joint_post_period,12.462870203440694,5,0.028967354255562777,0.612,999,999,0.612,1166,106
-corrected_event_post_period_regime_R2_diversification,regime_R2,diversification,Partner diversification excluding US and China,joint_post_period,2.4156219060056547,5,0.7891454619571817,0.898,999,999,0.898,1034,94
+corrected_event_post_period_full_sample_confirmatory_gvc,full_sample_confirmatory,gvc,Adverse forward-GVC deviation stability,joint_post_period,4.672522236331904,5,0.4571373981097224,0.767,999,999,0.767,858,78
+corrected_event_post_period_full_sample_cleaned_structural_gvc,full_sample_cleaned_structural,gvc,Adverse forward-GVC deviation stability,joint_post_period,4.9431832424045075,5,0.4228535099001448,0.729,999,999,0.729,847,77
+corrected_event_post_period_pooled_regime_interacted_gvc,pooled_regime_interacted,gvc,Adverse forward-GVC deviation stability,joint_post_period,15.19901824395429,10,0.1249727208301395,0.835,999,999,0.835,847,77
+corrected_event_post_period_regime_R1_gvc,regime_R1,gvc,Adverse forward-GVC deviation stability,joint_post_period,11.158917096928608,5,0.04831859423748843,0.578,999,999,0.578,374,34
+corrected_event_post_period_regime_R2_gvc,regime_R2,gvc,Adverse forward-GVC deviation stability,joint_post_period,3.7010229523754345,5,0.5932117385281913,0.729,999,999,0.729,473,43
+corrected_event_post_period_full_sample_confirmatory_recovery,full_sample_confirmatory,recovery,Log export recovery,joint_post_period,5.330905721411948,5,0.37684399685574016,0.531,999,999,0.531,2507,228
+corrected_event_post_period_full_sample_cleaned_structural_recovery,full_sample_cleaned_structural,recovery,Log export recovery,joint_post_period,6.1718740719270935,5,0.28985231233972325,0.614,999,999,0.614,2222,202
+corrected_event_post_period_pooled_regime_interacted_recovery,pooled_regime_interacted,recovery,Log export recovery,joint_post_period,14.038422347222173,10,0.17124624938875738,0.776,999,999,0.776,2222,202
+corrected_event_post_period_regime_R1_recovery,regime_R1,recovery,Log export recovery,joint_post_period,9.919200173005423,5,0.07755731475703251,0.652,999,999,0.652,1199,109
+corrected_event_post_period_regime_R2_recovery,regime_R2,recovery,Log export recovery,joint_post_period,4.074493408052859,5,0.5387413904266551,0.696,999,999,0.696,1023,93
+corrected_event_post_period_full_sample_confirmatory_diversification,full_sample_confirmatory,diversification,Partner diversification excluding US and China,joint_post_period,9.157508055559564,5,0.10294422435698046,0.397,999,999,0.397,2507,228
+corrected_event_post_period_full_sample_cleaned_structural_diversification,full_sample_cleaned_structural,diversification,Partner diversification excluding US and China,joint_post_period,5.764635775857182,5,0.3297986898671866,0.763,999,999,0.763,2222,202
+corrected_event_post_period_pooled_regime_interacted_diversification,pooled_regime_interacted,diversification,Partner diversification excluding US and China,joint_post_period,15.937813072210181,10,0.1014264641981493,0.711,999,999,0.711,2222,202
+corrected_event_post_period_regime_R1_diversification,regime_R1,diversification,Partner diversification excluding US and China,joint_post_period,13.215932259298437,5,0.021437128234077923,0.587,999,999,0.587,1199,109
+corrected_event_post_period_regime_R2_diversification,regime_R2,diversification,Partner diversification excluding US and China,joint_post_period,2.686726113849615,5,0.7481478588990035,0.892,999,999,0.892,1023,93

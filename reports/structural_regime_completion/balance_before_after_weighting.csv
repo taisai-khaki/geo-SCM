@@ -1,11 +1,11 @@
-variable,label,smd_before,smd_after_residual_density_weighting
-pre_log_real_gdp_pc,Log real GDP per capita,-0.3227063567657081,-0.739743098520643
-pre_real_gdp_pc_growth_mean,Mean real GDP-per-capita growth,-0.29462507774456065,-0.37551410736077045
-pre_real_gdp_pc_growth_slope,Real GDP-per-capita growth trend,-0.36646236327121445,-0.6634856009686143
-pre_real_gdp_pc_growth_volatility,GDP-per-capita growth volatility,0.17214966617234878,0.2847203583459642
-pre_manufacturing_value_added_share,Manufacturing value-added share,-0.349298300353134,-0.4524904429171435
-pre_trade_openness,Trade openness,-0.4307599189388432,-0.5936370156809073
-pre_resource_rents,Natural-resource-rent dependence,0.5378419241969076,0.8086799359464456
-pre_institutional_quality,Institutional quality,-0.5407670452399977,-0.9902538330423172
-pre_export_concentration,Export concentration,0.3746564178490301,0.6450246926966143
-pre_log_population,Log population,0.2923928952742597,0.5287797720409185
+variable,label,diagnostic_status,smd_before,smd_after_residual_density_weighting_failed,absolute_smd_after,balance_improved
+pre_log_real_gdp_pc,Log real GDP per capita,failed_balance,-0.3227063567657081,-0.7597972662103318,0.7597972662103318,False
+pre_real_gdp_pc_growth_mean,Mean real GDP-per-capita growth,failed_balance,-0.29462507774456065,-0.3952667598409333,0.3952667598409333,False
+pre_real_gdp_pc_growth_slope,Real GDP-per-capita growth trend,failed_balance,-0.36646236327121445,-0.6509239322743483,0.6509239322743483,False
+pre_real_gdp_pc_growth_volatility,GDP-per-capita growth volatility,failed_balance,0.17214966617234878,0.3134634550562765,0.3134634550562765,False
+pre_manufacturing_value_added_share,Manufacturing value-added share,failed_balance,-0.349298300353134,-0.4445549003370619,0.4445549003370619,False
+pre_trade_openness,Trade openness,failed_balance,-0.4307599189388432,-0.6137083900653546,0.6137083900653546,False
+pre_resource_rents,Natural-resource-rent dependence,failed_balance,0.5378419241969076,0.8152158224575763,0.8152158224575763,False
+pre_institutional_quality,Institutional quality,failed_balance,-0.5407670452399977,-1.0081668379443556,1.0081668379443556,False
+pre_export_concentration,Export concentration,failed_balance,0.3746564178490301,0.6548157123610399,0.6548157123610399,False
+pre_log_population,Log population,failed_balance,0.2923928952742597,0.5317202756293391,0.5317202756293391,False

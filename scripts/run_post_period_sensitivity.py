@@ -15,6 +15,7 @@ from run_final_audited_analysis import (
     coefficient_row,
     fit_terms,
     prepare_panel,
+    prepare_confirmatory_event_panel,
     corrected_regime_models,
     focal_event_terms,
     wald_test,
@@ -55,11 +56,21 @@ def run_continuous(frame: pd.DataFrame, post_start: int, reps: int, seed: int) -
 
 
 def run_event_post_sensitivity(
-    frame: pd.DataFrame, regimes: list[str], post_start: int, reps: int, seed: int
+    frame: pd.DataFrame,
+    regimes: list[str],
+    post_start: int,
+    reps: int,
+    seed: int,
+    confirmatory_frame: pd.DataFrame | None = None,
 ) -> pd.DataFrame:
     rows = []
     for oi, (outcome_key, (outcome, label)) in enumerate(OUTCOMES.items()):
-        variants = [("full_sample", frame, False), ("pooled_regime_interacted", frame, True)]
+        confirmatory = confirmatory_frame if confirmatory_frame is not None else frame
+        variants = [
+            ("full_sample_confirmatory", confirmatory, False),
+            ("full_sample_cleaned_structural", frame, False),
+            ("pooled_regime_interacted", frame, True),
+        ]
         variants += [
             (f"regime_{regime}", frame.loc[frame["structural_regime"].eq(regime)], False)
             for regime in regimes
@@ -105,10 +116,12 @@ def main() -> None:
     base = Path(args.base_dir).resolve()
     out = base / "reports" / "structural_regime_completion"
     panel = pd.read_csv(base / "reports" / "final_design_completion" / "panel_with_completed_design_constructs.csv")
-    profile = pd.read_csv(out / "structural_profile_final_audit_base.csv")
+    all_profile = pd.read_csv(out / "structural_profile_final_audit_base.csv")
+    profile = all_profile.copy()
     assignment = pd.read_csv(out / "structural_regime_assignment_probabilities.csv")
     profile = profile.loc[profile["primary_structural_sample"].astype(bool)].copy()
     model_panel = prepare_panel(panel, profile, assignment)
+    confirmatory_event_panel = prepare_confirmatory_event_panel(panel, all_profile)
     current = pd.read_csv(out / "final_continuous_structural_moderator_tests.csv")
     current = current.copy()
     current["analysis"] = "continuous_moderator"
@@ -125,7 +138,8 @@ def main() -> None:
     differences_2019.to_csv(out / "structural_regime_difference_tests_2019.csv", index=False)
     validation_2019.to_csv(out / "structural_regime_omnibus_validation_2019.csv", index=False)
     event_post_2019 = run_event_post_sensitivity(
-        model_panel, regimes, 2019, args.bootstrap_reps, args.seed + 3900
+        model_panel, regimes, 2019, args.bootstrap_reps, args.seed + 3900,
+        confirmatory_frame=confirmatory_event_panel,
     )
 
     slopes_2018 = pd.read_csv(out / "structural_regime_specific_coefficients_corrected.csv")

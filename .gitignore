@@ -14,3 +14,4 @@ Thumbs.db
 
 # Downloaded raw sources for the completed tariff-weighted redesign.
 data/raw/capability_redesign_sources/
+!reports/structural_regime_completion/reproducibility_proof.log

@@ -2,9 +2,10 @@ name: geo-scm-final-analysis
 channels:
   - conda-forge
 dependencies:
-  - python=3.11
-  - numpy
-  - pandas
-  - scipy
-  - scikit-learn
-  - matplotlib
+  - python=3.14.3
+  - numpy=2.4.3
+  - pandas=2.3.3
+  - scipy=1.17.1
+  - scikit-learn=1.8.0
+  - matplotlib=3.10.8
+  - pytest=9.1.1
