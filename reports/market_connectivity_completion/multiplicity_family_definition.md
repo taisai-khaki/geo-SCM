@@ -1,3 +1,3 @@
-# Market-connectivity fixed multiplicity family
+# Corrected market-connectivity multiplicity family
 
-The family contains exactly nine prespecified tests: the primary trade-openness interaction; one industrial/trade-structure omnibus; three conditional destination-entry mechanism tests; and four alternative diversification measures. Complementary market-access measures, event-year coefficients, holdouts, and influence diagnostics are robustness or validation evidence, not additional confirmatory hypotheses.
+The family contains each unique empirical test once: primary openness interaction; corrected industrial/trade-structure omnibus; three extensive destination-entry outcomes; two alternative diversification outcomes; and five intensive-margin outcomes. Duplicate new-destination-share and persistent-destination rows are not counted twice. Channel decomposition, phase equality, marginal effects, raw-openness robustness, and stability diagnostics are estimand or robustness evidence, not separate family hypotheses.

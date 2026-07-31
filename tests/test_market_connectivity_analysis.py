@@ -24,15 +24,29 @@ def test_market_connectivity_required_outputs():
         "market_connectivity_multiplicity_family.csv",
         "market_access_measure_coverage.csv",
         "figure_market_connectivity_event_study.png",
+        "mandatory_computations_metadata.json",
+        "mandatory_computations_summary.md",
+        "market_connectivity_channel_constructs.csv",
+        "market_connectivity_channel_decomposition.csv",
+        "intensive_margin_country_year_outcomes.csv",
+        "intensive_margin_measure_definitions.csv",
+        "market_connectivity_intensive_margin_tests.csv",
+        "market_connectivity_phase_results.csv",
+        "market_connectivity_phase_equality_tests.csv",
+        "market_connectivity_marginal_effects.csv",
+        "figure_market_connectivity_marginal_effects.png",
+        "market_connectivity_openness_robustness.csv",
     ]
     assert not [name for name in required if not (OUT / name).exists()]
 
 
 def test_primary_estimand_and_outcome_are_frozen():
     metadata = json.loads((OUT / "analysis_metadata.json").read_text())
+    mandatory = json.loads((OUT / "mandatory_computations_metadata.json").read_text())
     primary = pd.read_csv(OUT / "market_connectivity_primary_test.csv")
     assert metadata["primary_estimand"] == "ECI_pre x Exposure_pre x Post x Openness_pre"
-    assert primary.loc[0, "primary_outcome"] == "partner_diversification_excl_us_china"
+    assert mandatory["primary_outcome"] == "partner_diversification_excl_us_china"
+    assert primary.loc[0, "outcome_key"] == "diversification"
     assert primary.loc[0, "bootstrap_reps_requested"] == 999
     assert primary.loc[0, "n_countries"] == 181
 
@@ -46,16 +60,17 @@ def test_event_study_is_four_way_and_saturated_in_lower_orders():
     assert joints["bootstrap_reps_requested"].eq(999).all()
 
 
-def test_fixed_family_has_only_nine_tests():
+def test_fixed_family_has_unique_tests_once():
     family = pd.read_csv(OUT / "market_connectivity_multiplicity_family.csv")
-    assert len(family) == 9
+    assert len(family) == 12
     assert family["test_id"].is_unique
     assert family["qvalue_market_connectivity_family"].between(0, 1).all()
     assert set(family["family_component"]) == {
         "primary_trade_openness_interaction",
         "industrial_trade_structure_omnibus",
-        "destination_entry_mechanism",
+        "extensive_destination_mechanism",
         "alternative_diversification_measure",
+        "intensive_margin_outcome",
     }
 
 
@@ -77,6 +92,8 @@ def test_holdout_and_influence_diagnostics_cover_effective_sample():
     assert country_summary.loc[0, "total_countries"] == 181
     assert region_summary.loc[0, "total_regions"] == 7
     assert holdout_summary.loc[0, "positive_sign_proportion"] == 1.0
+    assert holdout_summary.loc[0, "validation_type"] == "region_stratified_repeated_subsample_stability"
+    assert holdout_summary.loc[0, "out_of_sample_validation"] == 0
     assert country_summary.loc[0, "positive_sign_proportion"] == 1.0
     assert region_summary.loc[0, "positive_sign_proportion"] == 1.0
 
@@ -89,3 +106,25 @@ def test_market_access_coverage_is_explicit():
     }
     robustness = pd.read_csv(OUT / "market_connectivity_market_access_robustness.csv")
     assert len(robustness) == 3
+
+
+def test_mandatory_decompositions_and_phase_outputs():
+    metadata = json.loads((OUT / "mandatory_computations_metadata.json").read_text())
+    assert metadata["bootstrap_reps"] == 999
+    channels = pd.read_csv(OUT / "market_connectivity_channel_decomposition.csv")
+    assert len(channels) == 5
+    assert set(channels["channel_type"]) == {"individual", "joint_model", "formal_equality_test"}
+    assert channels["bootstrap_reps_success"].eq(999).all()
+    intensive = pd.read_csv(OUT / "market_connectivity_intensive_margin_tests.csv")
+    assert len(intensive) == 5
+    assert intensive["test_id"].is_unique
+    phase = pd.read_csv(OUT / "market_connectivity_phase_results.csv")
+    equality = pd.read_csv(OUT / "market_connectivity_phase_equality_tests.csv")
+    assert len(phase) == 3
+    assert len(equality) == 3
+    marginal = pd.read_csv(OUT / "market_connectivity_marginal_effects.csv")
+    assert len(marginal) == 18
+    assert marginal["bootstrap_ci_low_95"].notna().all()
+    robustness = pd.read_csv(OUT / "market_connectivity_openness_robustness.csv")
+    assert len(robustness) == 5
+    assert robustness["bootstrap_reps_success"].eq(999).all()

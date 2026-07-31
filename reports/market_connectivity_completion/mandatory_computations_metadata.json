@@ -1,0 +1,15 @@
+{
+  "python": "3.14.3",
+  "seed": 20260731,
+  "bootstrap_reps": 999,
+  "primary_outcome": "partner_diversification_excl_us_china",
+  "primary_estimand": "ECI_pre x Exposure_pre x Post x Openness_pre",
+  "primary_n_countries": 181,
+  "primary_estimate": 0.024791001768477764,
+  "primary_p_wild_bootstrap": 0.008,
+  "fixed_family_tests": 12,
+  "fixed_family_q_lt_005": 5,
+  "phase_equality_p_wild_bootstrap": 0.074,
+  "terminology_holdout": "region-stratified repeated subsample stability analysis",
+  "out_of_sample_validation": false
+}

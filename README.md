@@ -119,3 +119,12 @@ Key outputs:
 
 The package explicitly labels H6 as theory-refining rather than confirmatory. The stored bilateral data are country-partner-year aggregates, so product-level tariff-weighted exposure is not claimed; the report records this constraint and provides continuous exposure plus destination-redirection mechanisms as the valid analyses supported by the current databank.
 Current empirical decision: the final 999-replication corrected analysis does not validate H6. Read `reports/capability_conversion_redesign/manuscript_decision_note.md` before treating the theory addendum as a claim for the paper.
+## Mandatory Market-Connectivity Computations
+
+Run the final focused market-connectivity extension with 999-replication wild-bootstrap inference:
+
+```powershell
+python .\scripts\run_market_connectivity_mandatory_computations.py --bootstrap-reps 999 --seed 20260731
+```
+
+This separates downstream export intensity from upstream import intensity, tests intensive versus extensive destination adaptation, estimates tariff/pandemic/persistence phases, reports marginal effects, applies the corrected 12-test unique family, and labels repeated subsamples as stability analysis rather than out-of-sample validation. See `reports/market_connectivity_completion/README.md` for interpretation and file-by-file use.
