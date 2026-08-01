@@ -1,67 +1,47 @@
-# Market-connectivity hypothesis extension
+# Corrected market-connectivity hypothesis extension
 
-## Frozen design
+## Design correction
 
-Hypothesis: pre-shock trade openness positively moderates the relationship between productive complexity and post-shock export-partner diversification among countries exposed to the US-China tariff conflict.
+The primary intensive-margin design uses only 2015-2022 observations. The incumbent destination set and baseline destination shares are constructed from 2015-2017, so no post-period or future relationship information enters the 2015-2017 pre-period outcomes. A separate sensitivity design uses the full 2012-2022 model window with an incumbent set and baseline shares constructed from 2012-2017.
 
-Primary estimand: `ECI_pre x Exposure_pre x Post x Openness_pre`.
-Primary outcome: partner diversification excluding the United States and China (`1-HHI`).
+The primary openness interaction remains `b=0.024791` with 999-replication wild-bootstrap `p=0.008`, based on 181 countries and 1,991 observations. The corrected primary intensive models have 1,448 observations across 181 countries and eight years. The sensitivity models have 1,991 observations across 181 countries and eleven years.
 
-The primary estimate is `b=0.024791` with 999-replication wild-bootstrap `p=0.008`, based on 1,991 observations and 181 countries. The result is a focused extension within the same country-year dataset and shock design; it is not preregistered and is not an independent confirmation.
+## Intensive-margin results
 
-## Mandatory computations
+The substantive conclusion is stable across incumbent definitions:
 
-### Downstream versus upstream integration
+- Primary 2015-2017 incumbent set, incumbent diversification: `b=0.021398`, `p=0.003`.
+- Primary 2015-2017 incumbent set, incumbent entropy: `b=0.067151`, `p=0.010`.
+- Sensitivity 2012-2017 incumbent set, incumbent diversification: `b=0.022681`, `p=0.002`.
+- Sensitivity 2012-2017 incumbent set, incumbent entropy: `b=0.067562`, `p=0.002`.
 
-Pre-shock export intensity is exports divided by GDP and represents downstream external integration. Pre-shock import intensity is imports divided by GDP and represents upstream sourcing integration. The individual four-way interactions are:
+Portfolio reallocation and incumbent retention remain statistically unsupported in both designs. Continuing export share is negative but not conventionally significant in the primary design (`p=.078`) or sensitivity (`p=.152`). The defensible interpretation is stable openness-conditioned rebalancing across incumbent partners, not demonstrated new relationship formation, generalized retention, or a broad portfolio-reallocation effect.
 
-- Export intensity: `b=0.020925`, wild-bootstrap `p=0.244`.
-- Import intensity: `b=0.431688`, wild-bootstrap `p=0.030`.
-- Joint export-minus-import equality test: `b=-0.438055`, wild-bootstrap `p=0.066`.
+## Channel correction
 
-The evidence is therefore more consistent with an upstream sourcing channel than a downstream export-intensity channel, although the channel difference is not conventionally significant at the 5 percent level.
+The export/import channel models now use the exact primary sample: 181 countries and 1,991 observations before prespecified exclusions. The raw Atlas components produce:
 
-### Extensive versus intensive adaptation
+- Export intensity: `b=0.027728`, individual wild-bootstrap `p=0.113`; joint `p=0.337`.
+- Import intensity: `b=0.457784`, individual wild-bootstrap `p=0.025`; joint `b=0.546129`, `p=0.007`.
+- Export-minus-import equality test: `b=-0.533261`, `p=0.010`.
 
-New-destination formation remains the extensive-margin mechanism and is not supported by the conditional mechanism tests. The new intensive-margin estimates show:
+Import interaction estimates remain positive in every requested transformation and exclusion specification, including log(1+x), 1 percent winsorization, exclusion of the highest import-intensity 1 percent and 5 percent, and exclusion of the smallest 5 percent by real GDP. Joint import estimates also retain a positive sign. However, statistical precision weakens in some tail-exclusion specifications, and the export-minus-import difference is not consistently supported outside the raw specification.
 
-- Incumbent-partner diversification: `b=0.022950`, wild-bootstrap `p=0.002`.
-- Incumbent-partner entropy: `b=0.066403`, wild-bootstrap `p=0.006`.
-- Relationship-portfolio reallocation: `b=-0.014114`, wild-bootstrap `p=0.387`.
-- Incumbent destination retention: `b=-0.002637`, wild-bootstrap `p=0.545`.
-- Continuing export share: `b=-0.011520`, wild-bootstrap `p=0.096`.
+The raw export/import components sum to an internally compatible Atlas trade-intensity measure, which is not identical to the WDI total-openness moderator used in the primary model. A separate WDI-compatible specification allocates the WDI primary total across observed Atlas export/import shares; it is included to make the source distinction transparent. Accordingly, the channel evidence should be described as a suggestive upstream-integration association, not as a definitive causal decomposition of the primary total-openness coefficient.
 
-The most defensible interpretation is that the openness-conditioned association is concentrated in a more even distribution of flows across incumbent partners, not in demonstrable new-destination formation, measured share reallocation, or simple retention.
+## Multiplicity and validation
 
-### Timing
-
-The phase-specific four-way estimates are:
-
-- Tariff onset, 2018-2019: `b=0.007530`, wild-bootstrap `p=0.302`.
-- Pandemic overlap, 2020-2021: `b=0.032500`, wild-bootstrap `p=0.002`.
-- Persistence, 2022: `b=0.043896`, wild-bootstrap `p=0.053`.
-
-The omnibus equality test has wild-bootstrap `p=0.074`. The pattern is delayed and strongest during the compound tariff-pandemic period, so the paper should use a compound-disruption or post-shock reconfiguration interpretation rather than claiming an immediate tariff-only effect.
-
-### Marginal effects and robustness
-
-Bootstrap confidence intervals for ECI marginal effects at low, median, and high exposure and openness are in `market_connectivity_marginal_effects.csv`, with the corresponding figure in `figure_market_connectivity_marginal_effects.png`. Openness robustness specifications are in `market_connectivity_openness_robustness.csv`: log openness (`p=0.088`), 1 percent winsorization (`p=0.034`), exclusion of the highest-openness 1 percent (`p=0.033`), exclusion of the highest-openness 5 percent (`p=0.058`), and exclusion of the smallest 5 percent by real GDP (`p=0.039`).
-
-### Multiplicity and stability terminology
-
-The fixed family has 12 unique tests and five FDR-adjusted `q<0.05` results. Duplicate empirical rows are counted once. Channel decomposition, phase decomposition, marginal effects, openness robustness, and influence diagnostics are reported as diagnostics or robustness evidence rather than silently added to the confirmatory family.
-
-The former holdout analysis is labeled `region-stratified repeated subsample stability analysis`. It re-estimates the coefficient on retained countries and is not out-of-sample validation. Leave-one-country and leave-one-region results are also stability diagnostics, not independent validation.
+The corrected primary family contains 12 unique tests and 5 FDR-adjusted `q<.05` results. The five sensitivity intensive models and channel stress tests are not added as duplicate confirmatory families. Repeated regional subsamples remain stability analysis, not independent out-of-sample validation.
 
 ## Key files
 
-- `market_connectivity_channel_constructs.csv`: frozen downstream export and upstream import intensity constructs.
-- `market_connectivity_channel_decomposition.csv`: individual, joint, and equality tests.
-- `intensive_margin_country_year_outcomes.csv`: country-year incumbent relationship outcomes.
-- `intensive_margin_measure_definitions.csv`: operational definitions for intensive outcomes.
-- `market_connectivity_intensive_margin_tests.csv`: openness-conditioned intensive-margin models.
-- `market_connectivity_phase_results.csv` and `market_connectivity_phase_equality_tests.csv`: timing estimates and equality tests.
-- `market_connectivity_marginal_effects.csv` and `figure_market_connectivity_marginal_effects.png`: interpretable simple effects and bootstrap intervals.
-- `market_connectivity_openness_robustness.csv`: alternative openness specifications and sample exclusions.
-- `market_connectivity_multiplicity_family.csv`: corrected unique test family and FDR q-values.
-- `mandatory_computations_metadata.json`: seed, Python version, requested/successful bootstrap count, and primary result metadata.
+- `market_connectivity_intensive_margin_tests.csv`: corrected primary 2015-2022 intensive-margin estimates.
+- `market_connectivity_intensive_margin_sensitivity.csv`: 2012-2022 sensitivity using the 2012-2017 incumbent set.
+- `intensive_margin_country_year_outcomes.csv`: primary country-year outcomes.
+- `intensive_margin_country_year_outcomes_sensitivity.csv`: sensitivity country-year outcomes.
+- `intensive_margin_measure_definitions.csv`: both design definitions and windows.
+- `market_connectivity_channel_decomposition.csv`: raw exact-primary-sample channel estimates.
+- `market_connectivity_channel_stress_tests.csv`: all individual, joint, and equality stress estimates.
+- `market_connectivity_channel_stress_summary.csv`: wide specification-level comparison, sample sizes, and sign indicators.
+- `market_connectivity_channel_constructs.csv`: raw, WDI-compatible, and source-compatibility constructs.
+- `market_connectivity_multiplicity_family.csv`: corrected 12-test family and q-values.

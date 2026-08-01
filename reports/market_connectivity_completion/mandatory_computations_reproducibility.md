@@ -3,7 +3,7 @@
 Command: `python scripts/run_market_connectivity_mandatory_computations.py --bootstrap-reps 999 --seed 20260731`
 
 Second-run exit code: 0
-Compared outputs: 19
+Compared outputs: 23
 Different outputs: 0
 Status: PASS
 

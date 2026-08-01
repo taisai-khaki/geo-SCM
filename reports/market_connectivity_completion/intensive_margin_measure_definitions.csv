@@ -1,6 +1,11 @@
-outcome,definition,pre_period,partner_scope
-incumbent_partner_diversification,"1-HHI over destinations served in 2015-2017, normalized over incumbent exports",2015-2017,non-US/China
-incumbent_partner_entropy,"Shannon entropy over destinations served in 2015-2017, normalized over incumbent exports",2015-2017,non-US/China
-portfolio_reallocation,0.5 times absolute change in incumbent destination shares relative to 2015-2017 mean shares,2015-2017,non-US/China
-incumbent_retention_rate,Share of pre-shock destinations retained with positive exports,2015-2017,non-US/China
-continuing_export_share,Exports to pre-shock destinations divided by all non-US/China exports,2015-2017,non-US/China
+outcome,definition,pre_period,partner_scope,design,incumbent_period,model_period
+incumbent_partner_diversification,"1-HHI over destinations served in the incumbent period, normalized over incumbent exports",,non-US/China,primary_2015_2022,2015-2017,2015-2022
+incumbent_partner_entropy,"Shannon entropy over destinations served in the incumbent period, normalized over incumbent exports",,non-US/China,primary_2015_2022,2015-2017,2015-2022
+portfolio_reallocation,0.5 times absolute change in incumbent destination shares relative to incumbent-period mean shares,,non-US/China,primary_2015_2022,2015-2017,2015-2022
+incumbent_retention_rate,Share of incumbent destinations retained with positive exports,,non-US/China,primary_2015_2022,2015-2017,2015-2022
+continuing_export_share,Exports to incumbent destinations divided by all non-US/China exports,,non-US/China,primary_2015_2022,2015-2017,2015-2022
+incumbent_partner_diversification,"1-HHI over destinations served in the incumbent period, normalized over incumbent exports",,non-US/China,sensitivity_2012_2022,2012-2017,2012-2022
+incumbent_partner_entropy,"Shannon entropy over destinations served in the incumbent period, normalized over incumbent exports",,non-US/China,sensitivity_2012_2022,2012-2017,2012-2022
+portfolio_reallocation,0.5 times absolute change in incumbent destination shares relative to incumbent-period mean shares,,non-US/China,sensitivity_2012_2022,2012-2017,2012-2022
+incumbent_retention_rate,Share of incumbent destinations retained with positive exports,,non-US/China,sensitivity_2012_2022,2012-2017,2012-2022
+continuing_export_share,Exports to incumbent destinations divided by all non-US/China exports,,non-US/China,sensitivity_2012_2022,2012-2017,2012-2022

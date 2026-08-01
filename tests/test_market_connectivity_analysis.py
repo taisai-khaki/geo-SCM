@@ -28,9 +28,13 @@ def test_market_connectivity_required_outputs():
         "mandatory_computations_summary.md",
         "market_connectivity_channel_constructs.csv",
         "market_connectivity_channel_decomposition.csv",
+        "market_connectivity_channel_stress_tests.csv",
+        "market_connectivity_channel_stress_summary.csv",
         "intensive_margin_country_year_outcomes.csv",
+        "intensive_margin_country_year_outcomes_sensitivity.csv",
         "intensive_margin_measure_definitions.csv",
         "market_connectivity_intensive_margin_tests.csv",
+        "market_connectivity_intensive_margin_sensitivity.csv",
         "market_connectivity_phase_results.csv",
         "market_connectivity_phase_equality_tests.csv",
         "market_connectivity_marginal_effects.csv",
@@ -111,13 +115,32 @@ def test_market_access_coverage_is_explicit():
 def test_mandatory_decompositions_and_phase_outputs():
     metadata = json.loads((OUT / "mandatory_computations_metadata.json").read_text())
     assert metadata["bootstrap_reps"] == 999
+    assert metadata["intensive_primary_model_period"] == "2015-2022"
+    assert metadata["intensive_sensitivity_model_period"] == "2012-2022"
     channels = pd.read_csv(OUT / "market_connectivity_channel_decomposition.csv")
     assert len(channels) == 5
+    assert channels["n_countries"].eq(181).all()
+    assert channels["n_obs"].eq(1991).all()
     assert set(channels["channel_type"]) == {"individual", "joint_model", "formal_equality_test"}
     assert channels["bootstrap_reps_success"].eq(999).all()
+    stress = pd.read_csv(OUT / "market_connectivity_channel_stress_tests.csv")
+    summary = pd.read_csv(OUT / "market_connectivity_channel_stress_summary.csv")
+    assert len(stress) == 35
+    assert len(summary) == 7
+    assert summary["import_estimate"].gt(0).all()
+    assert summary["joint_import_estimate"].gt(0).all()
     intensive = pd.read_csv(OUT / "market_connectivity_intensive_margin_tests.csv")
     assert len(intensive) == 5
+    assert intensive["design"].eq("primary_2015_2022").all()
+    assert intensive["n_years"].eq(8).all()
     assert intensive["test_id"].is_unique
+    sensitivity = pd.read_csv(OUT / "market_connectivity_intensive_margin_sensitivity.csv")
+    assert len(sensitivity) == 5
+    assert sensitivity["design"].eq("sensitivity_2012_2022").all()
+    assert sensitivity["n_years"].eq(11).all()
+    definitions = pd.read_csv(OUT / "intensive_margin_measure_definitions.csv")
+    assert len(definitions) == 10
+    assert set(definitions["design"]) == {"primary_2015_2022", "sensitivity_2012_2022"}
     phase = pd.read_csv(OUT / "market_connectivity_phase_results.csv")
     equality = pd.read_csv(OUT / "market_connectivity_phase_equality_tests.csv")
     assert len(phase) == 3

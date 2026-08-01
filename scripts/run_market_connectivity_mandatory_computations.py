@@ -31,29 +31,31 @@ def write(df, path):
     df.to_csv(path, index=False)
 
 
-def build_channel_intensities(frame, wdi):
+def build_channel_intensities(frame, wdi, primary_countries=None):
     pop = wdi.loc[wdi["indicator"].eq("SP.POP.TOTL"), ["country_iso3_code", "year", "value"]].rename(columns={"value": "population"})
     work = frame.merge(pop, on=["country_iso3_code", "year"], how="left")
     work["pre_real_gdp_usd"] = pd.to_numeric(work["wdi_gdp_pc_const_2015_usd"], errors="coerce") * pd.to_numeric(work["population"], errors="coerce")
     work["export_intensity"] = 100.0 * pd.to_numeric(work["export_value"], errors="coerce") / work["pre_real_gdp_usd"]
     work["import_intensity"] = 100.0 * pd.to_numeric(work["import_value"], errors="coerce") / work["pre_real_gdp_usd"]
     work["total_trade_intensity"] = work["export_intensity"] + work["import_intensity"]
-    work["log_total_trade_openness"] = np.log(work["total_trade_intensity"].where(work["total_trade_intensity"] > 0))
+    work["log_total_trade_openness"] = np.log1p(work["total_trade_intensity"].where(work["total_trade_intensity"] >= 0))
     pre = work.loc[work["year"].between(2015, 2017)]
     agg = pre.groupby("country_iso3_code", as_index=False).agg(
         pre_export_intensity=("export_intensity", "mean"),
         pre_import_intensity=("import_intensity", "mean"),
         pre_total_trade_intensity=("total_trade_intensity", "mean"),
         pre_log_total_trade_openness=("log_total_trade_openness", "mean"),
+        pre_wdi_total_openness=("wdi_trade_openness_pct_gdp", "mean"),
         pre_real_gdp_usd=("pre_real_gdp_usd", "mean"),
     )
-    for col in ["pre_export_intensity", "pre_import_intensity", "pre_total_trade_intensity", "pre_log_total_trade_openness"]:
-        agg[f"z_{col}"] = z(agg[col])
-    frame = frame.merge(agg, on="country_iso3_code", how="left")
-    frame["z_export_intensity"] = frame["country_iso3_code"].map(agg.set_index("country_iso3_code")["z_pre_export_intensity"])
-    frame["z_import_intensity"] = frame["country_iso3_code"].map(agg.set_index("country_iso3_code")["z_pre_import_intensity"])
-    frame["z_log_total_trade_openness"] = frame["country_iso3_code"].map(agg.set_index("country_iso3_code")["z_pre_log_total_trade_openness"])
-    return frame, agg
+    agg["pre_total_minus_wdi_openness"] = agg["pre_total_trade_intensity"] - agg["pre_wdi_total_openness"]
+    denom = agg["pre_total_trade_intensity"].replace(0, np.nan)
+    agg["pre_wdi_compatible_export_intensity"] = agg["pre_wdi_total_openness"] * agg["pre_export_intensity"] / denom
+    agg["pre_wdi_compatible_import_intensity"] = agg["pre_wdi_total_openness"] * agg["pre_import_intensity"] / denom
+    agg["pre_wdi_compatible_sum"] = agg["pre_wdi_compatible_export_intensity"] + agg["pre_wdi_compatible_import_intensity"]
+    if primary_countries is not None:
+        agg["in_primary_sample"] = agg["country_iso3_code"].isin(set(primary_countries)).astype(int)
+    return frame.merge(agg, on="country_iso3_code", how="left"), agg
 
 
 def separate_channel_terms(frame, channels):
@@ -92,31 +94,138 @@ def contrast_row(fit, contrast, reps, seed, test_id, outcome_key, outcome, extra
     return result
 
 
-def run_channel_decomposition(frame, reps, seed, outdir):
+def _channel_specification(agg, name):
+    base = agg.copy()
+    if name == "raw_atlas_components":
+        cols = {"export": "pre_export_intensity", "import": "pre_import_intensity"}
+        source = "Atlas export/import values divided by WDI GDP; sum is an internally compatible Atlas trade intensity, distinct from the WDI primary openness measure"
+        transform = "raw"
+    elif name == "log1p_components":
+        base["channel_export"] = np.log1p(base["pre_export_intensity"].clip(lower=0))
+        base["channel_import"] = np.log1p(base["pre_import_intensity"].clip(lower=0))
+        cols = {"export": "channel_export", "import": "channel_import"}
+        source = "log(1+x) transform of raw Atlas intensity"
+        transform = "log1p"
+    elif name == "winsorized_1pct_components":
+        base["channel_export"] = base["pre_export_intensity"].clip(base["pre_export_intensity"].quantile(.01), base["pre_export_intensity"].quantile(.99))
+        base["channel_import"] = base["pre_import_intensity"].clip(base["pre_import_intensity"].quantile(.01), base["pre_import_intensity"].quantile(.99))
+        cols = {"export": "channel_export", "import": "channel_import"}
+        source = "1 percent winsorized raw Atlas intensity"
+        transform = "winsorized_1pct"
+    elif name == "wdi_reconstructed_components":
+        cols = {"export": "pre_wdi_compatible_export_intensity", "import": "pre_wdi_compatible_import_intensity"}
+        source = "WDI primary total openness allocated across Atlas export/import shares; components sum to WDI primary openness"
+        transform = "wdi_total_reconstructed"
+    else:
+        raise ValueError(f"unknown channel specification: {name}")
+    return base, cols, source, transform
+
+
+def _channel_spec_rows(frame, agg, name, reps, seed):
+    if name in {"exclude_highest_1pct_import", "exclude_highest_5pct_import", "exclude_smallest_5pct_real_gdp"}:
+        if name == "exclude_highest_1pct_import":
+            keep = agg["pre_import_intensity"] < agg["pre_import_intensity"].quantile(.99)
+        elif name == "exclude_highest_5pct_import":
+            keep = agg["pre_import_intensity"] < agg["pre_import_intensity"].quantile(.95)
+        else:
+            keep = agg["pre_real_gdp_usd"] > agg["pre_real_gdp_usd"].quantile(.05)
+        selected = agg.loc[keep].copy()
+        source_name = "raw_atlas_components"
+        exclusion = name
+    else:
+        selected, cols, source, transform = _channel_specification(agg, name)
+        source_name = name
+        exclusion = "none"
+    if name in {"exclude_highest_1pct_import", "exclude_highest_5pct_import", "exclude_smallest_5pct_real_gdp"}:
+        selected, cols, source, transform = _channel_specification(selected, source_name)
+    selected["z_channel_export"] = z(selected[cols["export"]])
+    selected["z_channel_import"] = z(selected[cols["import"]])
+    model_frame = frame.loc[frame["country_iso3_code"].isin(set(selected["country_iso3_code"]))].copy()
+    model_frame = model_frame.merge(selected[["country_iso3_code", "z_channel_export", "z_channel_import"]], on="country_iso3_code", how="left")
+    extra = {
+        "channel_specification": name,
+        "channel_source": source,
+        "channel_transformation": transform,
+        "sample_alignment": "exact primary country sample before prespecified exclusion",
+        "sample_exclusion": exclusion,
+    }
     rows = []
-    for i, (name, col) in enumerate({"export_intensity": "z_export_intensity", "import_intensity": "z_import_intensity"}.items()):
-        work, terms, target = post_terms(frame, {name: col})
+    for i, (channel_name, col) in enumerate({"export_intensity": "z_channel_export", "import_intensity": "z_channel_import"}.items()):
+        work, terms, target = post_terms(model_frame, {channel_name: col})
         fit = fit_terms(work, PRIMARY_OUTCOME, terms)
-        rows.append(coefficient_row(fit, target, reps, seed + i, f"channel_{name}", "diversification", PRIMARY_LABEL,
-                                     {"channel": name, "channel_type": "individual", "estimand": f"ECI x Exposure x Post x {name}"}))
-    channels = {"export_intensity": "z_export_intensity", "import_intensity": "z_import_intensity"}
-    work, terms, targets = separate_channel_terms(frame, channels)
+        rows.append(coefficient_row(fit, target, reps, seed + i, f"channel_{name}_{channel_name}", "diversification", PRIMARY_LABEL,
+                                    {**extra, "channel": channel_name, "channel_type": "individual", "estimand": f"ECI x Exposure x Post x {channel_name}"}))
+    channels = {"export_intensity": "z_channel_export", "import_intensity": "z_channel_import"}
+    work, terms, targets = separate_channel_terms(model_frame, channels)
     fit = fit_terms(work, PRIMARY_OUTCOME, terms)
-    for name, target in targets.items():
+    for i, (channel_name, target) in enumerate(targets.items()):
         c = np.zeros(len(fit.term_names)); c[fit.term_index(target)] = 1
-        rows.append(contrast_row(fit, c, reps, seed + 10 + len(rows), f"channel_joint_{name}", "diversification", PRIMARY_LABEL,
-                                 {"channel": name, "channel_type": "joint_model", "estimand": f"ECI x Exposure x Post x {name}"}))
+        rows.append(contrast_row(fit, c, reps, seed + 10 + i, f"channel_joint_{name}_{channel_name}", "diversification", PRIMARY_LABEL,
+                                 {**extra, "channel": channel_name, "channel_type": "joint_model", "estimand": f"ECI x Exposure x Post x {channel_name}"}))
     diff = np.zeros(len(fit.term_names))
     diff[fit.term_index(targets["export_intensity"])] = 1
     diff[fit.term_index(targets["import_intensity"])] = -1
-    rows.append(contrast_row(fit, diff, reps, seed + 20, "channel_export_equals_import_test", "diversification", PRIMARY_LABEL,
-                             {"channel": "export_minus_import", "channel_type": "formal_equality_test", "hypothesis": "beta_export_intensity = beta_import_intensity"}))
-    result = pd.DataFrame(rows)
-    write(result, outdir / "market_connectivity_channel_decomposition.csv")
-    return result
+    rows.append(contrast_row(fit, diff, reps, seed + 20, f"channel_difference_{name}", "diversification", PRIMARY_LABEL,
+                             {**extra, "channel": "export_minus_import", "channel_type": "formal_equality_test", "hypothesis": "beta_export_intensity = beta_import_intensity"}))
+    return rows
 
 
-def intensive_outcomes(base_dir, frame, outdir):
+def run_channel_decomposition(frame, agg, primary_countries, reps, seed, outdir):
+    primary_agg = agg.loc[agg["country_iso3_code"].isin(set(primary_countries))].copy()
+    specs = [
+        "raw_atlas_components",
+        "log1p_components",
+        "winsorized_1pct_components",
+        "exclude_highest_1pct_import",
+        "exclude_highest_5pct_import",
+        "exclude_smallest_5pct_real_gdp",
+        "wdi_reconstructed_components",
+    ]
+    all_rows = []
+    for i, name in enumerate(specs):
+        all_rows.extend(_channel_spec_rows(frame, primary_agg, name, reps, seed + i * 100))
+    stress = pd.DataFrame(all_rows)
+    write(stress, outdir / "market_connectivity_channel_stress_tests.csv")
+    raw = stress.loc[stress["channel_specification"].eq("raw_atlas_components")].copy()
+    raw["channel_specification"] = "raw_atlas_components_exact_primary_sample"
+    write(raw, outdir / "market_connectivity_channel_decomposition.csv")
+    summary_rows = []
+    for name, g in stress.groupby("channel_specification", sort=False):
+        individual = g.loc[g["channel_type"].eq("individual")].set_index("channel")
+        joint = g.loc[g["channel_type"].eq("joint_model")].set_index("channel")
+        equality = g.loc[g["channel_type"].eq("formal_equality_test")].iloc[0]
+        summary_rows.append({
+            "channel_specification": name,
+            "channel_source": g["channel_source"].iloc[0],
+            "channel_transformation": g["channel_transformation"].iloc[0],
+            "sample_exclusion": g["sample_exclusion"].iloc[0],
+            "export_estimate": individual.loc["export_intensity", "estimate"],
+            "export_p_wild_bootstrap": individual.loc["export_intensity", "p_wild_bootstrap"],
+            "import_estimate": individual.loc["import_intensity", "estimate"],
+            "import_p_wild_bootstrap": individual.loc["import_intensity", "p_wild_bootstrap"],
+            "joint_export_estimate": joint.loc["export_intensity", "estimate"],
+            "joint_export_p_wild_bootstrap": joint.loc["export_intensity", "p_wild_bootstrap"],
+            "joint_import_estimate": joint.loc["import_intensity", "estimate"],
+            "joint_import_p_wild_bootstrap": joint.loc["import_intensity", "p_wild_bootstrap"],
+            "export_minus_import_estimate": equality["estimate"],
+            "export_minus_import_p_wild_bootstrap": equality["p_wild_bootstrap"],
+            "n_obs": int(equality["n_obs"]),
+            "n_countries": int(equality["n_countries"]),
+            "n_years": int(equality["n_years"]),
+            "export_sign": "positive" if individual.loc["export_intensity", "estimate"] > 0 else "negative",
+            "import_sign": "positive" if individual.loc["import_intensity", "estimate"] > 0 else "negative",
+            "joint_import_sign": "positive" if joint.loc["import_intensity", "estimate"] > 0 else "negative",
+            "difference_reasonably_supported": bool(equality["p_wild_bootstrap"] < .10),
+        })
+    summary = pd.DataFrame(summary_rows)
+    summary["import_sign_stable_across_specs"] = summary["import_estimate"].gt(0).all()
+    summary["joint_import_sign_stable_across_specs"] = summary["joint_import_estimate"].gt(0).all()
+    summary["extreme_small_economy_exclusions_retain_import_sign"] = summary.loc[summary["channel_specification"].isin(["exclude_highest_1pct_import", "exclude_highest_5pct_import", "exclude_smallest_5pct_real_gdp"]), "import_estimate"].gt(0).all()
+    write(summary, outdir / "market_connectivity_channel_stress_summary.csv")
+    return raw, stress, summary
+
+
+def intensive_outcomes(base_dir, frame, outdir, incumbent_period, model_period, design, output_filename):
     path = base_dir / "data" / "processed" / "source_atlas_country_country_year_2012_2022.csv"
     bilateral = pd.read_csv(path, usecols=["country_iso3_code", "partner_iso3_code", "year", "export_value"])
     bilateral["export_value"] = pd.to_numeric(bilateral["export_value"], errors="coerce").fillna(0.0)
@@ -124,13 +233,15 @@ def intensive_outcomes(base_dir, frame, outdir):
         bilateral["country_iso3_code"].ne(bilateral["partner_iso3_code"])
         & ~bilateral["partner_iso3_code"].isin(["USA", "CHN"])
     ].copy()
-    pre = bilateral.loc[bilateral["year"].between(2015, 2017) & bilateral["export_value"].gt(0)]
+    inc_start, inc_end = incumbent_period
+    model_start, model_end = model_period
+    pre = bilateral.loc[bilateral["year"].between(inc_start, inc_end) & bilateral["export_value"].gt(0)]
     sets = {country: set(g["partner_iso3_code"]) for country, g in pre.groupby("country_iso3_code")}
     pre_totals = pre.groupby(["country_iso3_code", "year"])["export_value"].sum().rename("pre_total")
     pre_share = pre.merge(pre_totals, on=["country_iso3_code", "year"], how="left")
     pre_share["share"] = pre_share["export_value"] / pre_share["pre_total"]
     pre_mean = pre_share.groupby(["country_iso3_code", "partner_iso3_code"])["share"].mean().rename("pre_mean_share").reset_index()
-    annual = bilateral.groupby(["country_iso3_code", "year", "partner_iso3_code"], as_index=False)["export_value"].sum()
+    annual = bilateral.loc[bilateral["year"].between(model_start, model_end)].groupby(["country_iso3_code", "year", "partner_iso3_code"], as_index=False)["export_value"].sum()
     rows = []
     for (country, year), g in annual.groupby(["country_iso3_code", "year"]):
         incumbent = sets.get(country, set())
@@ -138,7 +249,7 @@ def intensive_outcomes(base_dir, frame, outdir):
         inc = g.loc[g["partner_iso3_code"].isin(incumbent)]
         inc_total = inc["export_value"].sum()
         if not incumbent or total <= 0 or inc_total <= 0:
-            rows.append({"country_iso3_code": country, "year": year, "incumbent_partner_diversification": np.nan, "incumbent_partner_entropy": np.nan, "portfolio_reallocation": np.nan, "incumbent_retention_rate": np.nan, "continuing_export_share": np.nan})
+            rows.append({"country_iso3_code": country, "year": year, "design": design, "incumbent_period": f"{inc_start}-{inc_end}", "model_period": f"{model_start}-{model_end}", "incumbent_partner_diversification": np.nan, "incumbent_partner_entropy": np.nan, "portfolio_reallocation": np.nan, "incumbent_retention_rate": np.nan, "continuing_export_share": np.nan})
             continue
         inc_shares = inc["export_value"] / inc_total
         div = 1.0 - float((inc_shares ** 2).sum())
@@ -150,22 +261,30 @@ def intensive_outcomes(base_dir, frame, outdir):
         current = current.reindex(sorted(incumbent), fill_value=0.0)
         baseline = means.reindex(sorted(incumbent), fill_value=0.0)
         reallocation = 0.5 * float(np.abs(current.to_numpy() - baseline.to_numpy()).sum())
-        rows.append({"country_iso3_code": country, "year": year, "incumbent_partner_diversification": div, "incumbent_partner_entropy": entropy, "portfolio_reallocation": reallocation, "incumbent_retention_rate": retention, "continuing_export_share": continuing})
+        rows.append({"country_iso3_code": country, "year": year, "design": design, "incumbent_period": f"{inc_start}-{inc_end}", "model_period": f"{model_start}-{model_end}", "incumbent_partner_diversification": div, "incumbent_partner_entropy": entropy, "portfolio_reallocation": reallocation, "incumbent_retention_rate": retention, "continuing_export_share": continuing})
     measures = pd.DataFrame(rows)
-    merged = frame.merge(measures, on=["country_iso3_code", "year"], how="left")
-    construction = pd.DataFrame([{"outcome": c, "definition": d, "pre_period": "2015-2017", "partner_scope": "non-US/China"} for c, d in {
-        "incumbent_partner_diversification": "1-HHI over destinations served in 2015-2017, normalized over incumbent exports",
-        "incumbent_partner_entropy": "Shannon entropy over destinations served in 2015-2017, normalized over incumbent exports",
-        "portfolio_reallocation": "0.5 times absolute change in incumbent destination shares relative to 2015-2017 mean shares",
-        "incumbent_retention_rate": "Share of pre-shock destinations retained with positive exports",
-        "continuing_export_share": "Exports to pre-shock destinations divided by all non-US/China exports",
+    merged = frame.loc[frame["year"].between(model_start, model_end)].merge(measures, on=["country_iso3_code", "year"], how="left")
+    definitions = pd.DataFrame([{"design": design, "outcome": c, "definition": d, "incumbent_period": f"{inc_start}-{inc_end}", "model_period": f"{model_start}-{model_end}", "partner_scope": "non-US/China"} for c, d in {
+        "incumbent_partner_diversification": "1-HHI over destinations served in the incumbent period, normalized over incumbent exports",
+        "incumbent_partner_entropy": "Shannon entropy over destinations served in the incumbent period, normalized over incumbent exports",
+        "portfolio_reallocation": "0.5 times absolute change in incumbent destination shares relative to incumbent-period mean shares",
+        "incumbent_retention_rate": "Share of incumbent destinations retained with positive exports",
+        "continuing_export_share": "Exports to incumbent destinations divided by all non-US/China exports",
     }.items()])
-    write(construction, outdir / "intensive_margin_measure_definitions.csv")
-    write(measures, outdir / "intensive_margin_country_year_outcomes.csv")
+    definition_path = outdir / "intensive_margin_measure_definitions.csv"
+    if definition_path.exists():
+        existing = pd.read_csv(definition_path)
+        if "design" in existing.columns:
+            existing = existing.loc[existing["design"].notna() & existing["design"].ne(design)]
+        else:
+            existing = pd.DataFrame()
+        definitions = pd.concat([existing, definitions], ignore_index=True)
+    write(definitions, definition_path)
+    write(measures, outdir / output_filename)
     return merged
 
 
-def run_intensive_models(frame, reps, seed, outdir):
+def run_intensive_models(frame, reps, seed, outdir, output_filename, design, incumbent_period, model_period, family_component):
     outcomes = {
         "incumbent_diversification": ("incumbent_partner_diversification", "Incumbent-partner diversification"),
         "incumbent_entropy": ("incumbent_partner_entropy", "Incumbent-partner entropy"),
@@ -178,12 +297,12 @@ def run_intensive_models(frame, reps, seed, outdir):
         work, terms, target = post_terms(frame, {"openness": "z_openness_pre"})
         try:
             fit = fit_terms(work, outcome, terms)
-            rows.append(coefficient_row(fit, target, reps, seed + i, f"intensive_{key}", key, label,
-                                         {"family_component": "intensive_margin", "moderator": "openness"}))
+            rows.append(coefficient_row(fit, target, reps, seed + i, f"intensive_{design}_{key}", key, label,
+                                         {"family_component": family_component, "moderator": "openness", "design": design, "incumbent_period": f"{incumbent_period[0]}-{incumbent_period[1]}", "model_period": f"{model_period[0]}-{model_period[1]}"}))
         except Exception as exc:
-            rows.append({"test_id": f"intensive_{key}_error", "outcome_key": key, "outcome": label, "error": str(exc), "pvalue_for_fdr": np.nan, "family_component": "intensive_margin"})
+            rows.append({"test_id": f"intensive_{design}_{key}_error", "outcome_key": key, "outcome": label, "error": str(exc), "pvalue_for_fdr": np.nan, "family_component": family_component, "design": design})
     result = pd.DataFrame(rows)
-    write(result, outdir / "market_connectivity_intensive_margin_tests.csv")
+    write(result, outdir / output_filename)
     return result
 
 
@@ -330,23 +449,29 @@ def main():
     outdir = base / "reports/market_connectivity_completion"
     outdir.mkdir(parents=True, exist_ok=True)
     frame = build_base(base, outdir)
-    wdi, _, _ = load_wdi_structural_source(base)
-    frame, channel_agg = build_channel_intensities(frame, wdi)
-    write(channel_agg, outdir / "market_connectivity_channel_constructs.csv")
-    channel = run_channel_decomposition(frame, args.bootstrap_reps, args.seed, outdir)
-    intensive_frame = intensive_outcomes(base, frame, outdir)
-    intensive = run_intensive_models(intensive_frame, args.bootstrap_reps, args.seed + 100, outdir)
+
     primary_work, primary_terms, primary_target = post_terms(frame, {"openness": "z_openness_pre"})
     primary_fit = fit_terms(primary_work, PRIMARY_OUTCOME, primary_terms)
+    primary_countries = set(primary_work.loc[primary_fit.sample_index, "country_iso3_code"].astype(str))
     primary = pd.DataFrame([coefficient_row(primary_fit, primary_target, args.bootstrap_reps, args.seed + 200, "market_connectivity_primary_openness_interaction", "diversification", PRIMARY_LABEL, {"moderator": "openness", "family_component": "primary_trade_openness_interaction"})])
     write(primary, outdir / "market_connectivity_primary_test.csv")
+
+    wdi, _, _ = load_wdi_structural_source(base)
+    frame, channel_agg = build_channel_intensities(frame, wdi, primary_countries)
+    write(channel_agg, outdir / "market_connectivity_channel_constructs.csv")
+    channel, channel_stress, channel_summary = run_channel_decomposition(frame, channel_agg, primary_countries, args.bootstrap_reps, args.seed, outdir)
+
+    intensive_primary_frame = intensive_outcomes(base, frame, outdir, (2015, 2017), (2015, 2022), "primary_2015_2022", "intensive_margin_country_year_outcomes.csv")
+    intensive = run_intensive_models(intensive_primary_frame, args.bootstrap_reps, args.seed + 100, outdir, "market_connectivity_intensive_margin_tests.csv", "primary_2015_2022", (2015, 2017), (2015, 2022), "intensive_margin_outcome")
+    intensive_sensitivity_frame = intensive_outcomes(base, frame, outdir, (2012, 2017), (2012, 2022), "sensitivity_2012_2022", "intensive_margin_country_year_outcomes_sensitivity.csv")
+    intensive_sensitivity = run_intensive_models(intensive_sensitivity_frame, args.bootstrap_reps, args.seed + 150, outdir, "market_connectivity_intensive_margin_sensitivity.csv", "sensitivity_2012_2022", (2012, 2017), (2012, 2022), "sensitivity_only")
+
     alternatives = pd.read_csv(outdir / "market_connectivity_alternative_diversification.csv")
     mechanisms = pd.read_csv(outdir / "market_connectivity_mechanism_tests.csv")
-    omnibus = pd.DataFrame()
     phase, phase_eq = run_phase_models(frame, args.bootstrap_reps, args.seed + 300, outdir)
     marginal = marginal_effects(frame, args.bootstrap_reps, args.seed + 400, outdir)
     robust = robustness(frame, channel_agg, args.bootstrap_reps, args.seed + 500, outdir)
-    # Clean omnibus: required lower-order terms for each moderator only; no cross-moderator higher orders.
+
     mods = {"openness": "z_openness_pre", "manufacturing": "z_pre_manufacturing_value_added_share", "export_concentration": "z_pre_export_concentration"}
     base_terms = []
     work = frame.copy()
@@ -355,61 +480,87 @@ def main():
             term = "post_x_" + "_x_".join(combo)
             if term not in work:
                 product = np.ones(len(work))
-                for name in combo: product *= pd.to_numeric(work[{"eci": "z_eci_pre", "exposure": "z_exposure_pre"}[name]], errors="coerce").to_numpy()
+                for name in combo:
+                    product *= pd.to_numeric(work[{"eci": "z_eci_pre", "exposure": "z_exposure_pre"}[name]], errors="coerce").to_numpy()
                 work[term] = work["post_2018"].to_numpy() * product
-            if term not in base_terms: base_terms.append(term)
+            if term not in base_terms:
+                base_terms.append(term)
         for combo in [("moderator",), ("eci", "moderator"), ("exposure", "moderator"), ("eci", "exposure", "moderator")]:
             combo = tuple(mod if x == "moderator" else x for x in combo)
             term = "post_x_" + "_x_".join(combo)
             product = np.ones(len(work))
             factors = {"eci": "z_eci_pre", "exposure": "z_exposure_pre", mod: col}
-            for name in combo: product *= pd.to_numeric(work[factors[name]], errors="coerce").to_numpy()
+            for name in combo:
+                product *= pd.to_numeric(work[factors[name]], errors="coerce").to_numpy()
             work[term] = work["post_2018"].to_numpy() * product
             base_terms.append(term)
     fit = fit_terms(work, PRIMARY_OUTCOME, base_terms)
     target_terms = ["post_x_eci_x_exposure_x_" + x for x in mods]
     mat = np.zeros((3, len(fit.term_names)))
-    for i, term in enumerate(target_terms): mat[i, fit.term_index(term)] = 1
+    for i, term in enumerate(target_terms):
+        mat[i, fit.term_index(term)] = 1
     joint = audited.wald_test(fit, mat, reps=args.bootstrap_reps, seed=args.seed + 600)
     omnibus = pd.DataFrame([{"test_id": "market_connectivity_industrial_trade_structure_omnibus", "test_type": "joint_wald_omnibus", "outcome_key": "diversification", "outcome": PRIMARY_LABEL, "moderators": ";".join(mods), "wald_chi2": joint["wald_chi2"], "wald_df": joint["wald_df"], "p_cluster": joint["p_cluster"], "p_wild_bootstrap": joint["p_wild_bootstrap"], "pvalue_for_fdr": joint["pvalue_for_fdr"], "bootstrap_reps_requested": joint["bootstrap_reps_requested"], "bootstrap_reps_success": joint["bootstrap_reps_success"], "n_obs": fit.n_obs, "n_countries": fit.n_countries, "n_years": fit.n_years}])
     write(omnibus, outdir / "market_connectivity_industrial_trade_omnibus.csv")
+
     family = fixed_family(primary, omnibus, mechanisms, alternatives, intensive)
     write(family, outdir / "market_connectivity_multiplicity_family.csv")
-    (outdir / "multiplicity_family_definition.md").write_text("# Corrected market-connectivity multiplicity family\n\nThe family contains each unique empirical test once: primary openness interaction; corrected industrial/trade-structure omnibus; three extensive destination-entry outcomes; two alternative diversification outcomes; and five intensive-margin outcomes. Duplicate new-destination-share and persistent-destination rows are not counted twice. Channel decomposition, phase equality, marginal effects, raw-openness robustness, and stability diagnostics are estimand or robustness evidence, not separate family hypotheses.\n", encoding="utf-8")
-    hold = pd.read_csv(outdir / "market_connectivity_holdout_validation.csv"); hold["validation_type"] = "region_stratified_repeated_subsample_stability"; hold["out_of_sample_validation"] = 0; write(hold, outdir / "market_connectivity_holdout_validation.csv")
-    hs = pd.read_csv(outdir / "market_connectivity_holdout_summary.csv"); hs["validation_type"] = "region_stratified_repeated_subsample_stability"; hs["out_of_sample_validation"] = 0; write(hs, outdir / "market_connectivity_holdout_summary.csv")
+    family_definition = """# Corrected market-connectivity multiplicity family
+
+The family contains each unique primary empirical test once: primary openness interaction; corrected industrial/trade-structure omnibus; three extensive destination-entry outcomes; two alternative diversification outcomes; and five intensive-margin outcomes from the corrected 2015-2022 primary window. The 2012-2022 incumbent-set analysis is a sensitivity analysis and is not added as a second family of hypotheses. Duplicate new-destination rows are not counted twice. Channel decomposition, channel stress tests, phase equality, marginal effects, openness robustness, and stability diagnostics are estimand or robustness evidence, not separate family hypotheses.
+"""
+    (outdir / "multiplicity_family_definition.md").write_text(family_definition, encoding="utf-8")
+    hold = pd.read_csv(outdir / "market_connectivity_holdout_validation.csv")
+    hold["validation_type"] = "region_stratified_repeated_subsample_stability"
+    hold["out_of_sample_validation"] = 0
+    write(hold, outdir / "market_connectivity_holdout_validation.csv")
+    hs = pd.read_csv(outdir / "market_connectivity_holdout_summary.csv")
+    hs["validation_type"] = "region_stratified_repeated_subsample_stability"
+    hs["out_of_sample_validation"] = 0
+    write(hs, outdir / "market_connectivity_holdout_summary.csv")
+
+    raw_channel = channel_summary.loc[channel_summary["channel_specification"].eq("raw_atlas_components")].iloc[0]
     post_joint = phase_eq.loc[phase_eq["test_type"].eq("omnibus_phase_equality")]
-    meta = {"python": platform.python_version(), "seed": args.seed, "bootstrap_reps": args.bootstrap_reps, "primary_outcome": PRIMARY_OUTCOME, "primary_estimand": "ECI_pre x Exposure_pre x Post x Openness_pre", "primary_n_countries": int(primary.n_countries.iloc[0]), "primary_estimate": float(primary.estimate.iloc[0]), "primary_p_wild_bootstrap": float(primary.p_wild_bootstrap.iloc[0]), "fixed_family_tests": len(family), "fixed_family_q_lt_005": int((family.qvalue_market_connectivity_family < .05).sum()), "phase_equality_p_wild_bootstrap": float(post_joint.p_wild_bootstrap.iloc[0]) if len(post_joint) else None, "terminology_holdout": "region-stratified repeated subsample stability analysis", "out_of_sample_validation": False}
+    meta = {
+        "python": platform.python_version(), "seed": args.seed, "bootstrap_reps": args.bootstrap_reps,
+        "primary_outcome": PRIMARY_OUTCOME, "primary_estimand": "ECI_pre x Exposure_pre x Post x Openness_pre",
+        "primary_n_countries": int(primary.n_countries.iloc[0]), "primary_n_obs": int(primary.n_obs.iloc[0]),
+        "primary_estimate": float(primary.estimate.iloc[0]), "primary_p_wild_bootstrap": float(primary.p_wild_bootstrap.iloc[0]),
+        "fixed_family_tests": len(family), "fixed_family_q_lt_005": int((family.qvalue_market_connectivity_family < .05).sum()),
+        "phase_equality_p_wild_bootstrap": float(post_joint.p_wild_bootstrap.iloc[0]) if len(post_joint) else None,
+        "intensive_primary_model_period": "2015-2022", "intensive_primary_incumbent_period": "2015-2017",
+        "intensive_sensitivity_model_period": "2012-2022", "intensive_sensitivity_incumbent_period": "2012-2017",
+        "intensive_primary_n_years": int(intensive.n_years.dropna().iloc[0]), "intensive_sensitivity_n_years": int(intensive_sensitivity.n_years.dropna().iloc[0]),
+        "channel_primary_sample_n_countries": int(raw_channel.n_countries), "channel_primary_sample_n_obs": int(raw_channel.n_obs),
+        "channel_import_sign_stable_across_specs": bool(raw_channel.import_sign_stable_across_specs),
+        "channel_joint_import_sign_stable_across_specs": bool(raw_channel.joint_import_sign_stable_across_specs),
+        "channel_extreme_exclusion_import_sign_stable": bool(raw_channel.extreme_small_economy_exclusions_retain_import_sign),
+        "channel_raw_difference_reasonably_supported": bool(raw_channel.difference_reasonably_supported),
+        "terminology_holdout": "region-stratified repeated subsample stability analysis", "out_of_sample_validation": False,
+    }
     (outdir / "mandatory_computations_metadata.json").write_text(json.dumps(meta, indent=2), encoding="utf-8")
     audited_metadata_path = outdir / "analysis_metadata.json"
     audited_metadata = json.loads(audited_metadata_path.read_text())
     audited_metadata.update({
-        "primary_outcome": PRIMARY_OUTCOME,
-        "primary_estimand": "ECI_pre x Exposure_pre x Post x Openness_pre",
-        "primary_n_countries": int(primary.n_countries.iloc[0]),
-        "primary_n_obs": int(primary.n_obs.iloc[0]),
-        "primary_estimate": float(primary.estimate.iloc[0]),
-        "primary_p_wild_bootstrap": float(primary.p_wild_bootstrap.iloc[0]),
-        "family_tests": len(family),
-        "family_q_lt_005": int((family.qvalue_market_connectivity_family < .05).sum()),
-        "fixed_unique_family_tests": len(family),
-        "fixed_unique_family_q_lt_005": int((family.qvalue_market_connectivity_family < .05).sum()),
-        "mandatory_computations": True,
-        "terminology_holdout": "region-stratified repeated subsample stability analysis",
-        "out_of_sample_validation": False,
+        "primary_outcome": PRIMARY_OUTCOME, "primary_estimand": "ECI_pre x Exposure_pre x Post x Openness_pre",
+        "primary_n_countries": int(primary.n_countries.iloc[0]), "primary_n_obs": int(primary.n_obs.iloc[0]),
+        "primary_estimate": float(primary.estimate.iloc[0]), "primary_p_wild_bootstrap": float(primary.p_wild_bootstrap.iloc[0]),
+        "family_tests": len(family), "family_q_lt_005": int((family.qvalue_market_connectivity_family < .05).sum()),
+        "fixed_unique_family_tests": len(family), "fixed_unique_family_q_lt_005": int((family.qvalue_market_connectivity_family < .05).sum()),
+        "intensive_primary_model_period": "2015-2022", "intensive_sensitivity_model_period": "2012-2022",
+        "channel_primary_sample_n_countries": int(raw_channel.n_countries), "channel_primary_sample_n_obs": int(raw_channel.n_obs),
+        "mandatory_computations": True, "terminology_holdout": "region-stratified repeated subsample stability analysis", "out_of_sample_validation": False,
     })
     audited_metadata_path.write_text(json.dumps(audited_metadata, indent=2), encoding="utf-8")
     text = f"""# Mandatory final computations
 
-The market-connectivity extension now separates downstream export intensity from upstream import intensity, decomposes destination adaptation into extensive and intensive margins, estimates tariff-onset, pandemic-overlap, and persistence phases, and reports marginal effects.
+The corrected mandatory analysis uses a 2015-2022 primary intensive-margin window with the 2015-2017 incumbent destination set and a separate 2012-2022 sensitivity using the 2012-2017 incumbent set. The primary intensive family therefore has eight model years; the sensitivity has eleven.
 
 Primary openness interaction: {meta["primary_estimate"]:.6f}; wild-bootstrap p={meta["primary_p_wild_bootstrap"]:.6g}; fixed unique family tests={meta["fixed_family_tests"]}; q<.05={meta["fixed_family_q_lt_005"]}.
 
-The intensive-margin outcomes are incumbent-partner diversification, incumbent entropy, portfolio reallocation, incumbent retention, and continuing export share. New destination formation remains the extensive margin.
+The channel decomposition is estimated on the exact primary 181-country sample. Raw Atlas export/import intensity, log(1+x), 1 percent winsorization, import-tail exclusions, small-economy exclusion, and a WDI-compatible reconstruction are reported. The raw components sum to an Atlas trade-intensity measure, while the WDI-compatible specification allocates the WDI primary total across observed export/import shares; this distinction is documented rather than hidden.
 
-The repeated subsample procedure is called region-stratified repeated subsample stability analysis. It is not out-of-sample validation because coefficients are re-estimated on the retained countries.
-
-The fixed family counts each unique empirical test once. Channel, phase, marginal-effect, raw-openness robustness, and stability analyses are reported as diagnostics or robustness evidence.
+The former holdout procedure is region-stratified repeated subsample stability analysis, not out-of-sample validation. The fixed family counts each unique primary test once; channel stress tests and the incumbent-window sensitivity are not added as duplicate confirmatory families.
 """
     (outdir / "mandatory_computations_summary.md").write_text(text, encoding="utf-8")
     print(f"Mandatory computations written to {outdir}; family={len(family)}; q<.05={(family.qvalue_market_connectivity_family < .05).sum()}")

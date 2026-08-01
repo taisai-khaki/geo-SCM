@@ -128,3 +128,7 @@ python .\scripts\run_market_connectivity_mandatory_computations.py --bootstrap-r
 ```
 
 This separates downstream export intensity from upstream import intensity, tests intensive versus extensive destination adaptation, estimates tariff/pandemic/persistence phases, reports marginal effects, applies the corrected 12-test unique family, and labels repeated subsamples as stability analysis rather than out-of-sample validation. See `reports/market_connectivity_completion/README.md` for interpretation and file-by-file use.
+
+## Corrected Intensive and Channel Analysis
+
+The mandatory market-connectivity computation now uses a leakage-free 2015-2022 primary intensive-margin window, a 2012-2022 incumbent-set sensitivity, and exact-primary-sample export/import channel stress tests. The primary intensive results support incumbent-partner diversification and entropy across both incumbent definitions. Channel results are directionally suggestive of upstream integration but are not uniformly precise after outlier transformations. See `reports/market_connectivity_completion/README.md`.
