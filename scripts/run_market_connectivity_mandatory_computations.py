@@ -237,10 +237,23 @@ def intensive_outcomes(base_dir, frame, outdir, incumbent_period, model_period, 
     model_start, model_end = model_period
     pre = bilateral.loc[bilateral["year"].between(inc_start, inc_end) & bilateral["export_value"].gt(0)]
     sets = {country: set(g["partner_iso3_code"]) for country, g in pre.groupby("country_iso3_code")}
-    pre_totals = pre.groupby(["country_iso3_code", "year"])["export_value"].sum().rename("pre_total")
-    pre_share = pre.merge(pre_totals, on=["country_iso3_code", "year"], how="left")
-    pre_share["share"] = pre_share["export_value"] / pre_share["pre_total"]
-    pre_mean = pre_share.groupby(["country_iso3_code", "partner_iso3_code"])["share"].mean().rename("pre_mean_share").reset_index()
+    # Complete the country-year-incumbent grid so inactive baseline years contribute zero shares.
+    baseline_years = list(range(inc_start, inc_end + 1))
+    grid_rows = [
+        {"country_iso3_code": country, "year": year, "partner_iso3_code": partner}
+        for country, partners in sets.items()
+        for year in baseline_years
+        for partner in sorted(partners)
+    ]
+    baseline_grid = pd.DataFrame(grid_rows)
+    baseline_totals = bilateral.loc[bilateral["year"].between(inc_start, inc_end)].groupby(["country_iso3_code", "year"])["export_value"].sum().rename("pre_total").reset_index()
+    baseline_flows = bilateral.loc[bilateral["year"].between(inc_start, inc_end)].groupby(["country_iso3_code", "year", "partner_iso3_code"], as_index=False)["export_value"].sum()
+    pre_share = baseline_grid.merge(baseline_flows, on=["country_iso3_code", "year", "partner_iso3_code"], how="left")
+    pre_share = pre_share.merge(baseline_totals, on=["country_iso3_code", "year"], how="left")
+    pre_share["export_value"] = pre_share["export_value"].fillna(0.0)
+    pre_share["pre_total"] = pre_share["pre_total"].fillna(0.0)
+    pre_share["share"] = np.where(pre_share["pre_total"].gt(0), pre_share["export_value"] / pre_share["pre_total"], 0.0)
+    pre_mean = pre_share.groupby(["country_iso3_code", "partner_iso3_code"], as_index=False)["share"].mean().rename(columns={"share": "pre_mean_share"})
     annual = bilateral.loc[bilateral["year"].between(model_start, model_end)].groupby(["country_iso3_code", "year", "partner_iso3_code"], as_index=False)["export_value"].sum()
     rows = []
     for (country, year), g in annual.groupby(["country_iso3_code", "year"]):
@@ -267,7 +280,7 @@ def intensive_outcomes(base_dir, frame, outdir, incumbent_period, model_period, 
     definitions = pd.DataFrame([{"design": design, "outcome": c, "definition": d, "incumbent_period": f"{inc_start}-{inc_end}", "model_period": f"{model_start}-{model_end}", "partner_scope": "non-US/China"} for c, d in {
         "incumbent_partner_diversification": "1-HHI over destinations served in the incumbent period, normalized over incumbent exports",
         "incumbent_partner_entropy": "Shannon entropy over destinations served in the incumbent period, normalized over incumbent exports",
-        "portfolio_reallocation": "0.5 times absolute change in incumbent destination shares relative to incumbent-period mean shares",
+        "portfolio_reallocation": "0.5 times absolute change in incumbent destination shares relative to complete baseline-year grid mean shares; absent incumbent relationships receive zero",
         "incumbent_retention_rate": "Share of incumbent destinations retained with positive exports",
         "continuing_export_share": "Exports to incumbent destinations divided by all non-US/China exports",
     }.items()])

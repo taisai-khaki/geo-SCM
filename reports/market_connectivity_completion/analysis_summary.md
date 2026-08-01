@@ -2,7 +2,7 @@
 
 ## Design correction
 
-The primary intensive-margin design uses only 2015-2022 observations. The incumbent destination set and baseline destination shares are constructed from 2015-2017, so no post-period or future relationship information enters the 2015-2017 pre-period outcomes. A separate sensitivity design uses the full 2012-2022 model window with an incumbent set and baseline shares constructed from 2012-2017.
+The primary intensive-margin design uses only 2015-2022 observations. The incumbent destination set and baseline destination shares are constructed from 2015-2017, so no post-2017 relationship information enters the primary incumbent-partner outcomes. A separate sensitivity design uses the full 2012-2022 model window with an incumbent set and baseline shares constructed from 2012-2017.
 
 The primary openness interaction remains `b=0.024791` with 999-replication wild-bootstrap `p=0.008`, based on 181 countries and 1,991 observations. The corrected primary intensive models have 1,448 observations across 181 countries and eight years. The sensitivity models have 1,991 observations across 181 countries and eleven years.
 
@@ -15,7 +15,7 @@ The substantive conclusion is stable across incumbent definitions:
 - Sensitivity 2012-2017 incumbent set, incumbent diversification: `b=0.022681`, `p=0.002`.
 - Sensitivity 2012-2017 incumbent set, incumbent entropy: `b=0.067562`, `p=0.002`.
 
-Portfolio reallocation and incumbent retention remain statistically unsupported in both designs. Continuing export share is negative but not conventionally significant in the primary design (`p=.078`) or sensitivity (`p=.152`). The defensible interpretation is stable openness-conditioned rebalancing across incumbent partners, not demonstrated new relationship formation, generalized retention, or a broad portfolio-reallocation effect.
+Portfolio reallocation remains statistically unsupported after the complete-grid correction in the primary design (`b=-.013860`, `p=.377`, family `q=.5655`) and the 2012-2017 incumbent sensitivity (`b=-.022760`, `p=.124`). Incumbent retention also remains unsupported in both designs. Continuing export share is negative but not conventionally significant in the primary design (`p=.078`) or sensitivity (`p=.152`). The portfolio measure now uses a complete country x baseline-year x incumbent-destination grid with absent relationships set to zero before baseline shares are averaged. The defensible interpretation is stable openness-conditioned rebalancing across incumbent partners, not demonstrated new relationship formation, generalized retention, or a portfolio-reallocation effect.
 
 ## Channel correction
 

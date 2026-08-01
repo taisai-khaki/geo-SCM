@@ -141,6 +141,11 @@ def test_mandatory_decompositions_and_phase_outputs():
     definitions = pd.read_csv(OUT / "intensive_margin_measure_definitions.csv")
     assert len(definitions) == 10
     assert set(definitions["design"]) == {"primary_2015_2022", "sensitivity_2012_2022"}
+    portfolio_primary = intensive.loc[intensive["outcome_key"].eq("portfolio_reallocation")].iloc[0]
+    portfolio_sensitivity = sensitivity.loc[sensitivity["outcome_key"].eq("portfolio_reallocation")].iloc[0]
+    assert portfolio_primary["p_wild_bootstrap"] > 0.05
+    assert portfolio_sensitivity["p_wild_bootstrap"] > 0.05
+    assert "complete baseline-year grid" in definitions.loc[definitions["outcome"].eq("portfolio_reallocation"), "definition"].iloc[0]
     phase = pd.read_csv(OUT / "market_connectivity_phase_results.csv")
     equality = pd.read_csv(OUT / "market_connectivity_phase_equality_tests.csv")
     assert len(phase) == 3
